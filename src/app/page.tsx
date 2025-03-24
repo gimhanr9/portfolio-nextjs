@@ -1,3 +1,5 @@
+"use client";
+
 import { ArrowRight, Github, Linkedin, Mail, Twitter } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -7,12 +9,16 @@ import AnimatedText from "@/components/common/animated-text";
 import ProjectCard from "@/components/project-card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import TechStack from "@/components/common/tech-stack";
+import { CodeIcon, DevOpsIcon, ServerIcon } from "@/lib/icons";
 
 const Home = () => {
   return (
     <main className="flex min-h-screen flex-col">
       {/* Hero Section */}
-      <section className="relative flex flex-col items-center justify-center overflow-hidden py-24 md:py-32 bg-gradient-to-b from-background to-background/80">
+      <section
+        id="home"
+        className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden pt-16 bg-gradient-to-b from-background to-background/80"
+      >
         <div className="container px-4 md:px-6">
           <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
             <div className="flex flex-col justify-center space-y-4">
@@ -35,15 +41,27 @@ const Home = () => {
                 </p>
               </div>
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                <Link href="/projects">
-                  <Button className="group">
-                    View My Work
-                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </Button>
-                </Link>
-                <Link href="/contact">
-                  <Button variant="outline">Get In Touch</Button>
-                </Link>
+                <Button
+                  className="group"
+                  onClick={() =>
+                    document
+                      .getElementById("projects")
+                      ?.scrollIntoView({ behavior: "smooth" })
+                  }
+                >
+                  View My Work
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Button>
+                <Button
+                  variant="outline"
+                  onClick={() =>
+                    document
+                      .getElementById("contact")
+                      ?.scrollIntoView({ behavior: "smooth" })
+                  }
+                >
+                  Get In Touch
+                </Button>
               </div>
               <div className="flex items-center gap-4 mt-4">
                 <Link
@@ -89,7 +107,7 @@ const Home = () => {
                 <div className="animate-morph absolute inset-0 z-10 rounded-full bg-gradient-to-r from-teal-500 to-purple-500 opacity-20"></div>
                 <div className="relative z-20 h-full w-full overflow-hidden rounded-full">
                   <Image
-                    src="/placeholder.svg?height=600&width=600"
+                    src="/images/profile.jpg"
                     alt="Developer Portrait"
                     width={600}
                     height={600}
@@ -129,22 +147,7 @@ const Home = () => {
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                   <div className="flex flex-col items-center space-y-2 rounded-lg border p-6 shadow-sm transition-all hover:shadow-md">
                     <div className="rounded-full bg-primary/10 p-3">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="h-6 w-6 text-primary"
-                      >
-                        <path d="M18 6H5a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h13l4-3.5L18 6Z"></path>
-                        <path d="M12 13v8"></path>
-                        <path d="M5 13v6a2 2 0 0 0 2 2h8"></path>
-                      </svg>
+                      <CodeIcon className="h-6 w-6 text-primary" />
                     </div>
                     <h3 className="text-xl font-bold">Frontend Development</h3>
                     <p className="text-center text-sm text-muted-foreground">
@@ -153,23 +156,7 @@ const Home = () => {
                   </div>
                   <div className="flex flex-col items-center space-y-2 rounded-lg border p-6 shadow-sm transition-all hover:shadow-md">
                     <div className="rounded-full bg-primary/10 p-3">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="h-6 w-6 text-primary"
-                      >
-                        <path d="M2 13a6 6 0 1 0 12 0 6 6 0 1 0-12 0Z"></path>
-                        <path d="M14 13a6 6 0 1 0 12 0 6 6 0 1 0-12 0Z"></path>
-                        <path d="M8 21v-2a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2"></path>
-                        <path d="M2 21v-2a4 4 0 0 1 4-4h2"></path>
-                      </svg>
+                      <ServerIcon className="h-6 w-6 text-primary" />
                     </div>
                     <h3 className="text-xl font-bold">Backend Development</h3>
                     <p className="text-center text-sm text-muted-foreground">
@@ -178,20 +165,7 @@ const Home = () => {
                   </div>
                   <div className="flex flex-col items-center space-y-2 rounded-lg border p-6 shadow-sm transition-all hover:shadow-md">
                     <div className="rounded-full bg-primary/10 p-3">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="h-6 w-6 text-primary"
-                      >
-                        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
-                      </svg>
+                      <DevOpsIcon className="h-6 w-6 text-primary" />
                     </div>
                     <h3 className="text-xl font-bold">DevOps & Testing</h3>
                     <p className="text-center text-sm text-muted-foreground">
@@ -294,7 +268,7 @@ const Home = () => {
               title="E-Commerce Platform"
               description="A full-stack e-commerce platform with React, Node.js, and MongoDB. Features CI/CD pipeline with GitHub Actions and Jest testing."
               tags={["React", "Node.js", "MongoDB", "Jest", "CI/CD"]}
-              image="/placeholder.svg?height=400&width=600"
+              image="/images/projects/ecommerce.jpg"
               link="/projects/ecommerce"
             />
             <ProjectCard
@@ -307,21 +281,21 @@ const Home = () => {
                 "Jest",
                 "GitHub Actions",
               ]}
-              image="/placeholder.svg?height=400&width=600"
+              image="/images/projects/task-manager.jpg"
               link="/projects/task-manager"
             />
             <ProjectCard
               title="Analytics Dashboard"
               description="A data visualization dashboard with real-time analytics. Built with React, D3.js, and a Node.js backend."
               tags={["React", "D3.js", "Node.js", "Express", "Docker"]}
-              image="/placeholder.svg?height=400&width=600"
+              image="/images/projects/analytics.jpg"
               link="/projects/analytics"
             />
             <ProjectCard
               title="DevOps Toolkit"
               description="A collection of tools for automating development workflows. Includes CI/CD templates, testing frameworks, and deployment scripts."
               tags={["GitHub Actions", "Docker", "Jest", "Terraform", "AWS"]}
-              image="/placeholder.svg?height=400&width=600"
+              image="/images/projects/devops.jpg"
               link="/projects/devops-toolkit"
             />
           </div>
@@ -612,7 +586,12 @@ const Home = () => {
                     placeholder="Your message"
                   ></textarea>
                 </div>
-                <Button className="w-full">Send Message</Button>
+                <Button
+                  className="w-full"
+                  onClick={() => console.log("came ehre")}
+                >
+                  Send Message
+                </Button>
               </form>
             </div>
           </div>
