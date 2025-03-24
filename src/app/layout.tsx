@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { inter } from "./fonts";
 import "./globals.css";
+import Navbar from "@/components/common/navbar";
+import Footer from "@/components/common/footer";
+import { ThemeProvider } from "next-themes";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -13,8 +16,21 @@ const RootLayout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <html lang="en">
-      <body className={`${inter.className} antialiased`}>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body className={inter.className}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="flex min-h-screen flex-col">
+            <Navbar />
+            <div className="flex-1">{children}</div>
+            <Footer />
+          </div>
+        </ThemeProvider>
+      </body>
     </html>
   );
 };
