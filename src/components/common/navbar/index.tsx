@@ -6,9 +6,10 @@ import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import ThemeToggle from "../theme-toggle";
+import { ThemeToggle } from "../theme-toggle";
+import LanguageSelector from "../language-selector";
 
-const Navbar = () => {
+export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
@@ -33,20 +34,27 @@ const Navbar = () => {
     setIsOpen(false);
   }, [pathname]);
 
+  const scrollToSection = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/projects", label: "Projects" },
-    { href: "/blog", label: "Blog" },
-    { href: "/about", label: "About" },
-    { href: "/contact", label: "Contact" },
+    { href: "#home", label: "Home", sectionId: "home" },
+    { href: "#about", label: "About", sectionId: "about" },
+    { href: "#projects", label: "Projects", sectionId: "projects" },
+    { href: "#cicd", label: "CI/CD", sectionId: "cicd" },
+    { href: "#contact", label: "Contact", sectionId: "contact" },
   ];
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-all duration-200 ${
+      className={`fixed top-0 z-50 w-full transition-all duration-200 ${
         isScrolled
           ? "bg-background/80 backdrop-blur-md shadow-sm"
-          : "bg-background"
+          : "bg-background/0"
       }`}
     >
       <div className="container flex h-16 items-center justify-between px-4 md:px-6">
@@ -57,9 +65,9 @@ const Navbar = () => {
         </Link>
         <nav className="hidden md:flex items-center gap-6">
           {navLinks.map((link) => (
-            <Link
+            <button
               key={link.href}
-              href={link.href}
+              onClick={() => scrollToSection(link.sectionId)}
               className={`text-sm font-medium transition-colors hover:text-primary ${
                 pathname === link.href
                   ? "text-primary"
@@ -67,11 +75,13 @@ const Navbar = () => {
               }`}
             >
               {link.label}
-            </Link>
+            </button>
           ))}
+          <LanguageSelector />
           <ThemeToggle />
         </nav>
         <div className="flex md:hidden items-center gap-4">
+          <LanguageSelector />
           <ThemeToggle />
           <Button
             variant="ghost"
@@ -90,7 +100,7 @@ const Navbar = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden overflow-hidden"
+            className="md:hidden overflow-hidden bg-background/95 backdrop-blur-sm"
           >
             <div className="container px-4 py-4 flex flex-col gap-4">
               {navLinks.map((link, index) => (
@@ -100,8 +110,8 @@ const Navbar = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
                 >
-                  <Link
-                    href={link.href}
+                  <button
+                    onClick={() => scrollToSection(link.sectionId)}
                     className={`block py-2 text-sm font-medium transition-colors hover:text-primary ${
                       pathname === link.href
                         ? "text-primary"
@@ -109,7 +119,7 @@ const Navbar = () => {
                     }`}
                   >
                     {link.label}
-                  </Link>
+                  </button>
                 </motion.div>
               ))}
             </div>
@@ -118,6 +128,4 @@ const Navbar = () => {
       </AnimatePresence>
     </header>
   );
-};
-
-export default Navbar;
+}
