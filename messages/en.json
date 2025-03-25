@@ -26,5 +26,15 @@
   "contact": {
     "title": "Get In Touch",
     "description": "Interested in working together? Feel free to reach out."
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "description": "The page you're looking for doesn't exist or has been moved.",
+    "goBack": "Go Back",
+    "backToHome": "Back to Home",
+    "suggestedLinks": "You might be looking for:",
+    "projects": "Projects",
+    "about": "About",
+    "contact": "Contact"
   }
 }

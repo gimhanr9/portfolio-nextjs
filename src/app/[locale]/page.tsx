@@ -49,10 +49,7 @@ const Home = ({ params }: { params: { locale: string } }) => {
                   {t("hero.badge")}
                 </Badge>
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
-                  <div className="flex items-center gap-2">
-                    <AnimatedText text={t("hero.greeting")} delay={0} />
-                    <VoiceRecital text={introText} language={locale} />
-                  </div>
+                  <AnimatedText text={t("hero.greeting")} delay={0} />
 
                   {/* Add space between greeting and name */}
                   <div className="h-4"></div>
@@ -66,10 +63,7 @@ const Home = ({ params }: { params: { locale: string } }) => {
                     <AnimatedText text={t("hero.description")} delay={0.6} />
                   </p>
                   {/* Add speaker icon after description */}
-                  <VoiceRecital
-                    text={t("hero.description")}
-                    language={locale}
-                  />
+                  <VoiceRecital text={introText} language={locale} />
                 </div>
               </div>
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
