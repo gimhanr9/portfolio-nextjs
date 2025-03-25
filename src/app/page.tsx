@@ -407,22 +407,7 @@ const Home = () => {
 
       {/* Contact Section */}
       <section id="contact" className="py-16 md:py-24">
-        <div className="container px-4 md:px-6">
-          <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
-            <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-5xl">
-              Get In Touch
-            </h2>
-            <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-              Interested in working together? Feel free to reach out.
-            </p>
-          </div>
-
-          <div className="mx-auto mt-12 max-w-2xl">
-            <div className="rounded-lg border bg-card p-6 shadow-sm">
-              <ContactSection />
-            </div>
-          </div>
-        </div>
+        <ContactSection />
       </section>
     </main>
   );
