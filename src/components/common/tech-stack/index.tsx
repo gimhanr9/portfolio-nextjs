@@ -1,23 +1,9 @@
 "use client";
 
+import { technologies } from "@/data/skills";
 import { motion } from "framer-motion";
 
 const TechStack = () => {
-  const technologies = [
-    { name: "React", icon: "⚛️" },
-    { name: "Next.js", icon: "▲" },
-    { name: "TypeScript", icon: "🔷" },
-    { name: "Node.js", icon: "🟢" },
-    { name: "Express", icon: "🚂" },
-    { name: "MongoDB", icon: "🍃" },
-    { name: "PostgreSQL", icon: "🐘" },
-    { name: "Jest", icon: "🃏" },
-    { name: "GitHub Actions", icon: "🔄" },
-    { name: "Docker", icon: "🐳" },
-    { name: "AWS", icon: "☁️" },
-    { name: "Tailwind CSS", icon: "🎨" },
-  ];
-
   return (
     <div className="mt-8">
       <h3 className="mb-4 text-center text-xl font-bold">Tech Stack</h3>

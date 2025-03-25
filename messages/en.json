@@ -1,0 +1,30 @@
+{
+    "hero": {
+    "badge": "Full Stack Developer",
+    "greeting": "Hi there! I'm",
+    "name": "Your Name",
+    "description": "Building robust, scalable applications with modern technologies. Passionate about CI/CD, testing, and delivering exceptional user experiences."
+  },
+  "buttons": {
+    "viewWork": "View My Work",
+    "getInTouch": "Get In Touch"
+  },
+  "about": {
+    "title": "About Me",
+    "description": "I'm a full stack developer with expertise in building modern web applications. My focus is on creating scalable, maintainable code with robust CI/CD pipelines and comprehensive testing."
+  },
+  "tabs": {
+    "skills": "Skills",
+    "experience": "Experience",
+    "education": "Education"
+  },
+  "projects": {
+    "title": "Featured Projects",
+    "description": "Check out some of my recent work. Each project includes CI/CD pipelines and comprehensive test coverage.",
+    "viewAll": "View All Projects"
+  },
+  "contact": {
+    "title": "Get In Touch",
+    "description": "Interested in working together? Feel free to reach out."
+  }
+}

@@ -22,8 +22,18 @@ import ContactSection from "@/components/common/contact-section";
 import StatusBadges from "@/components/common/status-badges";
 import ExperienceTimeline from "@/components/common/experience-timeline";
 import EducationTimeline from "@/components/common/education-timeline";
+import { useTranslations } from "next-intl";
+import VoiceRecital from "@/components/common/voice-recital";
+import { projects } from "@/data/projects";
 
-const Home = () => {
+const Home = ({ params }: { params: { locale: string } }) => {
+  const t = useTranslations();
+  const locale = params.locale || "en";
+
+  // Introduction text for voice recital
+  const introText = `${t("hero.greeting")} ${t("hero.name")}. ${t(
+    "hero.description"
+  )}`;
   return (
     <main className="flex min-h-screen flex-col">
       {/* Hero Section */}
@@ -36,20 +46,20 @@ const Home = () => {
             <div className="flex flex-col justify-center space-y-4">
               <div className="space-y-2">
                 <Badge variant="outline" className="animate-fade-in">
-                  Full Stack Developer
+                  {t("hero.badge")}
                 </Badge>
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
-                  <AnimatedText text="Hi there! I'm" delay={0} />
+                  <div className="flex items-center gap-2">
+                    <AnimatedText text={t("hero.greeting")} delay={0} />
+                    <VoiceRecital text={introText} language={locale} />
+                  </div>
                   <br />
                   <span className="bg-gradient-to-r from-teal-500 to-purple-500 bg-clip-text text-transparent">
-                    <AnimatedText text="Your Name" delay={0.3} />
+                    <AnimatedText text={t("hero.name")} delay={0.3} />
                   </span>
                 </h1>
                 <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                  <AnimatedText
-                    text="Building robust, scalable applications with modern technologies. Passionate about CI/CD, testing, and delivering exceptional user experiences."
-                    delay={0.6}
-                  />
+                  <AnimatedText text={t("hero.description")} delay={0.6} />
                 </p>
               </div>
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
@@ -61,7 +71,7 @@ const Home = () => {
                       ?.scrollIntoView({ behavior: "smooth" })
                   }
                 >
-                  View My Work
+                  {t("buttons.viewWork")}
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Button>
                 <Button
@@ -72,7 +82,7 @@ const Home = () => {
                       ?.scrollIntoView({ behavior: "smooth" })
                   }
                 >
-                  Get In Touch
+                  {t("buttons.getInTouch")}
                 </Button>
               </div>
               <div className="flex items-center gap-4 mt-4">
@@ -142,21 +152,23 @@ const Home = () => {
         <div className="container px-4 md:px-6">
           <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
             <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-5xl">
-              About Me
+              {t("about.title")}
             </h2>
             <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-              I'm a full stack developer with expertise in building modern web
-              applications. My focus is on creating scalable, maintainable code
-              with robust CI/CD pipelines and comprehensive testing.
+              {t("about.description")}
             </p>
           </div>
 
           <div className="mt-16">
             <Tabs defaultValue="skills" className="mx-auto max-w-4xl">
               <TabsList className="grid w-full grid-cols-3">
-                <TabsTrigger value="skills">Skills</TabsTrigger>
-                <TabsTrigger value="experience">Experience</TabsTrigger>
-                <TabsTrigger value="education">Education</TabsTrigger>
+                <TabsTrigger value="skills">{t("tabs.skills")}</TabsTrigger>
+                <TabsTrigger value="experience">
+                  {t("tabs.experience")}
+                </TabsTrigger>
+                <TabsTrigger value="education">
+                  {t("tabs.education")}
+                </TabsTrigger>
               </TabsList>
               <TabsContent value="skills" className="mt-6 space-y-6">
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -206,51 +218,29 @@ const Home = () => {
         <div className="container px-4 md:px-6">
           <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
             <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-5xl">
-              Featured Projects
+              {t("projects.title")}
             </h2>
             <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-              Check out some of my recent work. Each project includes CI/CD
-              pipelines and comprehensive test coverage.
+              {t("projects.description")}
             </p>
           </div>
 
           <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 py-12 md:grid-cols-2 lg:gap-12">
-            <ProjectCard
-              title="E-Commerce Platform"
-              description="A full-stack e-commerce platform with React, Node.js, and MongoDB. Features CI/CD pipeline with GitHub Actions and Jest testing."
-              tags={["React", "Node.js", "MongoDB", "Jest", "CI/CD"]}
-              link="/projects/ecommerce"
-            />
-            <ProjectCard
-              title="Task Management App"
-              description="A collaborative task management application with real-time updates. Includes comprehensive test coverage with Jest and React Testing Library."
-              tags={[
-                "Next.js",
-                "TypeScript",
-                "PostgreSQL",
-                "Jest",
-                "GitHub Actions",
-              ]}
-              link="/projects/task-manager"
-            />
-            <ProjectCard
-              title="Analytics Dashboard"
-              description="A data visualization dashboard with real-time analytics. Built with React, D3.js, and a Node.js backend."
-              tags={["React", "D3.js", "Node.js", "Express", "Docker"]}
-              link="/projects/analytics"
-            />
-            <ProjectCard
-              title="DevOps Toolkit"
-              description="A collection of tools for automating development workflows. Includes CI/CD templates, testing frameworks, and deployment scripts."
-              tags={["GitHub Actions", "Docker", "Jest", "Terraform", "AWS"]}
-              link="/projects/devops-toolkit"
-            />
+            {projects.map((project, index) => (
+              <ProjectCard
+                key={index}
+                title={project.title}
+                description={project.description}
+                tags={project.tags}
+                link={project.link}
+              />
+            ))}
           </div>
 
           <div className="flex justify-center">
             <Link href="/projects">
               <Button variant="outline" className="group">
-                View All Projects
+                {t("projects.viewAll")}
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
             </Link>
