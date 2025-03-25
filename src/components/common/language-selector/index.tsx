@@ -52,7 +52,7 @@ const LanguageSelector = () => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger asChild disabled={isPending}>
         <Button
           variant="ghost"
           size="sm"
