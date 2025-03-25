@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { Switch } from "@/components/ui/switch";
 import { Moon, Sun } from "lucide-react";
 
-export function ThemeToggle() {
+const ThemeToggle = () => {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -29,4 +29,6 @@ export function ThemeToggle() {
       <Moon className="h-4 w-4" />
     </div>
   );
-}
+};
+
+export default ThemeToggle;

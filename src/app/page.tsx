@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Github, Linkedin, Mail, Twitter } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
@@ -9,7 +9,19 @@ import AnimatedText from "@/components/common/animated-text";
 import ProjectCard from "@/components/project-card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import TechStack from "@/components/common/tech-stack";
-import { CodeIcon, DevOpsIcon, ServerIcon } from "@/lib/icons";
+import {
+  CheckIcon,
+  CICDIcon,
+  CodeIcon,
+  DevOpsIcon,
+  GithubIcon,
+  LinkedinIcon,
+  MailIcon,
+  ServerIcon,
+  TwitterIcon,
+} from "@/lib/icons";
+import ContactSection from "@/components/common/contact-section";
+import StatusBadges from "@/components/common/status-badges";
 
 const Home = () => {
   return (
@@ -70,7 +82,7 @@ const Home = () => {
                   rel="noopener noreferrer"
                 >
                   <Button variant="ghost" size="icon" className="rounded-full">
-                    <Github className="h-5 w-5" />
+                    <GithubIcon className="h-5 w-5" />
                     <span className="sr-only">GitHub</span>
                   </Button>
                 </Link>
@@ -80,7 +92,7 @@ const Home = () => {
                   rel="noopener noreferrer"
                 >
                   <Button variant="ghost" size="icon" className="rounded-full">
-                    <Linkedin className="h-5 w-5" />
+                    <LinkedinIcon className="h-5 w-5" />
                     <span className="sr-only">LinkedIn</span>
                   </Button>
                 </Link>
@@ -90,13 +102,13 @@ const Home = () => {
                   rel="noopener noreferrer"
                 >
                   <Button variant="ghost" size="icon" className="rounded-full">
-                    <Twitter className="h-5 w-5" />
+                    <TwitterIcon className="h-5 w-5" />
                     <span className="sr-only">Twitter</span>
                   </Button>
                 </Link>
                 <Link href="mailto:your.email@example.com">
                   <Button variant="ghost" size="icon" className="rounded-full">
-                    <Mail className="h-5 w-5" />
+                    <MailIcon className="h-5 w-5" />
                     <span className="sr-only">Email</span>
                   </Button>
                 </Link>
@@ -118,6 +130,9 @@ const Home = () => {
               </div>
             </div>
           </div>
+
+          {/* Status Badges */}
+          <StatusBadges />
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent"></div>
       </section>
@@ -329,98 +344,25 @@ const Home = () => {
               <div className="rounded-lg border bg-card p-6 shadow-sm">
                 <div className="flex items-center gap-4">
                   <div className="rounded-full bg-primary/10 p-3">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="h-6 w-6 text-primary"
-                    >
-                      <path d="M12 5V3"></path>
-                      <path d="M18 12h2"></path>
-                      <path d="M12 19v2"></path>
-                      <path d="M4 12H2"></path>
-                      <path d="M7.05 7.05 5.63 5.63"></path>
-                      <path d="M17.66 7.05l1.42-1.42"></path>
-                      <path d="M16.24 16.24l1.42 1.42"></path>
-                      <path d="M7.05 16.24l-1.42 1.42"></path>
-                      <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"></path>
-                    </svg>
+                    <CICDIcon className="h-6 w-6 text-primary" />
                   </div>
                   <h3 className="text-xl font-bold">Continuous Integration</h3>
                 </div>
                 <ul className="mt-4 space-y-2 text-sm">
                   <li className="flex items-center gap-2">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="h-4 w-4 text-primary"
-                    >
-                      <path d="M20 6 9 17l-5-5"></path>
-                    </svg>
+                    <CheckIcon className="h-4 w-4 text-primary" />
                     Automated testing with Jest and React Testing Library
                   </li>
                   <li className="flex items-center gap-2">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="h-4 w-4 text-primary"
-                    >
-                      <path d="M20 6 9 17l-5-5"></path>
-                    </svg>
+                    <CheckIcon className="h-4 w-4 text-primary" />
                     Code quality checks with ESLint and Prettier
                   </li>
                   <li className="flex items-center gap-2">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="h-4 w-4 text-primary"
-                    >
-                      <path d="M20 6 9 17l-5-5"></path>
-                    </svg>
+                    <CheckIcon className="h-4 w-4 text-primary" />
                     Type checking with TypeScript
                   </li>
                   <li className="flex items-center gap-2">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="h-4 w-4 text-primary"
-                    >
-                      <path d="M20 6 9 17l-5-5"></path>
-                    </svg>
+                    <CheckIcon className="h-4 w-4 text-primary" />
                     Pull request reviews and automated checks
                   </li>
                 </ul>
@@ -428,91 +370,25 @@ const Home = () => {
               <div className="rounded-lg border bg-card p-6 shadow-sm">
                 <div className="flex items-center gap-4">
                   <div className="rounded-full bg-primary/10 p-3">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="h-6 w-6 text-primary"
-                    >
-                      <path d="M12 2v20"></path>
-                      <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                    </svg>
+                    <CICDIcon className="h-6 w-6 text-primary" />
                   </div>
                   <h3 className="text-xl font-bold">Continuous Deployment</h3>
                 </div>
                 <ul className="mt-4 space-y-2 text-sm">
                   <li className="flex items-center gap-2">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="h-4 w-4 text-primary"
-                    >
-                      <path d="M20 6 9 17l-5-5"></path>
-                    </svg>
+                    <CheckIcon className="h-4 w-4 text-primary" />
                     Automated deployments to Vercel
                   </li>
                   <li className="flex items-center gap-2">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="h-4 w-4 text-primary"
-                    >
-                      <path d="M20 6 9 17l-5-5"></path>
-                    </svg>
+                    <CheckIcon className="h-4 w-4 text-primary" />
                     Preview deployments for pull requests
                   </li>
                   <li className="flex items-center gap-2">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="h-4 w-4 text-primary"
-                    >
-                      <path d="M20 6 9 17l-5-5"></path>
-                    </svg>
+                    <CheckIcon className="h-4 w-4 text-primary" />
                     Environment-specific configurations
                   </li>
                   <li className="flex items-center gap-2">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="h-4 w-4 text-primary"
-                    >
-                      <path d="M20 6 9 17l-5-5"></path>
-                    </svg>
+                    <CheckIcon className="h-4 w-4 text-primary" />
                     Rollback capabilities for failed deployments
                   </li>
                 </ul>
@@ -541,58 +417,9 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="mx-auto mt-12 max-w-lg">
+          <div className="mx-auto mt-12 max-w-2xl">
             <div className="rounded-lg border bg-card p-6 shadow-sm">
-              <form className="space-y-4">
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div className="space-y-2">
-                    <label
-                      htmlFor="name"
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                    >
-                      Name
-                    </label>
-                    <input
-                      id="name"
-                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                      placeholder="Your name"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label
-                      htmlFor="email"
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                    >
-                      Email
-                    </label>
-                    <input
-                      id="email"
-                      type="email"
-                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                      placeholder="Your email"
-                    />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <label
-                    htmlFor="message"
-                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                  >
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    className="flex min-h-[120px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                    placeholder="Your message"
-                  ></textarea>
-                </div>
-                <Button
-                  className="w-full"
-                  onClick={() => console.log("came ehre")}
-                >
-                  Send Message
-                </Button>
-              </form>
+              <ContactSection />
             </div>
           </div>
         </div>

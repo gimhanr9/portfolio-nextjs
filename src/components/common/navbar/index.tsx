@@ -6,10 +6,10 @@ import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ThemeToggle } from "../theme-toggle";
 import LanguageSelector from "../language-selector";
+import ThemeToggle from "../theme-toggle";
 
-export default function Navbar() {
+const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
@@ -128,4 +128,6 @@ export default function Navbar() {
       </AnimatePresence>
     </header>
   );
-}
+};
+
+export default Navbar;
