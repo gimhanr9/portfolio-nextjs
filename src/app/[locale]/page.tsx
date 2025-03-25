@@ -45,7 +45,7 @@ const Home = ({ params }: { params: { locale: string } }) => {
           <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
             <div className="flex flex-col justify-center space-y-4">
               <div className="space-y-2">
-                <Badge variant="outline" className="animate-fade-in">
+                <Badge className="animate-fade-in text-sm px-3 py-1 bg-teal-100 text-teal-800 dark:bg-teal-900 dark:text-teal-300 border-teal-200 dark:border-teal-800">
                   {t("hero.badge")}
                 </Badge>
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
