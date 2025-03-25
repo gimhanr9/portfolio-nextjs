@@ -10,8 +10,6 @@ import ProjectCard from "@/components/project-card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import TechStack from "@/components/common/tech-stack";
 import {
-  CheckIcon,
-  CICDIcon,
   CodeIcon,
   DevOpsIcon,
   GithubIcon,
@@ -22,6 +20,8 @@ import {
 } from "@/lib/icons";
 import ContactSection from "@/components/common/contact-section";
 import StatusBadges from "@/components/common/status-badges";
+import ExperienceTimeline from "@/components/common/experience-timeline";
+import EducationTimeline from "@/components/common/education-timeline";
 
 const Home = () => {
   return (
@@ -191,74 +191,10 @@ const Home = () => {
                 <TechStack />
               </TabsContent>
               <TabsContent value="experience" className="mt-6 space-y-6">
-                <div className="space-y-8">
-                  <div className="flex flex-col space-y-2">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-xl font-bold">
-                        Senior Full Stack Developer
-                      </h3>
-                      <Badge>2021 - Present</Badge>
-                    </div>
-                    <p className="text-sm text-muted-foreground">
-                      Company Name
-                    </p>
-                    <p className="text-sm">
-                      Led development of scalable web applications using React,
-                      Node.js, and AWS. Implemented CI/CD pipelines with GitHub
-                      Actions and Jest testing.
-                    </p>
-                  </div>
-                  <div className="flex flex-col space-y-2">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-xl font-bold">
-                        Full Stack Developer
-                      </h3>
-                      <Badge>2018 - 2021</Badge>
-                    </div>
-                    <p className="text-sm text-muted-foreground">
-                      Previous Company
-                    </p>
-                    <p className="text-sm">
-                      Developed and maintained web applications using React,
-                      Express, and MongoDB. Implemented automated testing with
-                      Jest and Cypress.
-                    </p>
-                  </div>
-                </div>
+                <ExperienceTimeline />
               </TabsContent>
               <TabsContent value="education" className="mt-6 space-y-6">
-                <div className="space-y-8">
-                  <div className="flex flex-col space-y-2">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-xl font-bold">
-                        Master of Computer Science
-                      </h3>
-                      <Badge>2016 - 2018</Badge>
-                    </div>
-                    <p className="text-sm text-muted-foreground">
-                      University Name
-                    </p>
-                    <p className="text-sm">
-                      Specialized in Software Engineering and Distributed
-                      Systems.
-                    </p>
-                  </div>
-                  <div className="flex flex-col space-y-2">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-xl font-bold">
-                        Bachelor of Computer Science
-                      </h3>
-                      <Badge>2012 - 2016</Badge>
-                    </div>
-                    <p className="text-sm text-muted-foreground">
-                      University Name
-                    </p>
-                    <p className="text-sm">
-                      Graduated with honors. Focused on algorithms and web
-                      development.
-                    </p>
-                  </div>
-                </div>
+                <EducationTimeline />
               </TabsContent>
             </Tabs>
           </div>
@@ -283,7 +219,6 @@ const Home = () => {
               title="E-Commerce Platform"
               description="A full-stack e-commerce platform with React, Node.js, and MongoDB. Features CI/CD pipeline with GitHub Actions and Jest testing."
               tags={["React", "Node.js", "MongoDB", "Jest", "CI/CD"]}
-              image="/images/projects/ecommerce.jpg"
               link="/projects/ecommerce"
             />
             <ProjectCard
@@ -296,21 +231,18 @@ const Home = () => {
                 "Jest",
                 "GitHub Actions",
               ]}
-              image="/images/projects/task-manager.jpg"
               link="/projects/task-manager"
             />
             <ProjectCard
               title="Analytics Dashboard"
               description="A data visualization dashboard with real-time analytics. Built with React, D3.js, and a Node.js backend."
               tags={["React", "D3.js", "Node.js", "Express", "Docker"]}
-              image="/images/projects/analytics.jpg"
               link="/projects/analytics"
             />
             <ProjectCard
               title="DevOps Toolkit"
               description="A collection of tools for automating development workflows. Includes CI/CD templates, testing frameworks, and deployment scripts."
               tags={["GitHub Actions", "Docker", "Jest", "Terraform", "AWS"]}
-              image="/images/projects/devops.jpg"
               link="/projects/devops-toolkit"
             />
           </div>
@@ -322,85 +254,6 @@ const Home = () => {
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
             </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* CI/CD Section */}
-      <section id="cicd" className="py-16 md:py-24">
-        <div className="container px-4 md:px-6">
-          <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
-            <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-5xl">
-              My CI/CD Approach
-            </h2>
-            <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-              I believe in automating everything. Here's how I implement CI/CD
-              in my projects.
-            </p>
-          </div>
-
-          <div className="mx-auto mt-12 max-w-4xl">
-            <div className="grid gap-6 md:grid-cols-2">
-              <div className="rounded-lg border bg-card p-6 shadow-sm">
-                <div className="flex items-center gap-4">
-                  <div className="rounded-full bg-primary/10 p-3">
-                    <CICDIcon className="h-6 w-6 text-primary" />
-                  </div>
-                  <h3 className="text-xl font-bold">Continuous Integration</h3>
-                </div>
-                <ul className="mt-4 space-y-2 text-sm">
-                  <li className="flex items-center gap-2">
-                    <CheckIcon className="h-4 w-4 text-primary" />
-                    Automated testing with Jest and React Testing Library
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckIcon className="h-4 w-4 text-primary" />
-                    Code quality checks with ESLint and Prettier
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckIcon className="h-4 w-4 text-primary" />
-                    Type checking with TypeScript
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckIcon className="h-4 w-4 text-primary" />
-                    Pull request reviews and automated checks
-                  </li>
-                </ul>
-              </div>
-              <div className="rounded-lg border bg-card p-6 shadow-sm">
-                <div className="flex items-center gap-4">
-                  <div className="rounded-full bg-primary/10 p-3">
-                    <CICDIcon className="h-6 w-6 text-primary" />
-                  </div>
-                  <h3 className="text-xl font-bold">Continuous Deployment</h3>
-                </div>
-                <ul className="mt-4 space-y-2 text-sm">
-                  <li className="flex items-center gap-2">
-                    <CheckIcon className="h-4 w-4 text-primary" />
-                    Automated deployments to Vercel
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckIcon className="h-4 w-4 text-primary" />
-                    Preview deployments for pull requests
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckIcon className="h-4 w-4 text-primary" />
-                    Environment-specific configurations
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckIcon className="h-4 w-4 text-primary" />
-                    Rollback capabilities for failed deployments
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className="mt-8 flex justify-center">
-              <Link href="/cicd">
-                <Button variant="outline">
-                  Learn More About My CI/CD Process
-                </Button>
-              </Link>
-            </div>
           </div>
         </div>
       </section>

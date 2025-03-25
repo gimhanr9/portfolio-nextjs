@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Github, Linkedin, Mail, Twitter } from "lucide-react";
+import { GithubIcon, LinkedinIcon, TwitterIcon, MailIcon } from "@/lib/icons";
+import { Button } from "@/components/ui/button";
 
 const Footer = () => {
   return (
@@ -18,28 +19,36 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Github className="h-5 w-5" />
-                <span className="sr-only">GitHub</span>
+                <Button variant="ghost" size="icon" className="rounded-full">
+                  <GithubIcon className="h-5 w-5" />
+                  <span className="sr-only">GitHub</span>
+                </Button>
               </Link>
               <Link
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Linkedin className="h-5 w-5" />
-                <span className="sr-only">LinkedIn</span>
+                <Button variant="ghost" size="icon" className="rounded-full">
+                  <LinkedinIcon className="h-5 w-5" />
+                  <span className="sr-only">LinkedIn</span>
+                </Button>
               </Link>
               <Link
                 href="https://twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Twitter className="h-5 w-5" />
-                <span className="sr-only">Twitter</span>
+                <Button variant="ghost" size="icon" className="rounded-full">
+                  <TwitterIcon className="h-5 w-5" />
+                  <span className="sr-only">Twitter</span>
+                </Button>
               </Link>
               <Link href="mailto:your.email@example.com">
-                <Mail className="h-5 w-5" />
-                <span className="sr-only">Email</span>
+                <Button variant="ghost" size="icon" className="rounded-full">
+                  <MailIcon className="h-5 w-5" />
+                  <span className="sr-only">Email</span>
+                </Button>
               </Link>
             </div>
           </div>
