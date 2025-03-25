@@ -1,12 +1,13 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
+import "./globals.css"; // This is critical for styles
 
 type Props = {
   children: ReactNode;
 };
 
-// Since we have a `not-found.tsx` page on the root, a layout file
-// is required, even if it's just passing children through.
+// This root layout is needed for the root not-found.tsx
 const RootLayout = ({ children }: Props) => {
   return children;
 };
+
 export default RootLayout;

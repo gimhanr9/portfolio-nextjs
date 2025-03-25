@@ -53,14 +53,24 @@ const Home = ({ params }: { params: { locale: string } }) => {
                     <AnimatedText text={t("hero.greeting")} delay={0} />
                     <VoiceRecital text={introText} language={locale} />
                   </div>
-                  <br />
+
+                  {/* Add space between greeting and name */}
+                  <div className="h-4"></div>
+
                   <span className="bg-gradient-to-r from-teal-500 to-purple-500 bg-clip-text text-transparent">
                     <AnimatedText text={t("hero.name")} delay={0.3} />
                   </span>
                 </h1>
-                <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                  <AnimatedText text={t("hero.description")} delay={0.6} />
-                </p>
+                <div className="flex items-center gap-2">
+                  <p className="max-w-[600px] text-muted-foreground md:text-xl">
+                    <AnimatedText text={t("hero.description")} delay={0.6} />
+                  </p>
+                  {/* Add speaker icon after description */}
+                  <VoiceRecital
+                    text={t("hero.description")}
+                    language={locale}
+                  />
+                </div>
               </div>
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
                 <Button

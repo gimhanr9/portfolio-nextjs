@@ -1,12 +1,56 @@
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { routing } from "@/i18n/routing";
-import { ThemeProvider } from "next-themes";
+
 import Navbar from "@/components/common/navbar";
 import Footer from "@/components/common/footer";
 import { inter } from "../fonts";
 import { notFound } from "next/navigation";
+import "../globals.css"; // Import the global CSS here as well
+import { ThemeProvider } from "next-themes";
+
+// Metadata for the entire site
+export const metadata = {
+  title: {
+    default: "Your Name | Full Stack Developer",
+    template: "%s | Your Name",
+  },
+  description:
+    "Portfolio of a Full Stack Developer specializing in modern web technologies, CI/CD, and testing.",
+  keywords: [
+    "developer",
+    "portfolio",
+    "full stack",
+    "web development",
+    "CI/CD",
+    "testing",
+  ],
+  authors: [{ name: "Your Name" }],
+  creator: "Your Name",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://yourwebsite.com",
+    title: "Your Name | Full Stack Developer",
+    description:
+      "Portfolio of a Full Stack Developer specializing in modern web technologies, CI/CD, and testing.",
+    siteName: "Your Name Portfolio",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Your Name | Full Stack Developer",
+    description:
+      "Portfolio of a Full Stack Developer specializing in modern web technologies, CI/CD, and testing.",
+    creator: "@yourtwitterhandle",
+  },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon-16x16.png",
+    apple: "/apple-touch-icon.png",
+  },
+  manifest: "/site.webmanifest",
+};
 
 type Props = {
   children: ReactNode;
