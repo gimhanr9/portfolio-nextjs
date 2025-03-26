@@ -6,6 +6,35 @@ import { EmailTemplate } from "@/components/common/email-template";
 // Initialize Resend with your API key
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+// Simple email validation function that avoids complex regex backtracking
+function isValidEmail(email: string): boolean {
+  // Basic structure check
+  if (!email || email.length > 320) return false;
+
+  // Check for @ symbol and proper structure
+  const parts = email.split("@");
+  if (parts.length !== 2) return false;
+
+  const [local, domain] = parts;
+
+  // Check local part
+  if (
+    !local ||
+    local.length > 64 ||
+    local.startsWith(".") ||
+    local.endsWith(".")
+  )
+    return false;
+
+  // Check domain part
+  if (!domain || domain.length > 255 || !domain.includes(".")) return false;
+  const domainParts = domain.split(".");
+  const tld = domainParts[domainParts.length - 1];
+  if (!tld || tld.length < 2) return false;
+
+  return true;
+}
+
 export async function POST(request: NextRequest) {
   try {
     // Get the locale from the Accept-Language header or default to 'en'
@@ -26,7 +55,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    if (!isValidEmail(email)) {
       return NextResponse.json(
         { error: t("errors.emailInvalid") },
         { status: 400 }
