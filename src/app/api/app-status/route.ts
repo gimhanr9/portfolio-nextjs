@@ -1,5 +1,6 @@
 import { siteConfig } from "@/config/site";
 import { CICDStatus, QualityGateStatus, StatusData } from "@/lib/enums/status";
+import { NextResponse } from "next/server";
 
 // Fetch GitHub Actions workflow status
 export async function fetchCICDStatus(): Promise<StatusData["cicd"]> {
@@ -217,5 +218,21 @@ export async function fetchProjectStatus(): Promise<StatusData> {
         url: `${siteConfig.urls.github}/${siteConfig.github.repoOwner}/${siteConfig.github.repoName}/actions`,
       },
     };
+  }
+}
+
+export async function GET() {
+  try {
+    debugger;
+    // This runs on the server, so environment variables are accessible
+    const statusData = await fetchProjectStatus();
+
+    return NextResponse.json(statusData);
+  } catch (error) {
+    console.error("Error fetching project status:", error);
+    return NextResponse.json(
+      { error: "Failed to fetch project status" },
+      { status: 500 }
+    );
   }
 }

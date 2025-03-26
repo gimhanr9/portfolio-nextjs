@@ -26,6 +26,22 @@ jest.mock("next-intl/server", () => ({
   }),
 }));
 
+// Mock NextResponse
+jest.mock("next/server", () => {
+  const originalModule = jest.requireActual("next/server");
+  return {
+    ...originalModule,
+    NextResponse: {
+      json: jest.fn().mockImplementation((body, options) => {
+        return {
+          status: options?.status || 200,
+          json: async () => body,
+        };
+      }),
+    },
+  };
+});
+
 describe("Contact API Route", () => {
   beforeEach(() => {
     // Reset environment variables before each test

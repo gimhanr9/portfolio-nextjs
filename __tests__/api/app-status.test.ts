@@ -1,30 +1,32 @@
 import {
+  fetchProjectStatus,
   fetchCICDStatus,
   fetchQualityGateStatus,
-} from "@/app/api/app-status/route";
-import { siteConfig } from "@/config/site";
+  fetchTestCoverage,
+} from "@/lib/api/status";
 import { CICDStatus, QualityGateStatus } from "@/lib/enums/status";
+import { config } from "@/lib/config";
 import { describe, expect, it, jest, beforeEach } from "@jest/globals";
 
 // Mock global fetch
-global.fetch = jest.fn();
+global.fetch = jest.fn() as jest.Mock;
 
 describe("Status API Functions", () => {
   beforeEach(() => {
     jest.clearAllMocks();
 
     // Reset config values for testing
-    siteConfig.github.token = "test-github-token";
-    siteConfig.github.repoOwner = "test-owner";
-    siteConfig.github.repoName = "test-repo";
-    siteConfig.sonar.token = "test-sonar-token";
-    siteConfig.sonar.projectKey = "test-project-key";
+    config.github.token = "test-github-token";
+    config.github.repoOwner = "test-owner";
+    config.github.repoName = "test-repo";
+    config.sonar.token = "test-sonar-token";
+    config.sonar.projectKey = "test-project-key";
   });
 
   describe("fetchCICDStatus", () => {
     it("should return passing status when GitHub workflow is successful", async () => {
       // Mock successful GitHub API response
-      (fetch as jest.Mock).mockResolvedValueOnce({
+      (global.fetch as jest.Mock).mockResolvedValueOnce({
         ok: true,
         json: jest.fn().mockResolvedValueOnce({
           workflow_runs: [
@@ -43,7 +45,7 @@ describe("Status API Functions", () => {
       expect(result.url).toBe(
         "https://github.com/test-owner/test-repo/actions/runs/1"
       );
-      expect(fetch).toHaveBeenCalledWith(
+      expect(global.fetch).toHaveBeenCalledWith(
         expect.stringContaining("/repos/test-owner/test-repo/actions/runs"),
         expect.objectContaining({
           headers: expect.objectContaining({
@@ -54,7 +56,7 @@ describe("Status API Functions", () => {
     });
 
     it("should return failing status when GitHub workflow fails", async () => {
-      (fetch as jest.Mock).mockResolvedValueOnce({
+      (global.fetch as jest.Mock).mockResolvedValueOnce({
         ok: true,
         json: jest.fn().mockResolvedValueOnce({
           workflow_runs: [
@@ -73,7 +75,7 @@ describe("Status API Functions", () => {
     });
 
     it("should return pending status when GitHub workflow is in progress", async () => {
-      (fetch as jest.Mock).mockResolvedValueOnce({
+      (global.fetch as jest.Mock).mockResolvedValueOnce({
         ok: true,
         json: jest.fn().mockResolvedValueOnce({
           workflow_runs: [
@@ -97,11 +99,11 @@ describe("Status API Functions", () => {
       const result = await fetchCICDStatus();
 
       expect(result.status).toBe(CICDStatus.NOT_AVAILABLE);
-      expect(fetch).not.toHaveBeenCalled();
+      expect(global.fetch).not.toHaveBeenCalled();
     });
 
     it("should handle API errors gracefully", async () => {
-      (fetch as jest.Mock).mockRejectedValueOnce(new Error("API error"));
+      (global.fetch as jest.Mock).mockRejectedValueOnce(new Error("API error"));
 
       const result = await fetchCICDStatus();
 
@@ -111,7 +113,7 @@ describe("Status API Functions", () => {
 
   describe("fetchQualityGateStatus", () => {
     it("should return passed status when SonarQube quality gate passes", async () => {
-      (fetch as jest.Mock).mockResolvedValueOnce({
+      (global.fetch as jest.Mock).mockResolvedValueOnce({
         ok: true,
         json: jest.fn().mockResolvedValueOnce({
           projectStatus: {
@@ -123,7 +125,7 @@ describe("Status API Functions", () => {
       const result = await fetchQualityGateStatus();
 
       expect(result.status).toBe(QualityGateStatus.PASSED);
-      expect(fetch).toHaveBeenCalledWith(
+      expect(global.fetch).toHaveBeenCalledWith(
         expect.stringContaining(
           "/qualitygates/project_status?projectKey=test-project-key"
         ),
@@ -136,7 +138,7 @@ describe("Status API Functions", () => {
     });
 
     it("should return failed status when SonarQube quality gate fails", async () => {
-      (fetch as jest.Mock).mockResolvedValueOnce({
+      (global.fetch as jest.Mock).mockResolvedValueOnce({
         ok: true,
         json: jest.fn().mockResolvedValueOnce({
           projectStatus: {
@@ -156,13 +158,13 @@ describe("Status API Functions", () => {
       const result = await fetchQualityGateStatus();
 
       expect(result.status).toBe(QualityGateStatus.NOT_AVAILABLE);
-      expect(fetch).not.toHaveBeenCalled();
+      expect(global.fetch).not.toHaveBeenCalled();
     });
   });
 
   describe("fetchTestCoverage", () => {
     it("should return correct coverage percentage", async () => {
-      (fetch as jest.Mock).mockResolvedValueOnce({
+      (global.fetch as jest.Mock).mockResolvedValueOnce({
         ok: true,
         json: jest.fn().mockResolvedValueOnce({
           component: {
@@ -181,7 +183,7 @@ describe("Status API Functions", () => {
     });
 
     it("should return 0 when coverage data is not available", async () => {
-      (fetch as jest.Mock).mockResolvedValueOnce({
+      (global.fetch as jest.Mock).mockResolvedValueOnce({
         ok: true,
         json: jest.fn().mockResolvedValueOnce({
           component: {
@@ -199,23 +201,51 @@ describe("Status API Functions", () => {
   describe("fetchProjectStatus", () => {
     it("should fetch all statuses in parallel", async () => {
       // Mock the individual fetch functions
-      jest.mock("@/lib/api/status", () => {
-        const originalModule = jest.requireActual("@/lib/api/status");
-        return {
-          ...originalModule,
-          fetchCICDStatus: jest.fn().mockResolvedValue({
-            status: CICDStatus.PASSING,
-            url: "test-url",
-          }),
-          fetchQualityGateStatus: jest.fn().mockResolvedValue({
-            status: QualityGateStatus.PASSED,
-            url: "test-url",
-          }),
-          fetchTestCoverage: jest.fn().mockResolvedValue({
-            percentage: 90,
-            url: "test-url",
-          }),
-        };
+      const mockCICDStatus = {
+        status: CICDStatus.PASSING,
+        url: "test-url",
+      };
+
+      const mockQualityGateStatus = {
+        status: QualityGateStatus.PASSED,
+        url: "test-url",
+      };
+
+      const mockTestCoverage = {
+        percentage: 90,
+        url: "test-url",
+      };
+
+      // Use jest.spyOn to mock the functions
+      jest.spyOn(global, "fetch").mockImplementation((url) => {
+        if (url.toString().includes("actions/runs")) {
+          return Promise.resolve({
+            ok: true,
+            json: () =>
+              Promise.resolve({
+                workflow_runs: [
+                  { conclusion: "success", html_url: "test-url" },
+                ],
+              }),
+          }) as unknown as Promise<Response>;
+        } else if (url.toString().includes("qualitygates")) {
+          return Promise.resolve({
+            ok: true,
+            json: () =>
+              Promise.resolve({
+                projectStatus: { status: "OK" },
+              }),
+          }) as unknown as Promise<Response>;
+        } else if (url.toString().includes("measures")) {
+          return Promise.resolve({
+            ok: true,
+            json: () =>
+              Promise.resolve({
+                component: { measures: [{ value: "90" }] },
+              }),
+          }) as unknown as Promise<Response>;
+        }
+        return Promise.reject(new Error("Unknown URL"));
       });
 
       const result = await fetchProjectStatus();
@@ -223,6 +253,9 @@ describe("Status API Functions", () => {
       expect(result).toHaveProperty("cicd");
       expect(result).toHaveProperty("qualityGate");
       expect(result).toHaveProperty("testCoverage");
+      expect(result.cicd.status).toBe(CICDStatus.PASSING);
+      expect(result.qualityGate.status).toBe(QualityGateStatus.PASSED);
+      expect(result.testCoverage.percentage).toBe(90);
     });
   });
 });

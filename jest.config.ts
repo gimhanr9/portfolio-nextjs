@@ -40,6 +40,12 @@ const config: Config = {
     "!jest.config.ts",
     "!next.config.js",
   ],
+  // Set this to true to see more detailed error messages
+  verbose: true,
+  // This ensures that the test environment has access to the process.env variables
+  testEnvironmentOptions: {
+    url: "http://localhost:3000",
+  },
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
