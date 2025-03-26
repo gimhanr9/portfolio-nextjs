@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Home } from "lucide-react";
 import { useRouter } from "next/navigation";
+import "./globals.css";
 
 const NotFound = () => {
   const router = useRouter();

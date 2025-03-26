@@ -2,8 +2,8 @@
     "hero": {
     "badge": "Full Stack Developer",
     "greeting": "Hi there! I'm",
-    "name": "Your Name",
-    "description": "Building robust, scalable applications with modern technologies. Passionate about CI/CD, testing, and delivering exceptional user experiences."
+    "name": "Gimhan Rodrigo",
+    "description": "Building seamless digital experiences with clean code and cutting-edge technology. Passionate about crafting high-performance, scalable solutions."
   },
   "buttons": {
     "viewWork": "View My Work",
@@ -11,7 +11,7 @@
   },
   "about": {
     "title": "About Me",
-    "description": "I'm a full stack developer with expertise in building modern web applications. My focus is on creating scalable, maintainable code with robust CI/CD pipelines and comprehensive testing."
+    "description": "I'm a results-driven full-stack developer with expertise in web, mobile, and machine learning. With a strong foundation in software engineering and a passion for problem-solving, I thrive on building innovative, efficient, and scalable applications."
   },
   "tabs": {
     "skills": "Skills",
@@ -20,7 +20,7 @@
   },
   "projects": {
     "title": "Featured Projects",
-    "description": "Check out some of my recent work. Each project includes CI/CD pipelines and comprehensive test coverage.",
+    "description": "Check out some of my recent work.",
     "viewAll": "View All Projects"
   },
   "notFound": {

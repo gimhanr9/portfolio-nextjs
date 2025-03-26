@@ -8,6 +8,7 @@ import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import LanguageSelector from "../language-selector";
 import ThemeToggle from "../theme-toggle";
+import { siteConfig } from "@/config/site";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -60,7 +61,7 @@ const Navbar = () => {
       <div className="container flex h-16 items-center justify-between px-4 md:px-6">
         <Link href="/" className="flex items-center gap-2">
           <span className="text-xl font-bold bg-gradient-to-r from-teal-500 to-purple-500 bg-clip-text text-transparent">
-            YourName
+            {siteConfig.name}
           </span>
         </Link>
         <nav className="hidden md:flex items-center gap-6">
