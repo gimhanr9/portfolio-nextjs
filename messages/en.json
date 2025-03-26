@@ -79,11 +79,15 @@
         "emailInvalid": "Please enter a valid email address",
         "messageRequired": "Message is required",
         "messageTooShort": "Message must be at least 10 characters",
-        "sendFailed": "Your message couldn't be sent. Please try again."
+        "sendFailed": "Your message couldn't be sent. Please try again.",
+        "missingFields": "Name, email, and message are required",
+        "emailServiceNotConfigured": "Email service is not configured. Please contact the administrator.",
+        "emailServiceError": "Email service error. Please try again later."
       },
       "success": {
         "title": "Message sent!",
-        "description": "Thanks for reaching out. I'll get back to you soon."
+        "description": "Thanks for reaching out. I'll get back to you soon.",
+        "message": "Your message has been sent successfully"
       }
     }
   }
