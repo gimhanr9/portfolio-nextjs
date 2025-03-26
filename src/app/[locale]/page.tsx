@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import AnimatedText from "@/components/common/animated-text";
-import ProjectCard from "@/components/project-card";
+import ProjectCard from "@/components/common/project-card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import TechStack from "@/components/common/tech-stack";
 import {
@@ -232,7 +232,7 @@ const Home = ({ params }: { params: { locale: string } }) => {
           <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 py-12 md:grid-cols-2 lg:gap-12">
             {projects.map((project, index) => (
               <ProjectCard
-                key={index}
+                key={project.id}
                 title={project.title}
                 description={project.description}
                 tags={project.tags}

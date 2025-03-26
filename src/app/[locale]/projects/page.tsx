@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import ProjectCard from "@/components/project-card";
+import ProjectCard from "@/components/common/project-card";
 
 export const metadata = {
   title: "Projects | Your Name",

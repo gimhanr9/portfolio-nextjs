@@ -36,5 +36,25 @@
     "projects": "Projects",
     "about": "About",
     "contact": "Contact"
+  },
+  "status": {
+    "cicd": {
+      "label": "CI/CD",
+      "passing": "Passing",
+      "failing": "Failing",
+      "pending": "Pending",
+      "notAvailable": "Not Available"
+    },
+    "qualityGate": {
+      "label": "Quality Gate",
+      "passed": "Passed",
+      "failed": "Failed",
+      "pending": "Pending",
+      "notAvailable": "Not Available"
+    },
+    "testCoverage": {
+      "label": "Tests",
+      "notAvailable": "Not Available"
+    }
   }
 }

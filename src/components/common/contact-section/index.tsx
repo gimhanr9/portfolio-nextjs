@@ -68,8 +68,20 @@ const ContactSection = () => {
     setIsSubmitting(true);
 
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      // Send the form data to our API route
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to send message");
+      }
 
       // Success
       setIsSuccess(true);
@@ -86,7 +98,10 @@ const ContactSection = () => {
     } catch (error) {
       toast({
         title: "Something went wrong",
-        description: "Your message couldn't be sent. Please try again.",
+        description:
+          error instanceof Error
+            ? error.message
+            : "Your message couldn't be sent. Please try again.",
         variant: "destructive",
       });
     } finally {
