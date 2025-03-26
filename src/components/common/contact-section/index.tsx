@@ -10,9 +10,12 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { CheckIcon } from "@/lib/icons";
 import { FormDataType, FormErrorsType } from "./contact-section.types";
+import { useTranslations } from "next-intl";
 
 const ContactSection = () => {
+  const t = useTranslations("contact");
   const { toast } = useToast();
+
   const [formData, setFormData] = useState<FormDataType>({
     name: "",
     email: "",
@@ -27,23 +30,23 @@ const ContactSection = () => {
     const newErrors: FormErrorsType = {};
 
     if (!formData.name.trim()) {
-      newErrors.name = "Name is required";
+      newErrors.name = t("form.errors.nameRequired");
     }
 
     if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
+      newErrors.email = t("form.errors.emailRequired");
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = "Please enter a valid email address";
+      newErrors.email = t("form.errors.emailInvalid");
     }
 
     if (!formData.message.trim()) {
-      newErrors.message = "Message is required";
-    } else if (formData.message.trim().length < 10) {
-      newErrors.message = "Message must be at least 10 characters";
+      newErrors.message = t("form.errors.messageRequired");
+    } else if (formData.message.trim()?.length < 10) {
+      newErrors.message = t("form.errors.messageTooShort");
     }
 
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    return Object.keys(newErrors)?.length === 0;
   };
 
   const handleChange = (
@@ -77,17 +80,26 @@ const ContactSection = () => {
         body: JSON.stringify(formData),
       });
 
-      const data = await response.json();
+      // Always parse the response, even if it's an error
+      let data;
+      try {
+        data = await response.json();
+      } catch (parseError) {
+        console.error("Error parsing response:", parseError);
+        throw new Error("Failed to parse server response");
+      }
 
       if (!response.ok) {
-        throw new Error(data.error || "Failed to send message");
+        // Create a detailed error with the message from the API
+        throw new Error(data?.error || t("form.errors.sendFailed"));
       }
 
       // Success
       setIsSuccess(true);
       toast({
-        title: "Message sent!",
-        description: "Thanks for reaching out. I'll get back to you soon.",
+        title: t("form.success.title"),
+        description: t("form.success.description"),
+        variant: "default",
       });
 
       // Reset form after 2 seconds
@@ -96,12 +108,13 @@ const ContactSection = () => {
         setIsSuccess(false);
       }, 2000);
     } catch (error) {
+      console.error("Contact form submission error:", error);
+
+      // Ensure the error is displayed to the user
       toast({
-        title: "Something went wrong",
+        title: t("form.errors.title"),
         description:
-          error instanceof Error
-            ? error.message
-            : "Your message couldn't be sent. Please try again.",
+          error instanceof Error ? error.message : t("form.errors.sendFailed"),
         variant: "destructive",
       });
     } finally {
@@ -129,18 +142,18 @@ const ContactSection = () => {
               d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
             ></path>
           </svg>
-          Sending...
+          {t("form.buttons.sending")}
         </span>
       );
     } else if (isSuccess) {
       return (
         <span className="flex items-center gap-2">
           <CheckIcon className="h-4 w-4" />
-          Sent!
+          {t("form.buttons.sent")}
         </span>
       );
     } else {
-      return "Send Message";
+      return t("form.buttons.send");
     }
   };
 
@@ -148,10 +161,10 @@ const ContactSection = () => {
     <div className="container px-4 md:px-6">
       <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
         <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-5xl">
-          Get In Touch
+          {t("title")}
         </h2>
         <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-          Interested in working together? Feel free to reach out.
+          {t("description")}
         </p>
       </div>
 
@@ -160,14 +173,14 @@ const ContactSection = () => {
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
               <Label htmlFor="name" className="text-sm font-medium">
-                Name
+                {t("form.labels.name")}
               </Label>
               <Input
                 id="name"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                placeholder="Your name"
+                placeholder={t("form.placeholders.name")}
                 className={errors.name ? "border-destructive" : ""}
                 disabled={isSubmitting || isSuccess}
               />
@@ -178,7 +191,7 @@ const ContactSection = () => {
 
             <div className="space-y-2">
               <Label htmlFor="email" className="text-sm font-medium">
-                Email
+                {t("form.labels.email")}
               </Label>
               <Input
                 id="email"
@@ -186,7 +199,7 @@ const ContactSection = () => {
                 type="email"
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="your.email@example.com"
+                placeholder={t("form.placeholders.email")}
                 className={errors.email ? "border-destructive" : ""}
                 disabled={isSubmitting || isSuccess}
               />
@@ -197,14 +210,14 @@ const ContactSection = () => {
 
             <div className="space-y-2">
               <Label htmlFor="message" className="text-sm font-medium">
-                Message
+                {t("form.labels.message")}
               </Label>
               <Textarea
                 id="message"
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
-                placeholder="Your message"
+                placeholder={t("form.placeholders.message")}
                 className={`min-h-[150px] ${
                   errors.message ? "border-destructive" : ""
                 }`}

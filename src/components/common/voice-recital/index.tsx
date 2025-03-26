@@ -53,7 +53,7 @@ const VoiceRecital = (props: VoiceRecitalProps) => {
       let voices = window.speechSynthesis.getVoices();
 
       // If voices aren't loaded yet, wait for them
-      if (voices.length === 0) {
+      if (voices?.length === 0) {
         await new Promise<void>((resolve) => {
           window.speechSynthesis.onvoiceschanged = () => {
             voices = window.speechSynthesis.getVoices();

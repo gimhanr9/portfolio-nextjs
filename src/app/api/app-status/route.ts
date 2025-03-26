@@ -33,7 +33,7 @@ async function fetchCICDStatus(): Promise<StatusData["cicd"]> {
     }
 
     const data = await response.json();
-    if (!data.workflow_runs || data.workflow_runs.length === 0) {
+    if (!data.workflow_runs || data.workflow_runs?.length === 0) {
       return {
         status: CICDStatus.NOT_AVAILABLE,
         url: defaultUrl,

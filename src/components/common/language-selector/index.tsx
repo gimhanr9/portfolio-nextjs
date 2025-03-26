@@ -26,7 +26,7 @@ const LanguageSelector = () => {
 
   useEffect(() => {
     let locales = siteConfig.locales;
-    if (locales.length > 0) {
+    if (locales?.length > 0) {
       setLanguages(siteConfig.locales);
       setCurrentLanguage(
         locales.find((x) => x.code === siteConfig.defaultLocale) ?? locales[0]
