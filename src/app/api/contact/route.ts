@@ -1,31 +1,48 @@
-import { EmailTemplate } from "@/components/common/email-template";
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
+import { getTranslations } from "next-intl/server";
+import { EmailTemplate } from "@/components/common/email-template";
 
 // Initialize Resend with your API key
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: NextRequest) {
   try {
+    // Get the locale from the Accept-Language header or default to 'en'
+    const acceptLanguage = request.headers.get("accept-language") ?? "en";
+    const locale = acceptLanguage.split(",")[0].split("-")[0] || "en";
+
+    // Get translations for the specified locale
+    const t = await getTranslations({ locale, namespace: "contact.form" });
+
     // Parse the request body
     const { name, email, message } = await request.json();
 
     // Validate the request data
     if (!name || !email || !message) {
       return NextResponse.json(
-        { error: "Name, email, and message are required" },
+        { error: t("errors.missingFields") },
         { status: 400 }
       );
     }
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return NextResponse.json(
-        { error: "Please provide a valid email address" },
+        { error: t("errors.emailInvalid") },
         { status: 400 }
       );
     }
 
-    // Format the current date
+    // Check if Resend API key is configured
+    if (!process.env.RESEND_API_KEY) {
+      console.error("Resend API key is not configured");
+      return NextResponse.json(
+        { error: t("errors.emailServiceNotConfigured") },
+        { status: 500 }
+      );
+    }
+
+    // Format the current date based on locale
     const date = new Date().toLocaleString("en-US", {
       weekday: "long",
       year: "numeric",
@@ -36,18 +53,6 @@ export async function POST(request: NextRequest) {
     });
 
     try {
-      // Check if Resend API key is configured
-      if (!process.env.RESEND_API_KEY) {
-        console.error("Resend API key is not configured");
-        return NextResponse.json(
-          {
-            error:
-              "Email service is not configured. Please contact the administrator.",
-          },
-          { status: 500 }
-        );
-      }
-
       // Send the email using Resend
       const { data, error } = await resend.emails.send({
         from: `Contact Form <${
@@ -62,7 +67,7 @@ export async function POST(request: NextRequest) {
       if (error) {
         console.error("Resend API error:", error);
         return NextResponse.json(
-          { error: "Failed to send email. Please try again later." },
+          { error: t("errors.sendFailed") },
           { status: 500 }
         );
       }
@@ -70,12 +75,12 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({
         success: true,
         messageId: data?.id,
-        message: "Your message has been sent successfully",
+        message: t("success.message"),
       });
     } catch (emailError) {
       console.error("Email sending error:", emailError);
       return NextResponse.json(
-        { error: "Email service error. Please try again later." },
+        { error: t("errors.emailServiceError") },
         { status: 500 }
       );
     }

@@ -25,6 +25,7 @@ const ContactSection = () => {
   const [errors, setErrors] = useState<FormErrorsType>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
 
   const validateForm = (): boolean => {
     const newErrors: FormErrorsType = {};
@@ -59,10 +60,18 @@ const ContactSection = () => {
     if (errors[name as keyof FormErrorsType]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
+
+    // Clear server error when user makes changes
+    if (serverError) {
+      setServerError(null);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    // Clear any previous server errors
+    setServerError(null);
 
     if (!validateForm()) {
       return;
@@ -91,15 +100,17 @@ const ContactSection = () => {
 
       if (!response.ok) {
         // Create a detailed error with the message from the API
-        throw new Error(data?.error || t("form.errors.sendFailed"));
+        const errorMessage = data?.error || t("form.errors.sendFailed");
+        setServerError(errorMessage);
+        throw new Error(errorMessage);
       }
 
       // Success
       setIsSuccess(true);
+      setServerError(null);
       toast({
         title: t("form.success.title"),
         description: t("form.success.description"),
-        variant: "default",
       });
 
       // Reset form after 2 seconds
@@ -109,6 +120,13 @@ const ContactSection = () => {
       }, 2000);
     } catch (error) {
       console.error("Contact form submission error:", error);
+
+      // Set the server error state
+      if (!serverError) {
+        setServerError(
+          error instanceof Error ? error.message : t("form.errors.sendFailed")
+        );
+      }
 
       // Ensure the error is displayed to the user
       toast({
@@ -170,6 +188,13 @@ const ContactSection = () => {
 
       <div className="mx-auto mt-12 max-w-2xl">
         <div className="rounded-lg border bg-card p-6 shadow-sm">
+          {/* Display server error at the top of the form if present */}
+          {serverError && (
+            <div className="mb-6 p-4 rounded-md bg-destructive/15 text-destructive">
+              <p className="font-medium">{serverError}</p>
+            </div>
+          )}
+
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
               <Label htmlFor="name" className="text-sm font-medium">
