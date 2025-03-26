@@ -7,7 +7,7 @@ const EducationTimeline = () => {
       {education.map((edu, index) => (
         <div key={index} className="relative pl-12">
           {/* Timeline connector */}
-          {index < education.length - 1 && (
+          {index < education?.length - 1 && (
             <div className="absolute left-5 top-12 bottom-0 w-0.5 bg-gray-200 dark:bg-gray-800"></div>
           )}
 

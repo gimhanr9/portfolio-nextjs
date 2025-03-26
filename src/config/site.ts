@@ -39,7 +39,7 @@ export const siteConfig = {
     githubApi: "https://api.github.com",
     sonarCloud: "https://sonarcloud.io",
     sonarCloudApi: "https://sonarcloud.io/api",
-    portfolio: process.env.PORTFOLIO_URL ?? "https://gimhanrodrigo.com/",
+    portfolio: process.env.PORTFOLIO_URL ?? "https://gimhanrodrigo.com",
   },
 
   // Environment
