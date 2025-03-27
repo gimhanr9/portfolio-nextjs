@@ -4,7 +4,6 @@ import { getTranslations } from "next-intl/server";
 import { EmailTemplate } from "@/components/common/email-template";
 
 // Initialize Resend with your API key
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Simple email validation function that avoids complex regex backtracking
 function isValidEmail(email: string): boolean {
@@ -37,6 +36,8 @@ function isValidEmail(email: string): boolean {
 
 export async function POST(request: NextRequest) {
   try {
+    const resend = new Resend(process.env.RESEND_API_KEY);
+
     // Get the locale from the Accept-Language header or default to 'en'
     const acceptLanguage = request.headers.get("accept-language") ?? "en";
     const locale = acceptLanguage.split(",")[0].split("-")[0] || "en";
@@ -85,7 +86,7 @@ export async function POST(request: NextRequest) {
       // Send the email using Resend
       const { data, error } = await resend.emails.send({
         from: `Contact Form <${
-          process.env.FROM_EMAIL ?? "gimhanrg@gmail.com"
+          process.env.FROM_EMAIL ?? "no-reply@gimhanrodrigo.com"
         }>`,
         to: process.env.TO_EMAIL ?? "gimhanr9@gmail.com",
         subject: `Portfolio Contact: ${name}`,

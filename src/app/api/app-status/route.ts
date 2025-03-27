@@ -223,7 +223,6 @@ export async function fetchProjectStatus(): Promise<StatusData> {
 
 export async function GET() {
   try {
-    debugger;
     // This runs on the server, so environment variables are accessible
     const statusData = await fetchProjectStatus();
 

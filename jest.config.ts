@@ -8,44 +8,10 @@ const createJestConfig = nextJest({
 
 // Add any custom config to be passed to Jest
 const config: Config = {
-  preset: "ts-jest",
   coverageProvider: "v8",
   testEnvironment: "jsdom",
   // Add more setup options before each test is run
-  setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
-  moduleNameMapper: {
-    "^@/components/(.*)$": "<rootDir>/components/$1",
-    "^@/app/(.*)$": "<rootDir>/src/app/$1",
-    "^@/lib/(.*)$": "<rootDir>/lib/$1",
-    "^@/data/(.*)$": "<rootDir>/data/$1",
-    "^@/i18n/(.*)$": "<rootDir>/i18n/$1",
-    "^@/config/(.*)$": "<rootDir>/config/$1",
-    "^@/hooks/(.*)$": "<rootDir>/hooks/$1",
-  },
-  transform: {
-    "^.+\\.(ts|tsx)$": [
-      "ts-jest",
-      {
-        tsconfig: "tsconfig.json",
-      },
-    ],
-  },
-  testMatch: ["**/__tests__/**/*.test.(ts|tsx)"],
-  collectCoverageFrom: [
-    "**/*.{js,jsx,ts,tsx}",
-    "!**/*.d.ts",
-    "!**/node_modules/**",
-    "!**/.next/**",
-    "!**/coverage/**",
-    "!jest.config.ts",
-    "!next.config.js",
-  ],
-  // Set this to true to see more detailed error messages
-  verbose: true,
-  // This ensures that the test environment has access to the process.env variables
-  testEnvironmentOptions: {
-    url: "http://localhost:3000",
-  },
+  // setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
