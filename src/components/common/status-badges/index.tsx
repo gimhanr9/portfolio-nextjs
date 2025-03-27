@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { SonarQubeIcon, CICDIcon, JestIcon } from "@/lib/icons";
-import { fetchProjectStatus } from "@/app/api/app-status/route";
 import { CICDStatus, QualityGateStatus, StatusData } from "@/lib/enums/status";
 import { useTranslations } from "next-intl";
 
@@ -25,19 +24,23 @@ const StatusBadges = () => {
 
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    const getStatus = async () => {
-      try {
-        const data = await fetchProjectStatus();
-        setStatus(data);
-      } catch (error) {
-        // If there's an error, we'll keep the default "pending" status
-        console.error("Failed to fetch status:", error);
-      } finally {
-        setIsLoading(false);
+  const getStatus = async () => {
+    try {
+      // Use the API route instead of direct function call
+      const response = await fetch("/api/app-status");
+      if (!response.ok) {
+        throw new Error(`Status API returned ${response.status}`);
       }
-    };
+      const data = await response.json();
+      setStatus(data);
+    } catch (error) {
+      console.error("Failed to fetch status:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
+  useEffect(() => {
     getStatus();
   }, []);
 
@@ -118,6 +121,7 @@ const StatusBadges = () => {
           <div
             key={i}
             className="inline-flex items-center gap-2 rounded-full bg-gray-100 px-3 py-1 text-sm font-medium text-gray-800 dark:bg-gray-800 dark:text-gray-300 animate-pulse"
+            role="status"
           >
             <div className="h-4 w-4 rounded-full bg-gray-300 dark:bg-gray-700"></div>
             <div className="h-4 w-20 rounded-full bg-gray-300 dark:bg-gray-700"></div>

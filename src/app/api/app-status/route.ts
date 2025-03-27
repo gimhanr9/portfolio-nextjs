@@ -1,12 +1,14 @@
 import { siteConfig } from "@/config/site";
 import { CICDStatus, QualityGateStatus, StatusData } from "@/lib/enums/status";
+import { NextResponse } from "next/server";
 
 // Fetch GitHub Actions workflow status
-async function fetchCICDStatus(): Promise<StatusData["cicd"]> {
+export async function fetchCICDStatus(): Promise<StatusData["cicd"]> {
   const { token, repoOwner, repoName } = siteConfig.github;
   const defaultUrl = `${siteConfig.urls.github}/${repoOwner}/${repoName}/actions`;
 
   if (!token) {
+    console.log("GitHub token is not configured");
     return {
       status: CICDStatus.NOT_AVAILABLE,
       url: defaultUrl,
@@ -14,6 +16,7 @@ async function fetchCICDStatus(): Promise<StatusData["cicd"]> {
   }
 
   try {
+    console.log(`Fetching CI/CD status for ${repoOwner}/${repoName}`);
     const response = await fetch(
       `${siteConfig.urls.githubApi}/repos/${repoOwner}/${repoName}/actions/runs?per_page=1`,
       {
@@ -21,11 +24,15 @@ async function fetchCICDStatus(): Promise<StatusData["cicd"]> {
           Authorization: `token ${token}`,
           Accept: "application/vnd.github.v3+json",
         },
-        next: { revalidate: 300 }, // Cache for 5 minutes
+        // Remove the next: { revalidate } option as it's causing issues
+        // next: { revalidate: 300 }, // Cache for 5 minutes
       }
     );
 
     if (!response.ok) {
+      console.error(
+        `GitHub API error: ${response.status} ${response.statusText}`
+      );
       return {
         status: CICDStatus.NOT_AVAILABLE,
         url: defaultUrl,
@@ -33,7 +40,9 @@ async function fetchCICDStatus(): Promise<StatusData["cicd"]> {
     }
 
     const data = await response.json();
-    if (!data.workflow_runs || data.workflow_runs?.length === 0) {
+    console.log("GitHub API response:", data);
+
+    if (!data.workflow_runs || data.workflow_runs.length === 0) {
       return {
         status: CICDStatus.NOT_AVAILABLE,
         url: defaultUrl,
@@ -51,6 +60,7 @@ async function fetchCICDStatus(): Promise<StatusData["cicd"]> {
       url: latestRun.html_url || defaultUrl,
     };
   } catch (error) {
+    console.error("Error fetching CI/CD status:", error);
     return {
       status: CICDStatus.NOT_AVAILABLE,
       url: defaultUrl,
@@ -59,11 +69,14 @@ async function fetchCICDStatus(): Promise<StatusData["cicd"]> {
 }
 
 // Fetch SonarQube quality gate status
-async function fetchQualityGateStatus(): Promise<StatusData["qualityGate"]> {
+export async function fetchQualityGateStatus(): Promise<
+  StatusData["qualityGate"]
+> {
   const { token, projectKey } = siteConfig.sonar;
   const defaultUrl = `${siteConfig.urls.sonarCloud}/dashboard?id=${projectKey}`;
 
   if (!token) {
+    console.log("SonarQube token is not configured");
     return {
       status: QualityGateStatus.NOT_AVAILABLE,
       url: defaultUrl,
@@ -71,17 +84,22 @@ async function fetchQualityGateStatus(): Promise<StatusData["qualityGate"]> {
   }
 
   try {
+    console.log(`Fetching quality gate status for ${projectKey}`);
     const response = await fetch(
       `${siteConfig.urls.sonarCloudApi}/qualitygates/project_status?projectKey=${projectKey}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-        next: { revalidate: 300 }, // Cache for 5 minutes
+        // Remove the next: { revalidate } option
+        // next: { revalidate: 300 }, // Cache for 5 minutes
       }
     );
 
     if (!response.ok) {
+      console.error(
+        `SonarQube API error: ${response.status} ${response.statusText}`
+      );
       return {
         status: QualityGateStatus.NOT_AVAILABLE,
         url: defaultUrl,
@@ -89,6 +107,8 @@ async function fetchQualityGateStatus(): Promise<StatusData["qualityGate"]> {
     }
 
     const data = await response.json();
+    console.log("SonarQube API response:", data);
+
     return {
       status:
         data.projectStatus?.status === "OK"
@@ -99,6 +119,7 @@ async function fetchQualityGateStatus(): Promise<StatusData["qualityGate"]> {
       url: defaultUrl,
     };
   } catch (error) {
+    console.error("Error fetching quality gate status:", error);
     return {
       status: QualityGateStatus.NOT_AVAILABLE,
       url: defaultUrl,
@@ -107,13 +128,14 @@ async function fetchQualityGateStatus(): Promise<StatusData["qualityGate"]> {
 }
 
 // Fetch test coverage
-async function fetchTestCoverage(): Promise<StatusData["testCoverage"]> {
+export async function fetchTestCoverage(): Promise<StatusData["testCoverage"]> {
   const { token, projectKey } = siteConfig.sonar;
   const repoOwner = siteConfig.github.repoOwner;
   const repoName = siteConfig.github.repoName;
   const defaultUrl = `${siteConfig.urls.github}/${repoOwner}/${repoName}/actions`;
 
   if (!token) {
+    console.log("SonarQube token is not configured for test coverage");
     return {
       percentage: 0,
       url: defaultUrl,
@@ -121,17 +143,22 @@ async function fetchTestCoverage(): Promise<StatusData["testCoverage"]> {
   }
 
   try {
+    console.log(`Fetching test coverage for ${projectKey}`);
     const response = await fetch(
       `${siteConfig.urls.sonarCloudApi}/measures/component?component=${projectKey}&metricKeys=coverage`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-        next: { revalidate: 300 }, // Cache for 5 minutes
+        // Remove the next: { revalidate } option
+        // next: { revalidate: 300 }, // Cache for 5 minutes
       }
     );
 
     if (!response.ok) {
+      console.error(
+        `SonarQube API error for coverage: ${response.status} ${response.statusText}`
+      );
       return {
         percentage: 0,
         url: defaultUrl,
@@ -139,6 +166,8 @@ async function fetchTestCoverage(): Promise<StatusData["testCoverage"]> {
     }
 
     const data = await response.json();
+    console.log("SonarQube coverage API response:", data);
+
     const coverageValue = data.component?.measures?.[0]?.value;
 
     return {
@@ -146,6 +175,7 @@ async function fetchTestCoverage(): Promise<StatusData["testCoverage"]> {
       url: `${siteConfig.urls.sonarCloud}/component_measures?id=${projectKey}&metric=coverage`,
     };
   } catch (error) {
+    console.error("Error fetching test coverage:", error);
     return {
       percentage: 0,
       url: defaultUrl,
@@ -155,14 +185,53 @@ async function fetchTestCoverage(): Promise<StatusData["testCoverage"]> {
 
 // Main function to fetch all project status data
 export async function fetchProjectStatus(): Promise<StatusData> {
-  // Fetch all statuses in parallel
-  const [cicdStatus, qualityGateStatus, testCoverageStatus] = await Promise.all(
-    [fetchCICDStatus(), fetchQualityGateStatus(), fetchTestCoverage()]
-  );
+  console.log("Fetching all project status data");
 
-  return {
-    cicd: cicdStatus,
-    qualityGate: qualityGateStatus,
-    testCoverage: testCoverageStatus,
-  };
+  try {
+    // Fetch all statuses in parallel
+    const [cicdStatus, qualityGateStatus, testCoverageStatus] =
+      await Promise.all([
+        fetchCICDStatus(),
+        fetchQualityGateStatus(),
+        fetchTestCoverage(),
+      ]);
+
+    return {
+      cicd: cicdStatus,
+      qualityGate: qualityGateStatus,
+      testCoverage: testCoverageStatus,
+    };
+  } catch (error) {
+    console.error("Error fetching project status:", error);
+    // Return default values if there's an error
+    return {
+      cicd: {
+        status: CICDStatus.NOT_AVAILABLE,
+        url: `${siteConfig.urls.github}/${siteConfig.github.repoOwner}/${siteConfig.github.repoName}/actions`,
+      },
+      qualityGate: {
+        status: QualityGateStatus.NOT_AVAILABLE,
+        url: `${siteConfig.urls.sonarCloud}/dashboard?id=${siteConfig.sonar.projectKey}`,
+      },
+      testCoverage: {
+        percentage: 0,
+        url: `${siteConfig.urls.github}/${siteConfig.github.repoOwner}/${siteConfig.github.repoName}/actions`,
+      },
+    };
+  }
+}
+
+export async function GET() {
+  try {
+    // This runs on the server, so environment variables are accessible
+    const statusData = await fetchProjectStatus();
+
+    return NextResponse.json(statusData);
+  } catch (error) {
+    console.error("Error fetching project status:", error);
+    return NextResponse.json(
+      { error: "Failed to fetch project status" },
+      { status: 500 }
+    );
+  }
 }

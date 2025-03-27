@@ -30,7 +30,7 @@ export const siteConfig = {
   // Resend email configuration
   email: {
     apiKey: process.env.RESEND_API_KEY,
-    fromEmail: process.env.FROM_EMAIL ?? "gimhanrg@gmail.com",
+    fromEmail: "no-reply@gimhanrodrigo.com",
     toEmail: process.env.TO_EMAIL ?? "gimhanr9@gmail.com",
   },
 

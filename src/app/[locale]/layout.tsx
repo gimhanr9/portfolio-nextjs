@@ -9,12 +9,13 @@ import { inter } from "../fonts";
 import { notFound } from "next/navigation";
 import "../globals.css"; // Import the global CSS here as well
 import { ThemeProvider } from "next-themes";
+import { siteConfig } from "@/config/site";
 
 // Metadata for the entire site
 export const metadata = {
   title: {
-    default: "Your Name | Full Stack Developer",
-    template: "%s | Your Name",
+    default: `${siteConfig.name} | Full Stack Developer`,
+    template: `%s | ${siteConfig.name}`,
   },
   description:
     "Portfolio of a Full Stack Developer specializing in modern web technologies, CI/CD, and testing.",
@@ -26,20 +27,20 @@ export const metadata = {
     "CI/CD",
     "testing",
   ],
-  authors: [{ name: "Your Name" }],
-  creator: "Your Name",
+  authors: [{ name: siteConfig.name }],
+  creator: siteConfig.name,
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://yourwebsite.com",
-    title: "Your Name | Full Stack Developer",
+    url: siteConfig.url,
+    title: `${siteConfig.name} | Full Stack Developer`,
     description:
       "Portfolio of a Full Stack Developer specializing in modern web technologies, CI/CD, and testing.",
-    siteName: "Your Name Portfolio",
+    siteName: `${siteConfig.name} Portfolio`,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Your Name | Full Stack Developer",
+    title: `${siteConfig.name} | Full Stack Developer`,
     description:
       "Portfolio of a Full Stack Developer specializing in modern web technologies, CI/CD, and testing.",
     creator: "@yourtwitterhandle",

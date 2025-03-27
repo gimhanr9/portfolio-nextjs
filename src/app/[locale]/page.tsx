@@ -25,6 +25,7 @@ import EducationTimeline from "@/components/common/education-timeline";
 import { useTranslations } from "next-intl";
 import VoiceRecital from "@/components/common/voice-recital";
 import { projects } from "@/data/projects";
+import { siteConfig } from "@/config/site";
 
 const Home = ({ params }: { params: { locale: string } }) => {
   const t = useTranslations();
@@ -55,7 +56,7 @@ const Home = ({ params }: { params: { locale: string } }) => {
                   <div className="h-4"></div>
 
                   <span className="bg-gradient-to-r from-teal-500 to-purple-500 bg-clip-text text-transparent">
-                    <AnimatedText text={t("hero.name")} delay={0.3} />
+                    <AnimatedText text={siteConfig.name} delay={0.3} />
                   </span>
                 </h1>
                 <div className="flex items-center gap-2">

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { GithubIcon, LinkedinIcon, TwitterIcon, MailIcon } from "@/lib/icons";
 import { Button } from "@/components/ui/button";
+import { siteConfig } from "@/config/site";
 
 const Footer = () => {
   return (
@@ -8,7 +9,7 @@ const Footer = () => {
       <div className="container px-4 py-8 md:px-6 md:py-12">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           <div className="space-y-4">
-            <h3 className="text-lg font-bold">YourName</h3>
+            <h3 className="text-lg font-bold">{siteConfig.name}</h3>
             <p className="text-sm text-muted-foreground">
               Full Stack Developer specializing in modern web technologies,
               CI/CD, and testing.

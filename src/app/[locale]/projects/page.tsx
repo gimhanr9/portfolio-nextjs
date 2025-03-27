@@ -2,9 +2,10 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ProjectCard from "@/components/common/project-card";
+import { siteConfig } from "@/config/site";
 
 export const metadata = {
-  title: "Projects | Your Name",
+  title: `Projects | ${siteConfig.name}`,
   description:
     "Explore my portfolio of full stack development projects with CI/CD pipelines and comprehensive testing.",
 };
@@ -80,7 +81,6 @@ const ProjectsPage = () => {
             title={project.title}
             description={project.description}
             tags={project.tags}
-            image={project.image}
             link={project.link}
           />
         ))}
