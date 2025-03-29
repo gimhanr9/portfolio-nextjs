@@ -92,7 +92,7 @@ const Home = ({ params }: { params: { locale: string } }) => {
               </div>
               <div className="flex items-center gap-4 mt-4">
                 <Link
-                  href="https://github.com"
+                  href={siteConfig.urls.github}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -102,7 +102,7 @@ const Home = ({ params }: { params: { locale: string } }) => {
                   </Button>
                 </Link>
                 <Link
-                  href="https://linkedin.com"
+                  href={siteConfig.urls.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -112,7 +112,7 @@ const Home = ({ params }: { params: { locale: string } }) => {
                   </Button>
                 </Link>
                 <Link
-                  href="https://twitter.com"
+                  href={siteConfig.urls.twitter}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -121,7 +121,7 @@ const Home = ({ params }: { params: { locale: string } }) => {
                     <span className="sr-only">Twitter</span>
                   </Button>
                 </Link>
-                <Link href="mailto:your.email@example.com">
+                <Link href={`mailto:${siteConfig.contactEmail}`}>
                   <Button variant="ghost" size="icon" className="rounded-full">
                     <MailIcon className="h-5 w-5" />
                     <span className="sr-only">Email</span>

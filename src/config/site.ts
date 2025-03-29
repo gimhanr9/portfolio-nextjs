@@ -3,6 +3,7 @@ export const siteConfig = {
   url: "https://gimhanrodrigo.com",
   ogImage: "https://ui.shadcn.com/og.jpg",
   description: "My portfolio built using Next.js",
+  contactEmail: "gimhanr9@gmail.com",
   locales: [
     { code: "en", name: "English", flag: "🇺🇸" },
     { code: "es", name: "Español", flag: "🇪🇸" },
@@ -11,10 +12,6 @@ export const siteConfig = {
   ],
   defaultLocale: "en",
   localePrefix: "as-needed",
-  socialLinks: {
-    twitter: "https://twitter.com/shadcn",
-    github: "https://github.com/gimhanr9",
-  },
   github: {
     token: process.env.GITHUB_TOKEN,
     repoOwner: process.env.REPO_OWNER ?? "gimhanr9",
@@ -35,11 +32,14 @@ export const siteConfig = {
   },
 
   urls: {
-    github: "https://github.com",
+    github: "https://github.com/gimhanr9",
     githubApi: "https://api.github.com",
     sonarCloud: "https://sonarcloud.io",
     sonarCloudApi: "https://sonarcloud.io/api",
     portfolio: process.env.PORTFOLIO_URL ?? "https://gimhanrodrigo.com",
+    linkedin: "https://lk.linkedin.com/in/gimhanrodrigo",
+    twitter: "https://x.com/GimhanRodrigo",
+    instagram: "https://www.instagram.com/gimhanrodrigo/",
   },
 
   // Environment

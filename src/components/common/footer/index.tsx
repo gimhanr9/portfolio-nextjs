@@ -16,7 +16,7 @@ const Footer = () => {
             </p>
             <div className="flex items-center gap-4">
               <Link
-                href="https://github.com"
+                href={siteConfig.urls.github}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -26,7 +26,7 @@ const Footer = () => {
                 </Button>
               </Link>
               <Link
-                href="https://linkedin.com"
+                href={siteConfig.urls.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -36,7 +36,7 @@ const Footer = () => {
                 </Button>
               </Link>
               <Link
-                href="https://twitter.com"
+                href={siteConfig.urls.twitter}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -45,7 +45,7 @@ const Footer = () => {
                   <span className="sr-only">Twitter</span>
                 </Button>
               </Link>
-              <Link href="mailto:your.email@example.com">
+              <Link href={`mailto:${siteConfig.contactEmail}`}>
                 <Button variant="ghost" size="icon" className="rounded-full">
                   <MailIcon className="h-5 w-5" />
                   <span className="sr-only">Email</span>
@@ -55,7 +55,9 @@ const Footer = () => {
           </div>
         </div>
         <div className="mt-8 border-t pt-8 text-center text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} YourName. All rights reserved.</p>
+          <p>
+            © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>
