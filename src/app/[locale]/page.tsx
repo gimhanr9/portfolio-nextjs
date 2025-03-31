@@ -9,15 +9,7 @@ import AnimatedText from "@/components/common/animated-text";
 import ProjectCard from "@/components/common/project-card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import TechStack from "@/components/common/tech-stack";
-import {
-  CodeIcon,
-  DevOpsIcon,
-  GithubIcon,
-  LinkedinIcon,
-  MailIcon,
-  ServerIcon,
-  TwitterIcon,
-} from "@/lib/icons";
+import { GithubIcon, LinkedinIcon, MailIcon, TwitterIcon } from "@/lib/icons";
 import ContactSection from "@/components/common/contact-section";
 import StatusBadges from "@/components/common/status-badges";
 import ExperienceTimeline from "@/components/common/experience-timeline";
@@ -25,7 +17,7 @@ import EducationTimeline from "@/components/common/education-timeline";
 import { useTranslations } from "next-intl";
 import VoiceRecital from "@/components/common/voice-recital";
 import { projects } from "@/data/projects";
-import { siteConfig } from "@/config/site";
+import SkillCarousel from "@/components/common/skill-carousel";
 
 const Home = ({ params }: { params: { locale: string } }) => {
   const t = useTranslations();
@@ -35,6 +27,7 @@ const Home = ({ params }: { params: { locale: string } }) => {
   const introText = `${t("hero.greeting")} ${t("hero.name")}. ${t(
     "hero.description"
   )}`;
+
   return (
     <main className="flex min-h-screen flex-col">
       {/* Hero Section */}
@@ -56,7 +49,7 @@ const Home = ({ params }: { params: { locale: string } }) => {
                   <div className="h-4"></div>
 
                   <span className="bg-gradient-to-r from-teal-500 to-purple-500 bg-clip-text text-transparent">
-                    <AnimatedText text={siteConfig.name} delay={0.3} />
+                    <AnimatedText text={t("hero.name")} delay={0.3} />
                   </span>
                 </h1>
                 <div className="flex items-center gap-2">
@@ -92,7 +85,7 @@ const Home = ({ params }: { params: { locale: string } }) => {
               </div>
               <div className="flex items-center gap-4 mt-4">
                 <Link
-                  href={siteConfig.urls.github}
+                  href="https://github.com"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -102,7 +95,7 @@ const Home = ({ params }: { params: { locale: string } }) => {
                   </Button>
                 </Link>
                 <Link
-                  href={siteConfig.urls.linkedin}
+                  href="https://linkedin.com"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -112,7 +105,7 @@ const Home = ({ params }: { params: { locale: string } }) => {
                   </Button>
                 </Link>
                 <Link
-                  href={siteConfig.urls.twitter}
+                  href="https://twitter.com"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -121,7 +114,7 @@ const Home = ({ params }: { params: { locale: string } }) => {
                     <span className="sr-only">Twitter</span>
                   </Button>
                 </Link>
-                <Link href={`mailto:${siteConfig.contactEmail}`}>
+                <Link href="mailto:your.email@example.com">
                   <Button variant="ghost" size="icon" className="rounded-full">
                     <MailIcon className="h-5 w-5" />
                     <span className="sr-only">Email</span>
@@ -153,19 +146,19 @@ const Home = ({ params }: { params: { locale: string } }) => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-16 md:py-24">
-        <div className="container px-4 md:px-6">
-          <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
-            <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-5xl">
+      <section id="about" className="py-10 sm:py-16 md:py-24">
+        <div className="container px-4 sm:px-6">
+          <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-2 sm:gap-4 text-center">
+            <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight">
               {t("about.title")}
             </h2>
-            <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
+            <p className="max-w-[90%] sm:max-w-[85%] text-sm sm:text-base md:text-lg leading-relaxed sm:leading-normal text-muted-foreground">
               {t("about.description")}
             </p>
           </div>
 
-          <div className="mt-16">
-            <Tabs defaultValue="skills" className="mx-auto max-w-4xl">
+          <div className="mt-8 sm:mt-12 md:mt-16">
+            <Tabs defaultValue="skills" className="mx-auto max-w-5xl">
               <TabsList className="grid w-full grid-cols-3">
                 <TabsTrigger value="skills">{t("tabs.skills")}</TabsTrigger>
                 <TabsTrigger value="experience">
@@ -175,36 +168,37 @@ const Home = ({ params }: { params: { locale: string } }) => {
                   {t("tabs.education")}
                 </TabsTrigger>
               </TabsList>
-              <TabsContent value="skills" className="mt-6 space-y-6">
-                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                  <div className="flex flex-col items-center space-y-2 rounded-lg border p-6 shadow-sm transition-all hover:shadow-md">
-                    <div className="rounded-full bg-primary/10 p-3">
-                      <CodeIcon className="h-6 w-6 text-primary" />
-                    </div>
-                    <h3 className="text-xl font-bold">Frontend Development</h3>
-                    <p className="text-center text-sm text-muted-foreground">
-                      React, Next.js, TypeScript, Tailwind CSS
-                    </p>
-                  </div>
-                  <div className="flex flex-col items-center space-y-2 rounded-lg border p-6 shadow-sm transition-all hover:shadow-md">
-                    <div className="rounded-full bg-primary/10 p-3">
-                      <ServerIcon className="h-6 w-6 text-primary" />
-                    </div>
-                    <h3 className="text-xl font-bold">Backend Development</h3>
-                    <p className="text-center text-sm text-muted-foreground">
-                      Node.js, Express, MongoDB, PostgreSQL
-                    </p>
-                  </div>
-                  <div className="flex flex-col items-center space-y-2 rounded-lg border p-6 shadow-sm transition-all hover:shadow-md">
-                    <div className="rounded-full bg-primary/10 p-3">
-                      <DevOpsIcon className="h-6 w-6 text-primary" />
-                    </div>
-                    <h3 className="text-xl font-bold">DevOps & Testing</h3>
-                    <p className="text-center text-sm text-muted-foreground">
-                      CI/CD, Docker, Jest, GitHub Actions
-                    </p>
-                  </div>
-                </div>
+              <TabsContent value="skills" className="mt-4 sm:mt-6 space-y-6">
+                {/* Skill Carousel for the cards */}
+                <SkillCarousel
+                  skills={[
+                    {
+                      title: "Frontend Development",
+                      icon: "CodeIcon",
+                      description: "React, Next.js, TypeScript, Tailwind CSS",
+                    },
+                    {
+                      title: "Backend Development",
+                      icon: "ServerIcon",
+                      description: "Node.js, Express, MongoDB, PostgreSQL",
+                    },
+                    {
+                      title: "DevOps & Testing",
+                      icon: "DevOpsIcon",
+                      description: "CI/CD, Docker, Jest, GitHub Actions",
+                    },
+                    {
+                      title: "Mobile Development",
+                      icon: "CodeIcon",
+                      description: "React Native, Flutter, iOS, Android",
+                    },
+                    {
+                      title: "UI/UX Design",
+                      icon: "CodeIcon",
+                      description: "Figma, Adobe XD, Responsive Design",
+                    },
+                  ]}
+                />
                 <TechStack />
               </TabsContent>
               <TabsContent value="experience" className="mt-6 space-y-6">
@@ -233,7 +227,7 @@ const Home = ({ params }: { params: { locale: string } }) => {
           <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 py-12 md:grid-cols-2 lg:gap-12">
             {projects.map((project, index) => (
               <ProjectCard
-                key={project.id}
+                key={index}
                 title={project.title}
                 description={project.description}
                 tags={project.tags}
