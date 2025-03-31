@@ -21,7 +21,7 @@ const ExperienceTimeline = () => {
           {/* Content */}
           <div>
             <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-1 sm:mb-2">
-              <h3 className="text-sm sm:text-base md:text-lg lg:text-xl font-bold text-primary">
+              <h3 className="text-base md:text-lg lg:text-xl font-bold text-primary">
                 {exp.company}
               </h3>
               <Badge
@@ -32,7 +32,7 @@ const ExperienceTimeline = () => {
               </Badge>
             </div>
 
-            <h4 className="text-xs sm:text-sm md:text-base lg:text-lg font-medium mb-1 sm:mb-2 md:mb-3">
+            <h4 className="text-sm md:text-base lg:text-lg font-medium mb-1 sm:mb-2 md:mb-3">
               {exp.position}
             </h4>
 

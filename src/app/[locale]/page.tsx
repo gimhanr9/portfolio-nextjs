@@ -18,6 +18,7 @@ import { useTranslations } from "next-intl";
 import VoiceRecital from "@/components/common/voice-recital";
 import { projects } from "@/data/projects";
 import SkillCarousel from "@/components/common/skill-carousel";
+import { siteConfig } from "@/config/site";
 
 const Home = ({ params }: { params: { locale: string } }) => {
   const t = useTranslations();
@@ -33,9 +34,9 @@ const Home = ({ params }: { params: { locale: string } }) => {
       {/* Hero Section */}
       <section
         id="home"
-        className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden pt-16 bg-gradient-to-b from-background to-background/80"
+        className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden pt-24 bg-gradient-to-b from-background to-background/80"
       >
-        <div className="container mx-auto">
+        <div className="site-container">
           <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
             <div className="flex flex-col justify-center space-y-4">
               <div className="space-y-2">
@@ -53,7 +54,7 @@ const Home = ({ params }: { params: { locale: string } }) => {
                   </span>
                 </h1>
                 <div className="flex items-center gap-2">
-                  <p className="max-w-[600px] text-muted-foreground">
+                  <p className="max-w-[600px] text-sm md:text-base text-muted-foreground">
                     <AnimatedText text={t("hero.description")} delay={0.6} />
                   </p>
                   {/* Add speaker icon after description */}
@@ -85,7 +86,7 @@ const Home = ({ params }: { params: { locale: string } }) => {
               </div>
               <div className="flex items-center gap-4 mt-4">
                 <Link
-                  href="https://github.com"
+                  href={siteConfig.urls.github}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -95,7 +96,7 @@ const Home = ({ params }: { params: { locale: string } }) => {
                   </Button>
                 </Link>
                 <Link
-                  href="https://linkedin.com"
+                  href={siteConfig.urls.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -105,7 +106,7 @@ const Home = ({ params }: { params: { locale: string } }) => {
                   </Button>
                 </Link>
                 <Link
-                  href="https://twitter.com"
+                  href={siteConfig.urls.twitter}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -114,7 +115,7 @@ const Home = ({ params }: { params: { locale: string } }) => {
                     <span className="sr-only">Twitter</span>
                   </Button>
                 </Link>
-                <Link href="mailto:your.email@example.com">
+                <Link href={`mailto:${siteConfig.contactEmail}`}>
                   <Button variant="ghost" size="icon" className="rounded-full">
                     <MailIcon className="h-5 w-5" />
                     <span className="sr-only">Email</span>
@@ -147,7 +148,7 @@ const Home = ({ params }: { params: { locale: string } }) => {
 
       {/* About Section */}
       <section id="about">
-        <div className="container mx-auto">
+        <div className="site-container">
           <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
             <h2 className="font-heading">{t("about.title")}</h2>
             <p className="max-w-[85%] text-muted-foreground">
@@ -156,7 +157,7 @@ const Home = ({ params }: { params: { locale: string } }) => {
           </div>
 
           <div className="mt-12">
-            <Tabs defaultValue="skills" className="mx-auto max-w-5xl">
+            <Tabs defaultValue="skills" className="mx-auto">
               <TabsList className="grid w-full grid-cols-3">
                 <TabsTrigger value="skills">{t("tabs.skills")}</TabsTrigger>
                 <TabsTrigger value="experience">
@@ -212,7 +213,7 @@ const Home = ({ params }: { params: { locale: string } }) => {
 
       {/* Featured Projects Section */}
       <section id="projects" className="bg-muted/50">
-        <div className="container mx-auto">
+        <div className="site-container">
           <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
             <h2 className="font-heading">{t("projects.title")}</h2>
             <p className="max-w-[85%] text-muted-foreground">
@@ -220,7 +221,7 @@ const Home = ({ params }: { params: { locale: string } }) => {
             </p>
           </div>
 
-          <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 py-12 md:grid-cols-2 lg:gap-12">
+          <div className="mx-auto grid grid-cols-1 gap-6 py-12 md:grid-cols-2 lg:gap-12">
             {projects.map((project, index) => (
               <ProjectCard
                 key={index}

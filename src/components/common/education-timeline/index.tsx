@@ -13,7 +13,7 @@ const EducationTimeline = () => {
 
           {/* Institution logo */}
           <div
-            className={`absolute left-0 top-0 flex h-5 w-5 sm:h-6 sm:w-6 md:h-8 md:w-8 lg:h-10 lg:w-10 items-center justify-center rounded-full ${edu.institutionColor} text-white font-bold text-xs sm:text-sm md:text-base`}
+            className={`absolute left-0 top-0 flex h-5 w-5 sm:h-6 sm:w-6 md:h-8 md:h-8 lg:h-10 lg:w-10 items-center justify-center rounded-full ${edu.institutionColor} text-white font-bold text-xs sm:text-sm md:text-base`}
           >
             {edu.institutionLogo}
           </div>
@@ -21,7 +21,7 @@ const EducationTimeline = () => {
           {/* Content */}
           <div>
             <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-1 sm:mb-2">
-              <h3 className="text-sm sm:text-base md:text-lg lg:text-xl font-bold text-primary">
+              <h3 className="text-base md:text-lg lg:text-xl font-bold text-primary">
                 {edu.institution}
               </h3>
               <Badge
@@ -32,7 +32,7 @@ const EducationTimeline = () => {
               </Badge>
             </div>
 
-            <h4 className="text-xs sm:text-sm md:text-base lg:text-lg font-medium mb-1 sm:mb-2 md:mb-3">
+            <h4 className="text-sm md:text-base lg:text-lg font-medium mb-1 sm:mb-2 md:mb-3">
               {edu.degree}
             </h4>
 

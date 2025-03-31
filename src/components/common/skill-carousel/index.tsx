@@ -84,7 +84,7 @@ const SkillCarousel = (props: SkillCarouselProps) => {
   };
 
   return (
-    <div className="relative mb-8 px-4">
+    <div className="relative mb-8">
       {/* Carousel container with padding for the navigation buttons */}
       <div className="px-10">
         <div className="overflow-hidden" ref={emblaRef}>
@@ -98,10 +98,10 @@ const SkillCarousel = (props: SkillCarouselProps) => {
                   <div className="rounded-full bg-primary/10 p-3">
                     {getIconComponent(skill.icon)}
                   </div>
-                  <h3 className="text-lg font-bold line-clamp-1">
+                  <h3 className="text-base md:text-lg font-bold line-clamp-1">
                     {skill.title}
                   </h3>
-                  <p className="text-center text-sm text-muted-foreground">
+                  <p className="text-center text-xs sm:text-sm text-muted-foreground">
                     {skill.description}
                   </p>
                 </div>

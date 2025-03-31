@@ -176,7 +176,7 @@ const ContactSection = () => {
   };
 
   return (
-    <div className="container mx-auto">
+    <div className="site-container">
       <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
         <h2 className="font-heading">{t("title")}</h2>
         <p className="max-w-[85%] text-muted-foreground">{t("description")}</p>
@@ -249,13 +249,15 @@ const ContactSection = () => {
               )}
             </div>
 
-            <Button
-              type="submit"
-              className="w-full h-10"
-              disabled={isSubmitting || isSuccess}
-            >
-              {renderButtonContent()}
-            </Button>
+            <div className="flex justify-center">
+              <Button
+                type="submit"
+                className="px-8 h-10"
+                disabled={isSubmitting || isSuccess}
+              >
+                {renderButtonContent()}
+              </Button>
+            </div>
           </form>
         </div>
       </div>
