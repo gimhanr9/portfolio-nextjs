@@ -86,7 +86,7 @@ const Home = ({ params }: { params: { locale: string } }) => {
               </div>
               <div className="flex items-center gap-4 mt-4">
                 <Link
-                  href={siteConfig.urls.github}
+                  href="https://github.com"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -96,7 +96,7 @@ const Home = ({ params }: { params: { locale: string } }) => {
                   </Button>
                 </Link>
                 <Link
-                  href={siteConfig.urls.linkedin}
+                  href="https://linkedin.com"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -106,7 +106,7 @@ const Home = ({ params }: { params: { locale: string } }) => {
                   </Button>
                 </Link>
                 <Link
-                  href={siteConfig.urls.twitter}
+                  href="https://twitter.com"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -115,7 +115,7 @@ const Home = ({ params }: { params: { locale: string } }) => {
                     <span className="sr-only">Twitter</span>
                   </Button>
                 </Link>
-                <Link href={`mailto:${siteConfig.contactEmail}`}>
+                <Link href="mailto:your.email@example.com">
                   <Button variant="ghost" size="icon" className="rounded-full">
                     <MailIcon className="h-5 w-5" />
                     <span className="sr-only">Email</span>
@@ -149,64 +149,66 @@ const Home = ({ params }: { params: { locale: string } }) => {
       {/* About Section */}
       <section id="about">
         <div className="site-container">
-          <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
-            <h2 className="font-heading">{t("about.title")}</h2>
-            <p className="max-w-[85%] text-muted-foreground">
-              {t("about.description")}
-            </p>
-          </div>
+          <div className="max-w-4xl mx-auto">
+            <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
+              <h2 className="font-heading">{t("about.title")}</h2>
+              <p className="max-w-[85%] text-muted-foreground">
+                {t("about.description")}
+              </p>
+            </div>
 
-          <div className="mt-12">
-            <Tabs defaultValue="skills" className="mx-auto">
-              <TabsList className="grid w-full grid-cols-3">
-                <TabsTrigger value="skills">{t("tabs.skills")}</TabsTrigger>
-                <TabsTrigger value="experience">
-                  {t("tabs.experience")}
-                </TabsTrigger>
-                <TabsTrigger value="education">
-                  {t("tabs.education")}
-                </TabsTrigger>
-              </TabsList>
-              <TabsContent value="skills" className="mt-6 space-y-6">
-                {/* Skill Carousel for the cards */}
-                <SkillCarousel
-                  skills={[
-                    {
-                      title: "Frontend Development",
-                      icon: "CodeIcon",
-                      description: "React, Next.js, TypeScript, Tailwind CSS",
-                    },
-                    {
-                      title: "Backend Development",
-                      icon: "ServerIcon",
-                      description: "Node.js, Express, MongoDB, PostgreSQL",
-                    },
-                    {
-                      title: "DevOps & Testing",
-                      icon: "DevOpsIcon",
-                      description: "CI/CD, Docker, Jest, GitHub Actions",
-                    },
-                    {
-                      title: "Mobile Development",
-                      icon: "CodeIcon",
-                      description: "React Native, Flutter, iOS, Android",
-                    },
-                    {
-                      title: "UI/UX Design",
-                      icon: "CodeIcon",
-                      description: "Figma, Adobe XD, Responsive Design",
-                    },
-                  ]}
-                />
-                <TechStack />
-              </TabsContent>
-              <TabsContent value="experience" className="mt-6 space-y-6">
-                <ExperienceTimeline />
-              </TabsContent>
-              <TabsContent value="education" className="mt-6 space-y-6">
-                <EducationTimeline />
-              </TabsContent>
-            </Tabs>
+            <div className="mt-12">
+              <Tabs defaultValue="skills" className="mx-auto">
+                <TabsList className="grid w-full grid-cols-3">
+                  <TabsTrigger value="skills">{t("tabs.skills")}</TabsTrigger>
+                  <TabsTrigger value="experience">
+                    {t("tabs.experience")}
+                  </TabsTrigger>
+                  <TabsTrigger value="education">
+                    {t("tabs.education")}
+                  </TabsTrigger>
+                </TabsList>
+                <TabsContent value="skills" className="mt-6 space-y-6">
+                  {/* Skill Carousel for the cards */}
+                  <SkillCarousel
+                    skills={[
+                      {
+                        title: "Frontend Development",
+                        icon: "CodeIcon",
+                        description: "React, Next.js, TypeScript, Tailwind CSS",
+                      },
+                      {
+                        title: "Backend Development",
+                        icon: "ServerIcon",
+                        description: "Node.js, Express, MongoDB, PostgreSQL",
+                      },
+                      {
+                        title: "DevOps & Testing",
+                        icon: "DevOpsIcon",
+                        description: "CI/CD, Docker, Jest, GitHub Actions",
+                      },
+                      {
+                        title: "Mobile Development",
+                        icon: "CodeIcon",
+                        description: "React Native, Flutter, iOS, Android",
+                      },
+                      {
+                        title: "UI/UX Design",
+                        icon: "CodeIcon",
+                        description: "Figma, Adobe XD, Responsive Design",
+                      },
+                    ]}
+                  />
+                  <TechStack />
+                </TabsContent>
+                <TabsContent value="experience" className="mt-6 space-y-6">
+                  <ExperienceTimeline />
+                </TabsContent>
+                <TabsContent value="education" className="mt-6 space-y-6">
+                  <EducationTimeline />
+                </TabsContent>
+              </Tabs>
+            </div>
           </div>
         </div>
       </section>

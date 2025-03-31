@@ -116,15 +116,15 @@ const StatusBadges = () => {
 
   if (isLoading) {
     return (
-      <div className="flex flex-wrap justify-center gap-4 my-6">
+      <div className="flex flex-wrap justify-center gap-3 my-4">
         {[1, 2, 3].map((i) => (
           <div
             key={i}
-            className="inline-flex items-center gap-2 rounded-full bg-gray-100 px-3 py-1 text-sm font-medium text-gray-800 dark:bg-gray-800 dark:text-gray-300 animate-pulse"
+            className="inline-flex items-center gap-1 rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-800 dark:bg-gray-800 dark:text-gray-300 animate-pulse"
             role="status"
           >
-            <div className="h-4 w-4 rounded-full bg-gray-300 dark:bg-gray-700"></div>
-            <div className="h-4 w-20 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+            <div className="h-3 w-3 rounded-full bg-gray-300 dark:bg-gray-700"></div>
+            <div className="h-3 w-16 rounded-full bg-gray-300 dark:bg-gray-700"></div>
           </div>
         ))}
       </div>
@@ -132,18 +132,21 @@ const StatusBadges = () => {
   }
 
   return (
-    <div className="flex flex-wrap justify-center gap-4 my-6">
+    <div className="flex flex-wrap justify-center gap-3 my-4">
       <a
         href={status.cicd.url}
         target="_blank"
         rel="noopener noreferrer"
-        className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm font-medium hover:bg-opacity-80 transition-colors ${getCicdBadgeClass(
+        className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium hover:bg-opacity-80 transition-colors ${getCicdBadgeClass(
           status.cicd.status
         )}`}
       >
-        <CICDIcon className="h-4 w-4" />
+        <CICDIcon className="h-3 w-3" />
         <span>
-          {t("cicd.label")}: {getCicdStatusText(status.cicd.status)}
+          <span className="font-semibold">{t("cicd.label")}:</span>{" "}
+          <span className="font-normal text-[12px]">
+            {getCicdStatusText(status.cicd.status)}
+          </span>
         </span>
       </a>
 
@@ -151,14 +154,16 @@ const StatusBadges = () => {
         href={status.qualityGate.url}
         target="_blank"
         rel="noopener noreferrer"
-        className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm font-medium hover:bg-opacity-80 transition-colors ${getQualityGateBadgeClass(
+        className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium hover:bg-opacity-80 transition-colors ${getQualityGateBadgeClass(
           status.qualityGate.status
         )}`}
       >
-        <SonarQubeIcon className="h-4 w-4" />
+        <SonarQubeIcon className="h-3 w-3" />
         <span>
-          {t("qualityGate.label")}:{" "}
-          {getQualityGateStatusText(status.qualityGate.status)}
+          <span className="font-semibold">{t("qualityGate.label")}:</span>{" "}
+          <span className="font-normal text-[12px]">
+            {getQualityGateStatusText(status.qualityGate.status)}
+          </span>
         </span>
       </a>
 
@@ -166,14 +171,16 @@ const StatusBadges = () => {
         href={status.testCoverage.url}
         target="_blank"
         rel="noopener noreferrer"
-        className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm font-medium hover:bg-opacity-80 transition-colors ${getTestCoverageBadgeClass(
+        className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium hover:bg-opacity-80 transition-colors ${getTestCoverageBadgeClass(
           status.testCoverage.percentage
         )}`}
       >
-        <JestIcon className="h-4 w-4" />
+        <JestIcon className="h-3 w-3" />
         <span>
-          {t("testCoverage.label")}:{" "}
-          {getTestCoverageText(status.testCoverage.percentage)}
+          <span className="font-semibold">{t("testCoverage.label")}:</span>{" "}
+          <span className="font-normal text-[12px]">
+            {getTestCoverageText(status.testCoverage.percentage)}
+          </span>
         </span>
       </a>
     </div>
