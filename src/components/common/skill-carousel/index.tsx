@@ -8,13 +8,21 @@ import { CodeIcon, ServerIcon, DevOpsIcon } from "@/lib/icons";
 import useEmblaCarousel from "embla-carousel-react";
 import { cn } from "@/lib/utils";
 import { SkillCarouselProps } from "./skill-carousel.types";
+import { useMediaQuery } from "@/hooks/use-media-query";
 
 const SkillCarousel = (props: SkillCarouselProps) => {
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
+  const isTablet = useMediaQuery("(min-width: 640px)");
+
+  // Calculate slides per view based on screen size
+  const slidesPerView = isDesktop ? 3 : isTablet ? 2 : 1;
+
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
     loop: false,
     skipSnaps: false,
-    dragFree: true,
+    containScroll: "trimSnaps",
+    slidesToScroll: slidesPerView,
   });
 
   const [prevBtnDisabled, setPrevBtnDisabled] = useState(true);
@@ -48,6 +56,9 @@ const SkillCarousel = (props: SkillCarouselProps) => {
   useEffect(() => {
     if (!emblaApi) return;
 
+    // When screen size changes, we need to reinitialize
+    emblaApi.reInit();
+
     onSelect();
     setScrollSnaps(emblaApi.scrollSnapList());
     emblaApi.on("select", onSelect);
@@ -57,89 +68,85 @@ const SkillCarousel = (props: SkillCarouselProps) => {
       emblaApi.off("select", onSelect);
       emblaApi.off("reInit", onSelect);
     };
-  }, [emblaApi, onSelect]);
+  }, [emblaApi, onSelect, isDesktop, isTablet]);
 
   const getIconComponent = (iconName: string) => {
     switch (iconName) {
       case "CodeIcon":
-        return (
-          <CodeIcon className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-primary" />
-        );
+        return <CodeIcon className="h-5 w-5 text-primary" />;
       case "ServerIcon":
-        return (
-          <ServerIcon className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-primary" />
-        );
+        return <ServerIcon className="h-5 w-5 text-primary" />;
       case "DevOpsIcon":
-        return (
-          <DevOpsIcon className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-primary" />
-        );
+        return <DevOpsIcon className="h-5 w-5 text-primary" />;
       default:
-        return (
-          <CodeIcon className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-primary" />
-        );
+        return <CodeIcon className="h-5 w-5 text-primary" />;
     }
   };
 
   return (
-    <div className="relative mb-6 sm:mb-8">
-      <div className="overflow-hidden" ref={emblaRef}>
-        <div className="flex gap-3 sm:gap-4 md:gap-6">
-          {props.skills?.map((skill, index) => (
-            <div
-              key={index}
-              className="flex flex-col items-center space-y-1 sm:space-y-2 rounded-lg border p-3 sm:p-4 md:p-6 shadow-sm transition-all hover:shadow-md min-w-[200px] sm:min-w-[220px] md:min-w-[250px] lg:min-w-[280px] flex-shrink-0"
-            >
-              <div className="rounded-full bg-primary/10 p-2 sm:p-3">
-                {getIconComponent(skill.icon)}
+    <div className="relative mb-8">
+      {/* Carousel container with padding for the navigation buttons */}
+      <div className="px-10">
+        <div className="overflow-hidden" ref={emblaRef}>
+          <div className="flex">
+            {props.skills?.map((skill, index) => (
+              <div
+                key={index}
+                className={`flex-grow flex-shrink-0 basis-full sm:basis-1/2 lg:basis-1/3 p-2`}
+              >
+                <div className="flex flex-col items-center space-y-2 rounded-lg border p-4 shadow-sm transition-all hover:shadow-md h-full">
+                  <div className="rounded-full bg-primary/10 p-3">
+                    {getIconComponent(skill.icon)}
+                  </div>
+                  <h3 className="text-lg font-bold line-clamp-1">
+                    {skill.title}
+                  </h3>
+                  <p className="text-center text-sm text-muted-foreground">
+                    {skill.description}
+                  </p>
+                </div>
               </div>
-              <h3 className="text-sm sm:text-base md:text-lg lg:text-xl font-bold line-clamp-1">
-                {skill.title}
-              </h3>
-              <p className="text-center text-xs sm:text-sm text-muted-foreground">
-                {skill.description}
-              </p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* Navigation Buttons */}
-      <div className="flex justify-between absolute top-1/2 -translate-y-1/2 left-0 right-0 pointer-events-none">
-        <Button
-          variant="ghost"
-          size="icon"
-          className={cn(
-            "rounded-full bg-background/80 backdrop-blur-sm shadow-md pointer-events-auto -translate-x-1/2 h-7 w-7 sm:h-8 sm:w-8 md:h-9 md:w-9",
-            prevBtnDisabled && "opacity-30 cursor-not-allowed"
-          )}
-          onClick={scrollPrev}
-          disabled={prevBtnDisabled}
-          aria-label="Previous"
-        >
-          <ChevronLeft className="h-3 w-3 sm:h-4 sm:w-4" />
-        </Button>
-        <Button
-          variant="ghost"
-          size="icon"
-          className={cn(
-            "rounded-full bg-background/80 backdrop-blur-sm shadow-md pointer-events-auto translate-x-1/2 h-7 w-7 sm:h-8 sm:w-8 md:h-9 md:w-9",
-            nextBtnDisabled && "opacity-30 cursor-not-allowed"
-          )}
-          onClick={scrollNext}
-          disabled={nextBtnDisabled}
-          aria-label="Next"
-        >
-          <ChevronRight className="h-3 w-3 sm:h-4 sm:w-4" />
-        </Button>
-      </div>
+      {/* Navigation Buttons - positioned outside the carousel */}
+      <Button
+        variant="ghost"
+        size="icon"
+        className={cn(
+          "rounded-full bg-background/80 backdrop-blur-sm shadow-md absolute left-0 top-1/2 -translate-y-1/2 z-10",
+          prevBtnDisabled && "opacity-30 cursor-not-allowed"
+        )}
+        onClick={scrollPrev}
+        disabled={prevBtnDisabled}
+        aria-label="Previous"
+      >
+        <ChevronLeft className="h-4 w-4" />
+      </Button>
+
+      <Button
+        variant="ghost"
+        size="icon"
+        className={cn(
+          "rounded-full bg-background/80 backdrop-blur-sm shadow-md absolute right-0 top-1/2 -translate-y-1/2 z-10",
+          nextBtnDisabled && "opacity-30 cursor-not-allowed"
+        )}
+        onClick={scrollNext}
+        disabled={nextBtnDisabled}
+        aria-label="Next"
+      >
+        <ChevronRight className="h-4 w-4" />
+      </Button>
 
       {/* Pagination Dots */}
-      <div className="flex justify-center gap-1.5 sm:gap-2 mt-3 sm:mt-4">
+      <div className="flex justify-center gap-2 mt-4">
         {scrollSnaps.map((_, index) => (
           <button
             key={index}
             className={cn(
-              "w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-colors",
+              "w-2 h-2 rounded-full transition-colors",
               index === selectedIndex ? "bg-primary" : "bg-muted-foreground/30"
             )}
             onClick={() => scrollTo(index)}
