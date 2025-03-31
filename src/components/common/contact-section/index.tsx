@@ -176,7 +176,7 @@ const ContactSection = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container mx-auto">
       <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
         <h2 className="font-heading">{t("title")}</h2>
         <p className="max-w-[85%] text-muted-foreground">{t("description")}</p>

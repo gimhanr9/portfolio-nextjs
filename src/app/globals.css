@@ -74,16 +74,17 @@
   p {
     @apply text-sm md:text-base;
   }
+}
 
-  /* Container padding */
-  .container {
-    @apply px-6 md:px-12 lg:px-16 xl:px-24 2xl:px-32 max-w-screen-2xl;
-  }
+/* Container class with proper padding and max-width */
+.container {
+  @apply mx-auto px-6 md:px-12 lg:px-16 xl:px-24 2xl:px-32;
+  max-width: 1400px; /* Fixed max-width */
+}
 
-  /* Section spacing */
-  section {
-    @apply py-8 md:py-12 lg:py-16 xl:py-20;
-  }
+/* Section spacing */
+section {
+  @apply py-8 md:py-12 lg:py-16 xl:py-20;
 }
 
 @keyframes morph {

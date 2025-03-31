@@ -84,7 +84,7 @@ const SkillCarousel = (props: SkillCarouselProps) => {
   };
 
   return (
-    <div className="relative mb-8">
+    <div className="relative mb-8 px-4">
       {/* Carousel container with padding for the navigation buttons */}
       <div className="px-10">
         <div className="overflow-hidden" ref={emblaRef}>

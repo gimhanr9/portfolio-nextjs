@@ -35,7 +35,7 @@ const Home = ({ params }: { params: { locale: string } }) => {
         id="home"
         className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden pt-16 bg-gradient-to-b from-background to-background/80"
       >
-        <div className="container">
+        <div className="container mx-auto">
           <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
             <div className="flex flex-col justify-center space-y-4">
               <div className="space-y-2">
@@ -147,7 +147,7 @@ const Home = ({ params }: { params: { locale: string } }) => {
 
       {/* About Section */}
       <section id="about">
-        <div className="container">
+        <div className="container mx-auto">
           <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
             <h2 className="font-heading">{t("about.title")}</h2>
             <p className="max-w-[85%] text-muted-foreground">
@@ -212,7 +212,7 @@ const Home = ({ params }: { params: { locale: string } }) => {
 
       {/* Featured Projects Section */}
       <section id="projects" className="bg-muted/50">
-        <div className="container">
+        <div className="container mx-auto">
           <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
             <h2 className="font-heading">{t("projects.title")}</h2>
             <p className="max-w-[85%] text-muted-foreground">
