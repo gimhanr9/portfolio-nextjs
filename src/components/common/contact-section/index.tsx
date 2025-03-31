@@ -144,7 +144,10 @@ const ContactSection = () => {
     if (isSubmitting) {
       return (
         <span className="flex items-center gap-2">
-          <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
+          <svg
+            className="animate-spin h-3 w-3 sm:h-4 sm:w-4"
+            viewBox="0 0 24 24"
+          >
             <circle
               className="opacity-25"
               cx="12"
@@ -166,7 +169,7 @@ const ContactSection = () => {
     } else if (isSuccess) {
       return (
         <span className="flex items-center gap-2">
-          <CheckIcon className="h-4 w-4" />
+          <CheckIcon className="h-3 w-3 sm:h-4 sm:w-4" />
           {t("form.buttons.sent")}
         </span>
       );
@@ -176,28 +179,28 @@ const ContactSection = () => {
   };
 
   return (
-    <div className="container px-4 md:px-6">
-      <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
-        <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-5xl">
+    <div className="container max-w-screen-2xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-24">
+      <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-2 sm:gap-3 md:gap-4 text-center">
+        <h2 className="font-heading text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl leading-tight">
           {t("title")}
         </h2>
-        <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
+        <p className="max-w-[90%] sm:max-w-[85%] text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed sm:leading-normal text-muted-foreground">
           {t("description")}
         </p>
       </div>
 
-      <div className="mx-auto mt-12 max-w-2xl">
-        <div className="rounded-lg border bg-card p-6 shadow-sm">
+      <div className="mx-auto mt-6 sm:mt-8 md:mt-10 lg:mt-12 max-w-xl sm:max-w-2xl">
+        <div className="rounded-lg border bg-card p-4 sm:p-6 shadow-sm">
           {/* Display server error at the top of the form if present */}
           {serverError && (
-            <div className="mb-6 p-4 rounded-md bg-destructive/15 text-destructive">
-              <p className="font-medium">{serverError}</p>
+            <div className="mb-4 sm:mb-6 p-3 sm:p-4 rounded-md bg-destructive/15 text-destructive">
+              <p className="text-xs sm:text-sm font-medium">{serverError}</p>
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="space-y-2">
-              <Label htmlFor="name" className="text-sm font-medium">
+          <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+            <div className="space-y-1 sm:space-y-2">
+              <Label htmlFor="name" className="text-xs sm:text-sm font-medium">
                 {t("form.labels.name")}
               </Label>
               <Input
@@ -206,16 +209,18 @@ const ContactSection = () => {
                 value={formData.name}
                 onChange={handleChange}
                 placeholder={t("form.placeholders.name")}
-                className={errors.name ? "border-destructive" : ""}
+                className={`text-xs sm:text-sm h-8 sm:h-10 ${
+                  errors.name ? "border-destructive" : ""
+                }`}
                 disabled={isSubmitting || isSuccess}
               />
               {errors.name && (
-                <p className="text-sm text-destructive">{errors.name}</p>
+                <p className="text-xs text-destructive">{errors.name}</p>
               )}
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="email" className="text-sm font-medium">
+            <div className="space-y-1 sm:space-y-2">
+              <Label htmlFor="email" className="text-xs sm:text-sm font-medium">
                 {t("form.labels.email")}
               </Label>
               <Input
@@ -225,16 +230,21 @@ const ContactSection = () => {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder={t("form.placeholders.email")}
-                className={errors.email ? "border-destructive" : ""}
+                className={`text-xs sm:text-sm h-8 sm:h-10 ${
+                  errors.email ? "border-destructive" : ""
+                }`}
                 disabled={isSubmitting || isSuccess}
               />
               {errors.email && (
-                <p className="text-sm text-destructive">{errors.email}</p>
+                <p className="text-xs text-destructive">{errors.email}</p>
               )}
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="message" className="text-sm font-medium">
+            <div className="space-y-1 sm:space-y-2">
+              <Label
+                htmlFor="message"
+                className="text-xs sm:text-sm font-medium"
+              >
                 {t("form.labels.message")}
               </Label>
               <Textarea
@@ -243,19 +253,19 @@ const ContactSection = () => {
                 value={formData.message}
                 onChange={handleChange}
                 placeholder={t("form.placeholders.message")}
-                className={`min-h-[150px] ${
+                className={`min-h-[100px] sm:min-h-[150px] text-xs sm:text-sm ${
                   errors.message ? "border-destructive" : ""
                 }`}
                 disabled={isSubmitting || isSuccess}
               />
               {errors.message && (
-                <p className="text-sm text-destructive">{errors.message}</p>
+                <p className="text-xs text-destructive">{errors.message}</p>
               )}
             </div>
 
             <Button
               type="submit"
-              className="w-full h-12"
+              className="w-full h-8 sm:h-10 text-xs sm:text-sm"
               disabled={isSubmitting || isSuccess}
             >
               {renderButtonContent()}
