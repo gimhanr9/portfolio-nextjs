@@ -20,6 +20,16 @@ export const skillCategories: SkillCategory[] = [
     icon: "DevOpsIcon",
     skills: ["CI/CD", "Docker", "Jest", "GitHub Actions"],
   },
+  {
+    title: "Mobile Development",
+    icon: "CodeIcon",
+    skills: ["React Native", "Flutter", "iOS", "Android"],
+  },
+  {
+    title: "UI/UX Design",
+    icon: "CodeIcon",
+    skills: ["Figma", "Adobe XD", "Responsive Design", "User Testing"],
+  },
 ];
 
 export const technologies = [
@@ -35,4 +45,6 @@ export const technologies = [
   { name: "Docker", icon: "🐳" },
   { name: "AWS", icon: "☁️" },
   { name: "Tailwind CSS", icon: "🎨" },
+  { name: "React Native", icon: "📱" },
+  { name: "Figma", icon: "🎭" },
 ];

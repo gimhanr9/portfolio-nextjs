@@ -1,61 +1,56 @@
 import Link from "next/link";
 import { GithubIcon, LinkedinIcon, TwitterIcon, MailIcon } from "@/lib/icons";
-import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
 
 const Footer = () => {
   return (
-    <footer className="border-t bg-muted/40">
-      <div className="container px-4 py-8 md:px-6 md:py-12">
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          <div className="space-y-4">
-            <h3 className="text-lg font-bold">{siteConfig.name}</h3>
-            <p className="text-sm text-muted-foreground">
-              Full Stack Developer specializing in modern web technologies,
-              CI/CD, and testing.
-            </p>
-            <div className="flex items-center gap-4">
-              <Link
-                href={siteConfig.urls.github}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button variant="ghost" size="icon" className="rounded-full">
-                  <GithubIcon className="h-5 w-5" />
-                  <span className="sr-only">GitHub</span>
-                </Button>
-              </Link>
-              <Link
-                href={siteConfig.urls.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button variant="ghost" size="icon" className="rounded-full">
-                  <LinkedinIcon className="h-5 w-5" />
-                  <span className="sr-only">LinkedIn</span>
-                </Button>
-              </Link>
-              <Link
-                href={siteConfig.urls.twitter}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button variant="ghost" size="icon" className="rounded-full">
-                  <TwitterIcon className="h-5 w-5" />
-                  <span className="sr-only">Twitter</span>
-                </Button>
-              </Link>
-              <Link href={`mailto:${siteConfig.contactEmail}`}>
-                <Button variant="ghost" size="icon" className="rounded-full">
-                  <MailIcon className="h-5 w-5" />
-                  <span className="sr-only">Email</span>
-                </Button>
-              </Link>
-            </div>
+    <footer className="bg-[#0f1729] py-16 text-white">
+      <div className="site-container">
+        <div className="mb-12">
+          <h3 className="text-xl font-bold mb-3">{siteConfig.name}</h3>
+          <p className="text-sm font-medium text-gray-400 max-w-md mb-6">
+            Full Stack Developer specializing in modern web technologies, CI/CD,
+            and testing.
+          </p>
+          <div className="flex items-center gap-6">
+            <Link
+              href={siteConfig.urls.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              <GithubIcon className="h-5 w-5" />
+              <span className="sr-only">GitHub</span>
+            </Link>
+            <Link
+              href={siteConfig.urls.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              <LinkedinIcon className="h-5 w-5" />
+              <span className="sr-only">LinkedIn</span>
+            </Link>
+            <Link
+              href={siteConfig.urls.twitter}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              <TwitterIcon className="h-5 w-5" />
+              <span className="sr-only">Twitter</span>
+            </Link>
+            <Link
+              href={`mailto:${siteConfig.contactEmail}`}
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              <MailIcon className="h-5 w-5" />
+              <span className="sr-only">Email</span>
+            </Link>
           </div>
         </div>
-        <div className="mt-8 border-t pt-8 text-center text-sm text-muted-foreground">
-          <p>
+        <div className="border-t border-gray-800 pt-6 text-center">
+          <p className="text-sm font-medium text-gray-500">
             © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
           </p>
         </div>

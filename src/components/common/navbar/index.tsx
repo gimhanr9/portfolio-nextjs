@@ -46,7 +46,6 @@ const Navbar = () => {
     { href: "#home", label: "Home", sectionId: "home" },
     { href: "#about", label: "About", sectionId: "about" },
     { href: "#projects", label: "Projects", sectionId: "projects" },
-    { href: "#cicd", label: "CI/CD", sectionId: "cicd" },
     { href: "#contact", label: "Contact", sectionId: "contact" },
   ];
 
@@ -58,7 +57,7 @@ const Navbar = () => {
           : "bg-background/0"
       }`}
     >
-      <div className="container flex h-16 items-center justify-between px-4 md:px-6">
+      <div className="site-container flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
           <span className="text-xl font-bold bg-gradient-to-r from-teal-500 to-purple-500 bg-clip-text text-transparent">
             {siteConfig.name}
@@ -103,7 +102,7 @@ const Navbar = () => {
             transition={{ duration: 0.3 }}
             className="md:hidden overflow-hidden bg-background/95 backdrop-blur-sm"
           >
-            <div className="container px-4 py-4 flex flex-col gap-4">
+            <div className="site-container py-4 flex flex-col gap-4">
               {navLinks.map((link, index) => (
                 <motion.div
                   key={link.href}

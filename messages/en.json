@@ -1,5 +1,5 @@
 {
-    "hero": {
+  "hero": {
     "badge": "Full Stack Developer",
     "greeting": "Hi there! I'm",
     "name": "Gimhan Rodrigo",
@@ -52,6 +52,14 @@
       "label": "Tests",
       "notAvailable": "Not Available"
     }
+  },
+  "skills": {
+    "techStack": "Tech Stack",
+    "frontend": "Frontend Development",
+    "backend": "Backend Development",
+    "devops": "DevOps & Testing",
+    "mobile": "Mobile Development",
+    "design": "UI/UX Design"
   },
   "contact": {
     "title": "Get In Touch",
