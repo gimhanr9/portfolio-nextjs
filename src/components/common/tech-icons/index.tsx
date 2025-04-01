@@ -28,6 +28,8 @@ import {
   SiSass,
   SiGit,
   SiVercel,
+  SiDotnet,
+  SiNestjs,
 } from "react-icons/si";
 import { TechIconProps } from "./tech-icons.types";
 
@@ -42,28 +44,15 @@ export const techIconsMap: Record<
   javascript: SiJavascript,
   nodejs: SiNodedotjs,
   express: SiExpress,
-  mongodb: SiMongodb,
-  postgresql: SiPostgresql,
+  redux: SiRedux,
   jest: SiJest,
   github: SiGithubactions,
-  docker: SiDocker,
   tailwind: SiTailwindcss,
-  figma: SiFigma,
-  python: SiPython,
-  django: SiDjango,
-  vue: SiVuedotjs,
-  angular: SiAngular,
-  flutter: SiFlutter,
-  kubernetes: SiKubernetes,
-  tensorflow: SiTensorflow,
-  firebase: SiFirebase,
-  graphql: SiGraphql,
-  redux: SiRedux,
-  html: SiHtml5,
-  css: SiCss3,
-  sass: SiSass,
   git: SiGit,
   vercel: SiVercel,
+  netcore:SiDotnet,
+  nestjs:SiNestjs,
+  sqlserver:
 };
 
 const TechIcon = (props: TechIconProps) => {

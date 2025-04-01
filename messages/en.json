@@ -54,7 +54,7 @@
     }
   },
   "skills": {
-    "techStack": "Tech Stack",
+    "techStack": "Current Tech Stack",
     "frontend": "Frontend Development",
     "backend": "Backend Development",
     "devops": "DevOps & Testing",
