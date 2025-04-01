@@ -19,6 +19,7 @@ import VoiceRecital from "@/components/common/voice-recital";
 import { projects } from "@/data/projects";
 import SkillCarousel from "@/components/common/skill-carousel";
 import { siteConfig } from "@/config/site";
+import { skillCategories } from "@/data/skills";
 
 const Home = ({ params }: { params: { locale: string } }) => {
   const t = useTranslations();
@@ -170,35 +171,7 @@ const Home = ({ params }: { params: { locale: string } }) => {
                 </TabsList>
                 <TabsContent value="skills" className="mt-6 space-y-6">
                   {/* Skill Carousel for the cards */}
-                  <SkillCarousel
-                    skills={[
-                      {
-                        title: "Frontend Development",
-                        icon: "CodeIcon",
-                        description: "React, Next.js, TypeScript, Tailwind CSS",
-                      },
-                      {
-                        title: "Backend Development",
-                        icon: "ServerIcon",
-                        description: "Node.js, Express, MongoDB, PostgreSQL",
-                      },
-                      {
-                        title: "DevOps & Testing",
-                        icon: "DevOpsIcon",
-                        description: "CI/CD, Docker, Jest, GitHub Actions",
-                      },
-                      {
-                        title: "Mobile Development",
-                        icon: "CodeIcon",
-                        description: "React Native, Flutter, iOS, Android",
-                      },
-                      {
-                        title: "UI/UX Design",
-                        icon: "CodeIcon",
-                        description: "Figma, Adobe XD, Responsive Design",
-                      },
-                    ]}
-                  />
+                  <SkillCarousel skills={skillCategories} />
                   <TechStack />
                 </TabsContent>
                 <TabsContent value="experience" className="mt-6 space-y-6">

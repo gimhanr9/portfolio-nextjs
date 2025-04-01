@@ -91,7 +91,7 @@ const SkillCarousel = (props: SkillCarouselProps) => {
           <div className="flex">
             {props.skills?.map((skill, index) => (
               <div
-                key={index}
+                key={skill.id}
                 className={`flex-grow flex-shrink-0 basis-full sm:basis-1/2 lg:basis-1/3 p-2`}
               >
                 <div className="flex flex-col items-center space-y-2 rounded-lg border p-4 shadow-sm transition-all hover:shadow-md h-full">
@@ -102,7 +102,7 @@ const SkillCarousel = (props: SkillCarouselProps) => {
                     {skill.title}
                   </h3>
                   <p className="text-center text-xs sm:text-sm text-muted-foreground">
-                    {skill.description}
+                    {skill.skills.join(", ")}
                   </p>
                 </div>
               </div>
