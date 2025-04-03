@@ -1,5 +1,4 @@
 import { SkillCategory } from "@/components/common/skill-carousel/skill-carousel.types";
-import { SiReact } from "react-icons/si";
 
 export const skillCategories: SkillCategory[] = [
   {
@@ -72,9 +71,8 @@ export const technologies = [
   { name: "Neo4j", icon: "neo4j" },
   { name: "AWS", icon: "aws" },
   { name: "GCP", icon: "gcp" },
-  { name: "Firebase", icon: "firebase" },
+  { name: "Vercel", icon: "vercel" },
   { name: "Git", icon: "git" },
-  { name: "CI/CD", icon: "cicd" },
   { name: "Jest", icon: "jest" },
   { name: "GitHub Actions", icon: "github" },
   { name: "CI/CD", icon: "cicd" },

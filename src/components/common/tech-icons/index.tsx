@@ -3,34 +3,23 @@ import {
   SiReact,
   SiNextdotjs,
   SiTypescript,
-  SiNodedotjs,
-  SiExpress,
-  SiMongodb,
-  SiPostgresql,
   SiJest,
   SiGithubactions,
-  SiDocker,
   SiTailwindcss,
-  SiFigma,
-  SiPython,
-  SiDjango,
-  SiVuedotjs,
-  SiAngular,
-  SiFlutter,
-  SiKubernetes,
-  SiTensorflow,
-  SiFirebase,
-  SiGraphql,
   SiRedux,
   SiJavascript,
-  SiHtml5,
-  SiCss3,
-  SiSass,
   SiGit,
   SiVercel,
   SiDotnet,
   SiNestjs,
+  SiAmazonwebservices,
+  SiGooglecloud,
+  SiNeo4J,
+  SiMaterialdesign,
 } from "react-icons/si";
+import { FaInfinity } from "react-icons/fa";
+import { DiMsqlServer } from "react-icons/di";
+
 import { TechIconProps } from "./tech-icons.types";
 
 // Map of icon identifiers to their corresponding components
@@ -42,17 +31,20 @@ export const techIconsMap: Record<
   nextjs: SiNextdotjs,
   typescript: SiTypescript,
   javascript: SiJavascript,
-  nodejs: SiNodedotjs,
-  express: SiExpress,
   redux: SiRedux,
+  aws: SiAmazonwebservices,
+  gcp: SiGooglecloud,
+  cicd: FaInfinity,
   jest: SiJest,
   github: SiGithubactions,
   tailwind: SiTailwindcss,
   git: SiGit,
   vercel: SiVercel,
-  netcore:SiDotnet,
-  nestjs:SiNestjs,
-  sqlserver:
+  netcore: SiDotnet,
+  nestjs: SiNestjs,
+  sqlserver: DiMsqlServer,
+  neo4j: SiNeo4J,
+  materialui: SiMaterialdesign,
 };
 
 const TechIcon = (props: TechIconProps) => {
