@@ -32,6 +32,5 @@ describe("AnimatedText", () => {
   it("clears timer on unmount", () => {
     const { unmount } = render(<AnimatedText text={text} delay={delay} />);
     unmount();
-    // no explicit assertion here, just make sure no errors from clearing timer
   });
 });
