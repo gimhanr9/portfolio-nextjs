@@ -17,47 +17,69 @@ export async function fetchCICDStatus(): Promise<StatusData["cicd"]> {
 
   try {
     console.log(`Fetching CI/CD status for ${repoOwner}/${repoName}`);
-    const response = await fetch(
-      `${siteConfig.urls.githubApi}/repos/${repoOwner}/${repoName}/actions/runs?per_page=1`,
+
+    // Fetch latest commit SHA from the main branch
+    const latestCommitResponse = await fetch(
+      `${siteConfig.urls.githubApi}/repos/${repoOwner}/${repoName}/commits/main`,
       {
         headers: {
           Authorization: `token ${token}`,
           Accept: "application/vnd.github.v3+json",
         },
-        // Remove the next: { revalidate } option as it's causing issues
-        // next: { revalidate: 300 }, // Cache for 5 minutes
+        cache: "no-store",
       }
     );
 
-    if (!response.ok) {
-      console.error(
-        `GitHub API error: ${response.status} ${response.statusText}`
+    if (!latestCommitResponse.ok) {
+      throw new Error(
+        `Failed to fetch latest commit: ${latestCommitResponse.statusText}`
       );
+    }
+
+    const latestCommit = await latestCommitResponse.json();
+    const latestCommitSha = latestCommit.sha;
+
+    // Fetch latest workflow run for ci.yml
+    const latestRunResponse = await fetch(
+      `${siteConfig.urls.githubApi}/repos/${repoOwner}/${repoName}/actions/workflows/ci.yml/runs?branch=main&per_page=1`,
+      {
+        headers: {
+          Authorization: `token ${token}`,
+          Accept: "application/vnd.github.v3+json",
+        },
+        cache: "no-store",
+      }
+    );
+
+    if (!latestRunResponse.ok) {
+      throw new Error(
+        `Failed to fetch workflow run: ${latestRunResponse.statusText}`
+      );
+    }
+
+    const runData = await latestRunResponse.json();
+    const latestRun = runData.workflow_runs?.[0];
+
+    if (!latestRun) {
       return {
         status: CICDStatus.NOT_AVAILABLE,
         url: defaultUrl,
       };
     }
 
-    const data = await response.json();
-    console.log("GitHub API response:", data);
+    const isLatest = latestRun.head_sha === latestCommitSha;
 
-    if (!data.workflow_runs || data.workflow_runs.length === 0) {
-      return {
-        status: CICDStatus.NOT_AVAILABLE,
-        url: defaultUrl,
-      };
-    }
+    const status: CICDStatus = isLatest
+      ? latestRun.conclusion === "success"
+        ? CICDStatus.PASSING
+        : latestRun.conclusion === null
+        ? CICDStatus.PENDING
+        : CICDStatus.FAILING
+      : CICDStatus.PENDING;
 
-    const latestRun = data.workflow_runs[0];
     return {
-      status:
-        latestRun.conclusion === "success"
-          ? CICDStatus.PASSING
-          : latestRun.conclusion === null
-          ? CICDStatus.PENDING
-          : CICDStatus.FAILING,
-      url: latestRun.html_url || defaultUrl,
+      status,
+      url: latestRun.html_url ?? defaultUrl,
     };
   } catch (error) {
     console.error("Error fetching CI/CD status:", error);
@@ -85,14 +107,15 @@ export async function fetchQualityGateStatus(): Promise<
 
   try {
     console.log(`Fetching quality gate status for ${projectKey}`);
+
     const response = await fetch(
       `${siteConfig.urls.sonarCloudApi}/qualitygates/project_status?projectKey=${projectKey}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
+          Accept: "application/json",
         },
-        // Remove the next: { revalidate } option
-        // next: { revalidate: 300 }, // Cache for 5 minutes
+        cache: "no-store", // force fresh result
       }
     );
 
@@ -109,11 +132,12 @@ export async function fetchQualityGateStatus(): Promise<
     const data = await response.json();
     console.log("SonarQube API response:", data);
 
+    const status = data?.projectStatus?.status;
     return {
       status:
-        data.projectStatus?.status === "OK"
+        status === "OK"
           ? QualityGateStatus.PASSED
-          : data.projectStatus
+          : status === "ERROR" || status === "WARN"
           ? QualityGateStatus.FAILED
           : QualityGateStatus.NOT_AVAILABLE,
       url: defaultUrl,
