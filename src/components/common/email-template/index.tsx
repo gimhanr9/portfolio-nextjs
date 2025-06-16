@@ -1,9 +1,7 @@
 import * as React from "react";
 import { EmailTemplateProps } from "./email-template.types";
 
-export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = (
-  props: EmailTemplateProps
-) => (
+export const EmailTemplate = (props: EmailTemplateProps) => (
   <div
     style={{
       fontFamily: "Arial, sans-serif",
