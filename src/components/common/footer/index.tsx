@@ -4,7 +4,7 @@ import { siteConfig } from "@/config/site";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#0f1729] py-16 text-white">
+    <footer className="bg-muted/40 py-16">
       <div className="site-container">
         <div className="mb-12">
           <h3 className="text-xl font-bold mb-3">{siteConfig.name}</h3>

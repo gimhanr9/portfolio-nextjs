@@ -3,6 +3,7 @@
 import { technologies } from "@/data/skills";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
+import TechIcon from "../tech-icons";
 
 const TechStack = () => {
   const t = useTranslations("skills");
@@ -21,7 +22,7 @@ const TechStack = () => {
             transition={{ delay: index * 0.05, duration: 0.4 }}
             className="flex items-center gap-1 rounded-full border bg-background px-1.5 py-0.5 sm:px-2 sm:py-1 text-xs sm:text-sm"
           >
-            <span>{tech.icon}</span>
+            <TechIcon name={tech.icon} className="h-4 w-4" />
             <span>{tech.name}</span>
           </motion.div>
         ))}

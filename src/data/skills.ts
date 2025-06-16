@@ -1,50 +1,81 @@
-export interface SkillCategory {
-  title: string;
-  icon: string;
-  skills: string[];
-}
+import { SkillCategory } from "@/components/common/skill-carousel/skill-carousel.types";
 
 export const skillCategories: SkillCategory[] = [
   {
+    id: 1,
     title: "Frontend Development",
     icon: "CodeIcon",
-    skills: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+    skills: [
+      "React",
+      "Next.js",
+      "Redux",
+      "TypeScript",
+      "JavaScript",
+      "Material UI",
+      "Tailwind CSS",
+    ],
   },
   {
+    id: 2,
     title: "Backend Development",
     icon: "ServerIcon",
-    skills: ["Node.js", "Express", "MongoDB", "PostgreSQL"],
+    skills: [
+      ".Net Core",
+      "NestJS",
+      "Node.js",
+      "Express",
+      "Flask",
+      "MongoDB",
+      "SQL Server",
+      "MySQL",
+      "Neo4j",
+    ],
   },
   {
-    title: "DevOps & Testing",
+    id: 3,
+    title: "Cloud, DevOps & Testing",
     icon: "DevOpsIcon",
-    skills: ["CI/CD", "Docker", "Jest", "GitHub Actions"],
+    skills: [
+      "AWS",
+      "GCP",
+      "Firebase",
+      "Git",
+      "CI/CD",
+      "Jest",
+      "GitHub Actions",
+    ],
   },
   {
+    id: 4,
     title: "Mobile Development",
     icon: "CodeIcon",
-    skills: ["React Native", "Flutter", "iOS", "Android"],
+    skills: ["Flutter", "Android"],
   },
   {
-    title: "UI/UX Design",
+    id: 5,
+    title: "AI/ML",
     icon: "CodeIcon",
-    skills: ["Figma", "Adobe XD", "Responsive Design", "User Testing"],
+    skills: ["Tensorflow", "Keras", "Neural Networks"],
   },
 ];
 
 export const technologies = [
-  { name: "React", icon: "⚛️" },
-  { name: "Next.js", icon: "▲" },
-  { name: "TypeScript", icon: "🔷" },
-  { name: "Node.js", icon: "🟢" },
-  { name: "Express", icon: "🚂" },
-  { name: "MongoDB", icon: "🍃" },
-  { name: "PostgreSQL", icon: "🐘" },
-  { name: "Jest", icon: "🃏" },
-  { name: "GitHub Actions", icon: "🔄" },
-  { name: "Docker", icon: "🐳" },
-  { name: "AWS", icon: "☁️" },
-  { name: "Tailwind CSS", icon: "🎨" },
-  { name: "React Native", icon: "📱" },
-  { name: "Figma", icon: "🎭" },
+  { name: "React", icon: "react" },
+  { name: "Next.js", icon: "nextjs" },
+  { name: "Redux", icon: "redux" },
+  { name: "TypeScript", icon: "typescript" },
+  { name: "JavaScript", icon: "javascript" },
+  { name: ".Net Core", icon: "netcore" },
+  { name: ".NestJS", icon: "nestjs" },
+  { name: "SQL Server", icon: "sqlserver" },
+  { name: "Neo4j", icon: "neo4j" },
+  { name: "AWS", icon: "aws" },
+  { name: "GCP", icon: "gcp" },
+  { name: "Vercel", icon: "vercel" },
+  { name: "Git", icon: "git" },
+  { name: "Jest", icon: "jest" },
+  { name: "GitHub Actions", icon: "github" },
+  { name: "CI/CD", icon: "cicd" },
+  { name: "Material UI", icon: "materialui" },
+  { name: "Tailwind CSS", icon: "tailwind" },
 ];
