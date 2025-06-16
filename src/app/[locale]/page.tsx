@@ -18,7 +18,6 @@ import { useTranslations } from "next-intl";
 import VoiceRecital from "@/components/common/voice-recital";
 import { projects } from "@/data/projects";
 import SkillCarousel from "@/components/common/skill-carousel";
-import { siteConfig } from "@/config/site";
 import { skillCategories } from "@/data/skills";
 
 const Home = ({ params }: { params: { locale: string } }) => {

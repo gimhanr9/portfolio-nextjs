@@ -26,8 +26,12 @@ const StatusBadges = () => {
 
   const getStatus = async () => {
     try {
+      const baseUrl =
+        process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:3000";
       // Use the API route instead of direct function call
-      const response = await fetch("/api/app-status");
+      //const response = await fetch("/api/app-status");
+      const url = new URL("/api/app-status", baseUrl).toString();
+      const response = await fetch(url);
       if (!response.ok) {
         throw new Error(`Status API returned ${response.status}`);
       }
