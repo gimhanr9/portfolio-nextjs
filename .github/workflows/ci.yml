@@ -1,49 +1,23 @@
 name: CI/CD Pipeline
 
-# Define when this workflow will run
 on:
   push:
-    branches: [main] # Run on pushes to main branch
+    branches: [main]
   pull_request:
-    branches: [main] # Run on PRs targeting main branch
+    branches: [main]
 
-# Define environment variables used across jobs
 env:
-  NODE_VERSION: "18" # Node.js version to use
+  NODE_VERSION: "18"
 
-# Define the jobs to run
 jobs:
-  # Lint job - checks code quality
   lint:
     name: Lint
-    runs-on: ubuntu-latest # Use Ubuntu runner
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # Needed for SonarQube to analyze all history
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: "npm" # Cache npm dependencies
-
-      - name: Install dependencies
-        run: npm ci # Clean install of dependencies
-
-      - name: Run ESLint
-        run: npm run lint # Run linting
-
-  # Test job - runs unit and integration tests
-  test:
-    name: Test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Needed for SonarQube to analyze all history
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -54,29 +28,64 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run Jest tests
-        run: npm test
+      - name: Run ESLint
+        run: npm run lint
 
-  # SonarQube analysis job
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests with coverage
+        run: npm run test:coverage
+
   sonarqube:
     name: SonarQube
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
+          fetch-depth: 0
 
-      - name: SonarQube Scan
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests with coverage
+        run: npm run test:coverage
+
+      - name: Debug coverage file
+        run: cat coverage/lcov.info
+
+      - name: Run SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-  # Build job - creates production build
   build:
     name: Build
     runs-on: ubuntu-latest
-    needs: [lint, test, sonarqube] # Only run after lint, test, and sonarqube succeed
+    needs: [lint, test, sonarqube]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -98,14 +107,13 @@ jobs:
         with:
           name: build-output
           path: .next
-          retention-days: 7 # Keep artifacts for 7 days
+          retention-days: 7
 
-  # Deploy job - deploys to Vercel
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    needs: build # Only run after build succeeds
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main' # Only deploy on push to main
+    needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
