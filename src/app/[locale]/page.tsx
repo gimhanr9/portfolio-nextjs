@@ -36,7 +36,7 @@ const Home = ({ params }: { params: { locale: string } }) => {
         id="home"
         className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden pt-24 bg-gradient-to-b from-background to-background/80"
       >
-        <div className="site-container">
+        <div className="container px-4 md:px-6">
           <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
             <div className="flex flex-col justify-center space-y-4">
               <div className="space-y-2">
@@ -155,8 +155,8 @@ const Home = ({ params }: { params: { locale: string } }) => {
       </section>
 
       {/* About Section */}
-      <section id="about">
-        <div className="site-container">
+      <section id="about" className="py-16 md:py-24">
+        <div className="container px-4 md:px-6">
           <div className="max-w-4xl mx-auto">
             <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
               <h2 className="font-heading">{t("about.title")}</h2>
@@ -194,8 +194,8 @@ const Home = ({ params }: { params: { locale: string } }) => {
       </section>
 
       {/* Featured Projects Section */}
-      <section id="projects" className="bg-muted/50">
-        <div className="site-container">
+      <section id="projects" className="py-16 md:py-24 bg-muted/50">
+        <div className="container px-4 md:px-6">
           <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
             <h2 className="font-heading">{t("projects.title")}</h2>
             <p className="max-w-[85%] text-muted-foreground">
