@@ -4,10 +4,10 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 import LanguageSelector from "../language-selector";
 import ThemeToggle from "../theme-toggle";
+import { Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { siteConfig } from "@/config/site";
 
 const Navbar = () => {
@@ -49,6 +49,9 @@ const Navbar = () => {
     { href: "#contact", label: "Contact", sectionId: "contact" },
   ];
 
+  // Set this to true to disable the language selector
+  const isLanguageSelectorDisabled = true;
+
   return (
     <header
       className={`fixed top-0 z-50 w-full transition-all duration-200 ${
@@ -57,7 +60,7 @@ const Navbar = () => {
           : "bg-background/0"
       }`}
     >
-      <div className="site-container flex h-16 items-center justify-between">
+      <div className="container px-4 md:px-6 flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
           <span className="text-xl font-bold bg-gradient-to-r from-teal-500 to-purple-500 bg-clip-text text-transparent">
             {siteConfig.name}
@@ -102,7 +105,7 @@ const Navbar = () => {
             transition={{ duration: 0.3 }}
             className="md:hidden overflow-hidden bg-background/95 backdrop-blur-sm"
           >
-            <div className="site-container py-4 flex flex-col gap-4">
+            <div className="container px-4 md:px-6 py-4 flex flex-col gap-4">
               {navLinks.map((link, index) => (
                 <motion.div
                   key={link.href}
@@ -129,5 +132,4 @@ const Navbar = () => {
     </header>
   );
 };
-
 export default Navbar;

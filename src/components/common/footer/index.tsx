@@ -5,10 +5,10 @@ import { siteConfig } from "@/config/site";
 const Footer = () => {
   return (
     <footer className="bg-muted/40 py-16">
-      <div className="site-container">
+      <div className="container px-4 md:px-6">
         <div className="mb-12">
           <h3 className="text-xl font-bold mb-3">{siteConfig.name}</h3>
-          <p className="text-sm font-medium text-gray-400 max-w-md mb-6">
+          <p className="text-sm md:text-base text-gray-400 max-w-md mb-6">
             Full Stack Developer specializing in modern web technologies, CI/CD,
             and testing.
           </p>
@@ -49,8 +49,8 @@ const Footer = () => {
             </Link>
           </div>
         </div>
-        <div className="border-t border-gray-800 pt-6 text-center">
-          <p className="text-sm font-medium text-gray-500">
+        <div className="border-t border-gray-300 pt-6 text-center text-sm text-gray-400">
+          <p>
             © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
           </p>
         </div>
@@ -58,5 +58,4 @@ const Footer = () => {
     </footer>
   );
 };
-
 export default Footer;
