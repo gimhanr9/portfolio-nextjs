@@ -124,24 +124,32 @@ const Home = ({ params }: { params: { locale: string } }) => {
               </div>
             </div>
             <div className="flex items-center justify-center">
-              <div className="relative aspect-square overflow-hidden rounded-full border border-border bg-muted p-2">
-                <div className="animate-morph absolute inset-0 z-10 rounded-full bg-gradient-to-r from-teal-500 to-purple-500 opacity-20"></div>
-                <div className="relative z-20 h-full w-full overflow-hidden rounded-full">
-                  <Image
-                    src="/images/profile.jpg"
-                    alt="Developer Portrait"
-                    width={600}
-                    height={600}
-                    className="h-full w-full object-cover"
-                    priority
-                  />
+              <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 xl:w-80 xl:h-80">
+                {/* Outer border container */}
+                <div className="absolute inset-0 rounded-full border-2 border-border bg-muted p-1">
+                  {/* Animated gradient overlay */}
+                  <div className="animate-morph absolute inset-1 rounded-full bg-gradient-to-r from-teal-500 to-purple-500 opacity-20"></div>
+
+                  {/* Inner image container */}
+                  <div className="relative w-full h-full rounded-full overflow-hidden">
+                    <Image
+                      src="/images/my_image.png"
+                      alt="Developer Portrait"
+                      fill
+                      className="object-cover"
+                      priority
+                      sizes="(max-width: 640px) 192px, (max-width: 768px) 224px, (max-width: 1024px) 256px, (max-width: 1280px) 288px, 320px"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Status Badges */}
-          <StatusBadges />
+          <div className="mt-12 sm:mt-16 md:mt-20">
+            <StatusBadges />
+          </div>
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent"></div>
       </section>
