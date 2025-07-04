@@ -9,19 +9,31 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: 1,
-    title: "E-Commerce Platform",
+    title: "Loyalty App",
     description:
-      "A full-stack e-commerce platform with React, Node.js, and MongoDB. Features CI/CD pipeline with GitHub Actions and Jest testing.",
-    tags: ["React", "Node.js", "MongoDB", "Jest", "CI/CD"],
-    link: "/projects/ecommerce",
+      "A full-stack loyalty application with React, Golang, and SQLite. Integrated with Square API for loyalty point and customer processing.",
+    tags: ["React", "Golang", "SQLite", "Square API"],
+    link: "/projects/go-loyalty",
   },
   {
     id: 2,
-    title: "Task Management App",
+    title: "Contactless Doorbell",
     description:
-      "A collaborative task management application with real-time updates. Includes comprehensive test coverage with Jest and React Testing Library.",
-    tags: ["Next.js", "TypeScript", "PostgreSQL", "Jest", "GitHub Actions"],
-    link: "/projects/task-manager",
+      "A system consisting of a mobile application, Flask REST API and a Raspberry Pi device acting as the doorbell specializing in masked face recognition.",
+    tags: [
+      "Flask",
+      "Tensorflow",
+      "Keras",
+      "Flutter",
+      "Firebase",
+      "OneSignal",
+      "SendGrid",
+      "JWT",
+      "GCP",
+      "Masked face recognition",
+      "Image processing",
+    ],
+    link: "/projects/contactless-doorbell",
   },
   {
     id: 3,
