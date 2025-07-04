@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -61,8 +62,23 @@ const Navbar = () => {
       }`}
     >
       <div className="container px-4 md:px-6 flex h-16 items-center justify-between">
-        <Link href="/" className="flex items-center gap-2">
-          <span className="text-xl font-bold bg-gradient-to-r from-teal-500 to-purple-500 bg-clip-text text-transparent">
+        <Link
+          href="/"
+          className="flex items-center gap-2 sm:gap-3 hover:opacity-80 transition-opacity"
+        >
+          {/* Logo Image - Responsive sizing */}
+          <div className="relative w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full overflow-hidden ring-2 ring-primary/20 hover:ring-primary/40 transition-all duration-200">
+            <Image
+              src="/images/logo.jpg"
+              alt={`${siteConfig.name} Logo`}
+              fill
+              className="object-cover"
+              sizes="(max-width: 640px) 32px, (max-width: 768px) 36px, 40px"
+              priority
+            />
+          </div>
+          {/* Site Name - Responsive text sizing */}
+          <span className="text-lg sm:text-xl md:text-xl font-bold bg-gradient-to-r from-teal-500 to-purple-500 bg-clip-text text-transparent">
             {siteConfig.name}
           </span>
         </Link>
