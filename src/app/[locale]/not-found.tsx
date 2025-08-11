@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { ArrowLeft, Home, Search } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function NotFoundPage() {
   const t = useTranslations("notFound");
@@ -35,28 +36,27 @@ export default function NotFoundPage() {
           <h2 className="text-2xl md:text-3xl font-bold text-foreground">
             {t("title")}
           </h2>
-          <p className="text-muted-foreground text-lg leading-relaxed max-w-sm mx-auto">
+          <p className="text-muted-foreground sm:text-lg leading-relaxed max-w-sm mx-auto">
             {t("description")}
           </p>
         </div>
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
-          <button
+          <Button
             onClick={() => window.history.back()}
             className="inline-flex items-center gap-2 px-6 py-3 bg-muted/50 hover:bg-muted/70 border border-border/50 rounded-lg text-foreground font-medium transition-all duration-200 hover:scale-105 hover:shadow-lg backdrop-blur-sm"
           >
             <ArrowLeft className="w-4 h-4" />
             {t("goBack")}
-          </button>
+          </Button>
 
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium rounded-lg transition-all duration-200 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25"
-          >
-            <Home className="w-4 h-4" />
-            {t("backToHome")}
-          </Link>
+          <Button asChild>
+            <Link href="/" className="inline-flex items-center gap-2 px-6 py-3">
+              <Home className="w-4 h-4" />
+              {t("backToHome")}
+            </Link>
+          </Button>
         </div>
       </div>
     </div>

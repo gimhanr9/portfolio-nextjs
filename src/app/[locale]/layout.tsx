@@ -77,9 +77,7 @@ const LocaleLayout = async ({ children, params: { locale } }: Props) => {
             disableTransitionOnChange
           >
             <div className="flex min-h-screen flex-col">
-              <Navbar />
               <div className="flex-1">{children}</div>
-              <Footer />
             </div>
           </ThemeProvider>
         </NextIntlClientProvider>
