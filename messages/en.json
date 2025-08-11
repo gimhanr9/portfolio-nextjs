@@ -63,13 +63,9 @@
   },
   "notFound": {
     "title": "Page Not Found",
-    "description": "The page you're looking for doesn't exist or has been moved.",
+    "description": "The page you're looking for doesn't exist or has been moved to a different location.",
     "goBack": "Go Back",
-    "backToHome": "Back to Home",
-    "suggestedLinks": "You might be looking for:",
-    "projects": "Projects",
-    "about": "About",
-    "contact": "Contact"
+    "backToHome": "Back to Home"
   },
   "status": {
     "cicd": {

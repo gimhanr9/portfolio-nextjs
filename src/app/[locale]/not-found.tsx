@@ -1,120 +1,64 @@
 "use client";
 
-import Link from "next/link";
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { ArrowLeft, Home } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
+import { ArrowLeft, Home, Search } from "lucide-react";
 
-const LocalizedNotFound = () => {
-  const router = useRouter();
+export default function NotFoundPage() {
   const t = useTranslations("notFound");
 
   return (
-    <div className="flex min-h-[80vh] flex-col items-center justify-center px-4 text-center">
-      <div className="max-w-md">
-        {/* Animated 404 Text */}
-        <motion.div
-          className="mb-8 text-center"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <h1 className="bg-gradient-to-r from-teal-500 to-purple-500 bg-clip-text text-8xl font-extrabold text-transparent">
+    <div className="flex min-h-screen items-center justify-center px-4">
+      <div className="text-center space-y-8 max-w-md mx-auto">
+        {/* 404 Number */}
+        <div className="relative">
+          <h1 className="text-8xl md:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-teal-600 animate-pulse">
             404
           </h1>
-        </motion.div>
+          <div className="absolute inset-0 text-8xl md:text-9xl font-black text-muted-foreground/10 blur-sm">
+            404
+          </div>
+        </div>
 
-        {/* Animated Illustration */}
-        <motion.div
-          className="mb-8 flex justify-center"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-        >
-          <div className="relative h-40 w-40">
-            <div className="absolute inset-0 animate-morph rounded-full bg-gradient-to-r from-teal-500/20 to-purple-500/20"></div>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <svg
-                className="h-24 w-24 text-muted-foreground"
-                fill="none"
-                height="24"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="1.5"
-                viewBox="0 0 24 24"
-                width="24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <circle cx="12" cy="12" r="10" />
-                <line x1="12" y1="8" x2="12" y2="12" />
-                <line x1="12" y1="16" x2="12.01" y2="16" />
-              </svg>
+        {/* Icon */}
+        <div className="flex justify-center">
+          <div className="relative p-6">
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full blur-xl animate-pulse"></div>
+            <div className="relative bg-muted/30 backdrop-blur-sm border border-border/50 rounded-full p-4">
+              <Search className="w-12 h-12 text-muted-foreground" />
             </div>
           </div>
-        </motion.div>
+        </div>
 
-        {/* Message */}
-        <motion.div
-          className="mb-8 space-y-3"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.5 }}
-        >
-          <h2 className="text-2xl font-bold">{t("title")}</h2>
-          <p className="text-muted-foreground">{t("description")}</p>
-        </motion.div>
+        {/* Title and Description */}
+        <div className="space-y-4">
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground">
+            {t("title")}
+          </h2>
+          <p className="text-muted-foreground text-lg leading-relaxed max-w-sm mx-auto">
+            {t("description")}
+          </p>
+        </div>
 
-        {/* Navigation Options */}
-        <motion.div
-          className="flex flex-col gap-4 sm:flex-row sm:justify-center"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.5 }}
-        >
-          <Button
-            onClick={() => router.back()}
-            variant="outline"
-            className="gap-2"
+        {/* Action Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
+          <button
+            onClick={() => window.history.back()}
+            className="inline-flex items-center gap-2 px-6 py-3 bg-muted/50 hover:bg-muted/70 border border-border/50 rounded-lg text-foreground font-medium transition-all duration-200 hover:scale-105 hover:shadow-lg backdrop-blur-sm"
           >
-            <ArrowLeft className="h-4 w-4" />
+            <ArrowLeft className="w-4 h-4" />
             {t("goBack")}
-          </Button>
-          <Button asChild className="gap-2">
-            <Link href={`/${t("locale")}`}>
-              <Home className="h-4 w-4" />
-              {t("backToHome")}
-            </Link>
-          </Button>
-        </motion.div>
+          </button>
 
-        {/* Suggested Links */}
-        <motion.div
-          className="mt-12"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8, duration: 0.5 }}
-        >
-          <h3 className="mb-4 text-sm font-medium text-muted-foreground">
-            {t("suggestedLinks")}
-          </h3>
-          <div className="flex flex-wrap justify-center gap-2">
-            <Button variant="link" asChild size="sm">
-              <Link href={`/${t("locale")}/#projects`}>{t("projects")}</Link>
-            </Button>
-            <Button variant="link" asChild size="sm">
-              <Link href={`/${t("locale")}/#about`}>{t("about")}</Link>
-            </Button>
-            <Button variant="link" asChild size="sm">
-              <Link href={`/${t("locale")}/#contact`}>{t("contact")}</Link>
-            </Button>
-          </div>
-        </motion.div>
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium rounded-lg transition-all duration-200 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25"
+          >
+            <Home className="w-4 h-4" />
+            {t("backToHome")}
+          </Link>
+        </div>
       </div>
     </div>
   );
-};
-
-export default LocalizedNotFound;
+}
