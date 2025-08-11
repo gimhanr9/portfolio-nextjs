@@ -300,7 +300,8 @@ const Home = ({ params }: { params: { locale: string } }) => {
                   title={t(`projects.items.${project.key}.title`)}
                   description={t(`projects.items.${project.key}.description`)}
                   tags={t.raw(`projects.items.${project.key}.tags`) as string[]}
-                  link={project.link}
+                  showGithub={project.showGithub}
+                  githubUrl={project.githubUrl}
                 />
               ))}
             </div>

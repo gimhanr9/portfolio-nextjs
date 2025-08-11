@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardDescription,
@@ -10,6 +11,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { motion } from "framer-motion";
+import { Github, ExternalLink } from "lucide-react";
 import { ProjectCardProps } from "./project-card.types";
 
 const hashString = (str: string): number => {
@@ -44,22 +46,42 @@ const getTagColor = (tag: string): string => {
   return colorPalette[hash % colorPalette.length];
 };
 
-// Default color for tags not in the list
-const defaultTagColor =
-  "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300";
-
 const ProjectCard = (props: ProjectCardProps) => {
   return (
     <motion.div whileHover={{ y: -5 }} transition={{ duration: 0.3 }}>
-      <Link href={props.link} className="block h-full">
-        <Card className="h-full overflow-hidden border-2 hover:border-primary/50 transition-colors">
-          <CardHeader className="pb-3">
-            <CardTitle className="text-xl">{props.title}</CardTitle>
-            <CardDescription className="mt-2">
-              {props.description}
-            </CardDescription>
-          </CardHeader>
-          <CardFooter>
+      <Card className="h-full overflow-hidden border-2 hover:border-primary/50 transition-colors">
+        <CardHeader className="pb-3">
+          {/* Title and GitHub Link Row */}
+          <div className="flex items-center justify-between gap-3">
+            <CardTitle className="text-xl flex-1">{props.title}</CardTitle>
+
+            {/* GitHub Link */}
+            {props.showGithub && props.githubUrl && (
+              <Link
+                href={props.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()} // Prevent card click when clicking GitHub link
+              >
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="h-8 px-2 text-xs hover:bg-muted/80 transition-colors"
+                >
+                  <Github className="w-3.5 h-3.5 mr-1.5" />
+                  GitHub
+                </Button>
+              </Link>
+            )}
+          </div>
+
+          <CardDescription className="mt-2">
+            {props.description}
+          </CardDescription>
+        </CardHeader>
+
+        <CardFooter className="pt-0">
+          <div className="w-full space-y-4">
             <div className="flex flex-wrap gap-2">
               {props.tags.map((tag) => (
                 <Badge key={tag} className={getTagColor(tag)}>
@@ -67,9 +89,9 @@ const ProjectCard = (props: ProjectCardProps) => {
                 </Badge>
               ))}
             </div>
-          </CardFooter>
-        </Card>
-      </Link>
+          </div>
+        </CardFooter>
+      </Card>
     </motion.div>
   );
 };
