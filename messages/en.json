@@ -21,7 +21,45 @@
   "projects": {
     "title": "Featured Projects",
     "description": "Check out some of my recent work.",
-    "viewAll": "View All Projects"
+    "showMore": "Show More",
+    "showLess": "Show Less",
+    "items": {
+      "portfolio": {
+        "title": "Portfolio Website",
+        "description": "A website showcasing my projects, skills, and experiences. Built with Next.js, TypeScript, and Tailwind CSS. Includes CI/CD pipeline with Github Actions for automated testing and deployment. Integrates with SonarQube for code quality analysis.",
+        "tags": ["Next.js", "Typescript", "Jest", "Tailwind CSS", "SonarQube", "GitHub Actions", "CI/CD", "Vercel"]
+      },
+      "loyalty": {
+        "title": "Loyalty App",
+        "description": "A full-stack loyalty application with React, Golang, and SQLite. Integrated with Square API for loyalty point and customer processing.",
+        "tags": ["React", "Golang", "SQLite", "Square API"]
+      },
+      "doorbell": {
+        "title": "Contactless Doorbell With Masked Face Recognition",
+        "description": "A system consisting of a mobile application, Flask REST API and a Raspberry Pi device acting as the doorbell specializing in masked face recognition.",
+        "tags": ["Flask", "Tensorflow", "Keras", "Flutter", "Firebase", "OneSignal", "SendGrid", "JWT", "GCP", "Masked face recognition", "Image processing"]
+      },
+      "shopping-api": {
+        "title": "Shopping API",
+        "description": "An API built with MongoDB, Express, and Node.js for managing shopping lists and product inventories. Features include user authentication and real-time updates.",
+        "tags": ["Node.js", "Express", "MongoDB", "SendGrid", "JWT"]
+      },
+      "flutter-shopping": {
+        "title": "Flutter Shopping Application",
+        "description": "A flutter ecommerce mobile application that includes various features including Firebase auth and forgot password, cart, purchase rating and review, view and ask product related questions from seller, read product ratings and reviews, product variants and stock management.",
+        "tags": ["Flutter", "Dart", "Firebase"]
+      },
+      "android-shopping": {
+        "title": "Android Shopping Application",
+        "description": "An Android ecommerce mobile application developed using the MVVM architecture equipped with an admin login where products can be added while also replying to customer queries. This is a complete ecommerce application equipped with Firebase authentication.",
+        "tags": ["Android", "Java", "Firebase", "MVVM", "Navigation component"]
+      },
+      "student-enquiry": {
+        "title": "Student Enquiry Management System",
+        "description": "A student enquiry management system built using C++ and data structures to enable an university to maintain and update each enquiry from the time it is entered until it is resolved.",
+        "tags": ["C++", "Data structures"]
+      }
+    }
   },
   "notFound": {
     "title": "Page Not Found",

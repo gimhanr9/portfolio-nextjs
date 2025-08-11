@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronDown, ChevronUp } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
@@ -19,15 +19,21 @@ import VoiceRecital from "@/components/common/voice-recital";
 import { projects } from "@/data/projects";
 import SkillCarousel from "@/components/common/skill-carousel";
 import { skillCategories } from "@/data/skills";
+import { useState } from "react";
 
 const Home = ({ params }: { params: { locale: string } }) => {
   const t = useTranslations();
   const locale = params.locale || "en";
+  const [showAllProjects, setShowAllProjects] = useState(false);
 
   // Introduction text for voice recital
   const introText = `${t("hero.greeting")} ${t("hero.name")}. ${t(
     "hero.description"
   )}`;
+
+  // Determine which projects to show
+  const displayedProjects = showAllProjects ? projects : projects.slice(0, 4);
+  const hasMoreProjects = projects.length > 4;
 
   return (
     <main className="flex min-h-screen flex-col">
@@ -279,25 +285,56 @@ const Home = ({ params }: { params: { locale: string } }) => {
             </p>
           </div>
 
-          <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 py-12 md:grid-cols-2 lg:gap-12">
-            {projects.map((project, index) => (
-              <ProjectCard
-                key={index}
-                title={project.title}
-                description={project.description}
-                tags={project.tags}
-                link={project.link}
-              />
-            ))}
+          <div className="mx-auto max-w-5xl py-12">
+            <div
+              className={`grid gap-6 lg:gap-12 ${
+                displayedProjects.length % 2 === 1 &&
+                displayedProjects.length > 2
+                  ? "grid-cols-1 md:grid-cols-2 [&>*:last-child]:md:col-span-2 [&>*:last-child]:max-w-md [&>*:last-child]:mx-auto"
+                  : "grid-cols-1 md:grid-cols-2"
+              }`}
+            >
+              {displayedProjects.map((project, index) => (
+                <ProjectCard
+                  key={project.id}
+                  title={t(`projects.items.${project.key}.title`)}
+                  description={t(`projects.items.${project.key}.description`)}
+                  tags={t.raw(`projects.items.${project.key}.tags`) as string[]}
+                  link={project.link}
+                />
+              ))}
+            </div>
           </div>
 
-          <div className="flex justify-center">
+          {/* <div className="flex justify-center">
             <Link href="/projects">
               <Button variant="outline" className="group bg-transparent">
                 {t("projects.viewAll")}
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
             </Link>
+          </div> */}
+
+          <div className="flex justify-center">
+            {hasMoreProjects && (
+              <Button
+                variant="outline"
+                className="group bg-transparent"
+                onClick={() => setShowAllProjects(!showAllProjects)}
+              >
+                {showAllProjects ? (
+                  <>
+                    {t("projects.showLess")}
+                    <ChevronUp className="ml-2 h-4 w-4 transition-transform group-hover:-translate-y-1" />
+                  </>
+                ) : (
+                  <>
+                    {t("projects.showMore")}
+                    <ChevronDown className="ml-2 h-4 w-4 transition-transform group-hover:translate-y-1" />
+                  </>
+                )}
+              </Button>
+            )}
           </div>
         </div>
       </section>
