@@ -2,7 +2,7 @@ export interface EducationItem {
   institution: string;
   institutionLogo: string;
   institutionColor: string;
-  degree: string;
+  degreeKey: string;
   period: string;
   descriptions: string[];
 }

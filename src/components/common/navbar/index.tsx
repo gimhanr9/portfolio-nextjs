@@ -10,8 +10,10 @@ import ThemeToggle from "../theme-toggle";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { siteConfig } from "@/config/site";
+import { useTranslations } from "next-intl";
 
 const Navbar = () => {
+  const t = useTranslations();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
@@ -44,10 +46,14 @@ const Navbar = () => {
   };
 
   const navLinks = [
-    { href: "#home", label: "Home", sectionId: "home" },
-    { href: "#about", label: "About", sectionId: "about" },
-    { href: "#projects", label: "Projects", sectionId: "projects" },
-    { href: "#contact", label: "Contact", sectionId: "contact" },
+    { href: "#home", labelKey: "navigation.home", sectionId: "home" },
+    { href: "#about", labelKey: "navigation.about", sectionId: "about" },
+    {
+      href: "#projects",
+      labelKey: "navigation.projects",
+      sectionId: "projects",
+    },
+    { href: "#contact", labelKey: "navigation.contact", sectionId: "contact" },
   ];
 
   // Set this to true to disable the language selector
@@ -93,7 +99,7 @@ const Navbar = () => {
                   : "text-muted-foreground"
               }`}
             >
-              {link.label}
+              {t(link.labelKey)}
             </button>
           ))}
           <LanguageSelector />
@@ -137,7 +143,7 @@ const Navbar = () => {
                         : "text-muted-foreground"
                     }`}
                   >
-                    {link.label}
+                    {t(link.labelKey)}
                   </button>
                 </motion.div>
               ))}

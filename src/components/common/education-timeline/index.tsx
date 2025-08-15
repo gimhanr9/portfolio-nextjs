@@ -1,7 +1,9 @@
 import { Badge } from "@/components/ui/badge";
 import { education } from "@/data/education";
+import { useTranslations } from "next-intl";
 
 const EducationTimeline = () => {
+  const t = useTranslations();
   return (
     <div className="space-y-6 sm:space-y-8 md:space-y-10 lg:space-y-12">
       {education?.map((edu, index) => (
@@ -33,7 +35,7 @@ const EducationTimeline = () => {
             </div>
 
             <h4 className="text-sm md:text-base lg:text-lg font-medium mb-1 sm:mb-2 md:mb-3">
-              {edu.degree}
+              {t(edu.degreeKey)}
             </h4>
 
             <div className="space-y-1 sm:space-y-1.5 md:space-y-2">

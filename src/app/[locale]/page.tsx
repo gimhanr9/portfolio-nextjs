@@ -22,6 +22,7 @@ import { skillCategories } from "@/data/skills";
 import { useState } from "react";
 import Navbar from "@/components/common/navbar";
 import Footer from "@/components/common/footer";
+import { siteConfig } from "@/config/site";
 
 const Home = ({ params }: { params: { locale: string } }) => {
   const t = useTranslations();
@@ -132,7 +133,7 @@ const Home = ({ params }: { params: { locale: string } }) => {
 
                 <div className="flex items-center gap-4 pt-4">
                   <Link
-                    href="https://github.com"
+                    href={siteConfig.urls.github}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -146,7 +147,7 @@ const Home = ({ params }: { params: { locale: string } }) => {
                     </Button>
                   </Link>
                   <Link
-                    href="https://linkedin.com"
+                    href={siteConfig.urls.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -160,7 +161,7 @@ const Home = ({ params }: { params: { locale: string } }) => {
                     </Button>
                   </Link>
                   <Link
-                    href="https://twitter.com"
+                    href={siteConfig.urls.twitter}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -173,7 +174,7 @@ const Home = ({ params }: { params: { locale: string } }) => {
                       <span className="sr-only">Twitter</span>
                     </Button>
                   </Link>
-                  <Link href="mailto:your.email@example.com">
+                  <Link href={`mailto:${siteConfig.contactEmail}`}>
                     <Button
                       variant="ghost"
                       size="icon"
