@@ -23,6 +23,7 @@ import { useState } from "react";
 import Navbar from "@/components/common/navbar";
 import Footer from "@/components/common/footer";
 import { siteConfig } from "@/config/site";
+import FloatingParticles from "@/components/common/animation/FloatingParticles";
 
 const Home = ({ params }: { params: { locale: string } }) => {
   const t = useTranslations();
@@ -49,23 +50,8 @@ const Home = ({ params }: { params: { locale: string } }) => {
         >
           {/* Animated Background */}
           <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-muted/20">
-            {/* Floating Particles */}
-            <div className="absolute inset-0">
-              {[...Array(20)].map((_, i) => (
-                <div
-                  key={i}
-                  className="absolute animate-pulse"
-                  style={{
-                    left: `${Math.random() * 100}%`,
-                    top: `${Math.random() * 100}%`,
-                    animationDelay: `${Math.random() * 3}s`,
-                    animationDuration: `${3 + Math.random() * 4}s`,
-                  }}
-                >
-                  <div className="w-1 h-1 bg-primary/30 rounded-full"></div>
-                </div>
-              ))}
-            </div>
+            {/* Replace the old floating particles code with the new component */}
+            <FloatingParticles count={20} />
 
             {/* Gradient Orbs */}
             <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-to-r from-teal-500/10 to-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
@@ -313,15 +299,6 @@ const Home = ({ params }: { params: { locale: string } }) => {
                 ))}
               </div>
             </div>
-
-            {/* <div className="flex justify-center">
-            <Link href="/projects">
-              <Button variant="outline" className="group bg-transparent">
-                {t("projects.viewAll")}
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </Link>
-          </div> */}
 
             <div className="flex justify-center">
               {hasMoreProjects && (
