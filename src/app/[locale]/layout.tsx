@@ -90,7 +90,7 @@ const LocaleLayout = async ({ children, params: { locale } }: Props) => {
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ThemeProvider
             attribute="class"
-            defaultTheme="system"
+            defaultTheme="dark"
             enableSystem
             disableTransitionOnChange
           >
