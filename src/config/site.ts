@@ -1,7 +1,6 @@
 export const siteConfig = {
   name: "Gimhan Rodrigo",
   url: "https://gimhanrodrigo.com",
-  ogImage: "https://ui.shadcn.com/og.jpg",
   description: "My portfolio built using Next.js",
   contactEmail: "gimhanr9@gmail.com",
   locales: [

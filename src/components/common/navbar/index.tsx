@@ -56,9 +56,6 @@ const Navbar = () => {
     { href: "#contact", labelKey: "navigation.contact", sectionId: "contact" },
   ];
 
-  // Set this to true to disable the language selector
-  const isLanguageSelectorDisabled = true;
-
   return (
     <header
       className={`fixed top-0 z-50 w-full transition-all duration-200 ${
