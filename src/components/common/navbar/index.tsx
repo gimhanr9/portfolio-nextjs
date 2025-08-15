@@ -1,16 +1,19 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 import LanguageSelector from "../language-selector";
 import ThemeToggle from "../theme-toggle";
+import { Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { siteConfig } from "@/config/site";
+import { useTranslations } from "next-intl";
 
 const Navbar = () => {
+  const t = useTranslations();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
@@ -43,10 +46,14 @@ const Navbar = () => {
   };
 
   const navLinks = [
-    { href: "#home", label: "Home", sectionId: "home" },
-    { href: "#about", label: "About", sectionId: "about" },
-    { href: "#projects", label: "Projects", sectionId: "projects" },
-    { href: "#contact", label: "Contact", sectionId: "contact" },
+    { href: "#home", labelKey: "navigation.home", sectionId: "home" },
+    { href: "#about", labelKey: "navigation.about", sectionId: "about" },
+    {
+      href: "#projects",
+      labelKey: "navigation.projects",
+      sectionId: "projects",
+    },
+    { href: "#contact", labelKey: "navigation.contact", sectionId: "contact" },
   ];
 
   return (
@@ -57,9 +64,24 @@ const Navbar = () => {
           : "bg-background/0"
       }`}
     >
-      <div className="site-container flex h-16 items-center justify-between">
-        <Link href="/" className="flex items-center gap-2">
-          <span className="text-xl font-bold bg-gradient-to-r from-teal-500 to-purple-500 bg-clip-text text-transparent">
+      <div className="container px-4 md:px-6 flex h-16 items-center justify-between">
+        <Link
+          href="/"
+          className="flex items-center gap-2 sm:gap-3 hover:opacity-80 transition-opacity"
+        >
+          {/* Logo Image - Responsive sizing */}
+          <div className="relative w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full overflow-hidden ring-2 ring-primary/20 hover:ring-primary/40 transition-all duration-200">
+            <Image
+              src="/images/logo.jpg"
+              alt={`${siteConfig.name} Logo`}
+              fill
+              className="object-cover"
+              sizes="(max-width: 640px) 32px, (max-width: 768px) 36px, 40px"
+              priority
+            />
+          </div>
+          {/* Site Name - Responsive text sizing */}
+          <span className="text-lg sm:text-xl md:text-xl font-bold bg-gradient-to-r from-teal-500 to-purple-500 bg-clip-text text-transparent">
             {siteConfig.name}
           </span>
         </Link>
@@ -74,7 +96,7 @@ const Navbar = () => {
                   : "text-muted-foreground"
               }`}
             >
-              {link.label}
+              {t(link.labelKey)}
             </button>
           ))}
           <LanguageSelector />
@@ -102,7 +124,7 @@ const Navbar = () => {
             transition={{ duration: 0.3 }}
             className="md:hidden overflow-hidden bg-background/95 backdrop-blur-sm"
           >
-            <div className="site-container py-4 flex flex-col gap-4">
+            <div className="container px-4 md:px-6 py-4 flex flex-col gap-4">
               {navLinks.map((link, index) => (
                 <motion.div
                   key={link.href}
@@ -118,7 +140,7 @@ const Navbar = () => {
                         : "text-muted-foreground"
                     }`}
                   >
-                    {link.label}
+                    {t(link.labelKey)}
                   </button>
                 </motion.div>
               ))}
@@ -129,5 +151,4 @@ const Navbar = () => {
     </header>
   );
 };
-
 export default Navbar;

@@ -1,16 +1,17 @@
 import Link from "next/link";
 import { GithubIcon, LinkedinIcon, TwitterIcon, MailIcon } from "@/lib/icons";
 import { siteConfig } from "@/config/site";
+import { useTranslations } from "next-intl";
 
 const Footer = () => {
+  const t = useTranslations();
   return (
     <footer className="bg-muted/40 py-16">
-      <div className="site-container">
+      <div className="container px-4 md:px-6">
         <div className="mb-12">
           <h3 className="text-xl font-bold mb-3">{siteConfig.name}</h3>
-          <p className="text-sm font-medium text-gray-400 max-w-md mb-6">
-            Full Stack Developer specializing in modern web technologies, CI/CD,
-            and testing.
+          <p className="text-sm md:text-base text-gray-400 max-w-md mb-6">
+            {t("footer.description")}
           </p>
           <div className="flex items-center gap-6">
             <Link
@@ -49,14 +50,14 @@ const Footer = () => {
             </Link>
           </div>
         </div>
-        <div className="border-t border-gray-800 pt-6 text-center">
-          <p className="text-sm font-medium text-gray-500">
-            © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
+        <div className="border-t border-gray-300 pt-6 text-center text-sm text-gray-400">
+          <p>
+            © {new Date().getFullYear()} {siteConfig.name}.{" "}
+            {t("footer.copyright")}
           </p>
         </div>
       </div>
     </footer>
   );
 };
-
 export default Footer;

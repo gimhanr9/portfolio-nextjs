@@ -1,6 +1,6 @@
 // __tests__/not-found.test.tsx
 import { render, screen, fireEvent } from "@testing-library/react";
-import LocalizedNotFound from "@/app/[locale]/not-found";
+import NotFoundPage from "@/app/[locale]/not-found";
 
 type TranslationKeys =
   | "title"
@@ -41,7 +41,7 @@ jest.mock("next/navigation", () => ({
 
 describe("LocalizedNotFound", () => {
   it("renders 404 title and message", () => {
-    render(<LocalizedNotFound />);
+    render(<NotFoundPage />);
 
     expect(screen.getByText("404")).toBeInTheDocument();
     expect(screen.getByText("Page not found")).toBeInTheDocument();
@@ -51,13 +51,13 @@ describe("LocalizedNotFound", () => {
   });
 
   it("calls router.back() when Go Back is clicked", () => {
-    render(<LocalizedNotFound />);
+    render(<NotFoundPage />);
     fireEvent.click(screen.getByText("Go Back"));
     expect(mockBack).toHaveBeenCalled();
   });
 
   it("renders navigation buttons", () => {
-    render(<LocalizedNotFound />);
+    render(<NotFoundPage />);
     expect(screen.getByText("Back to Home")).toBeInTheDocument();
     expect(screen.getByText("Projects")).toBeInTheDocument();
     expect(screen.getByText("About")).toBeInTheDocument();

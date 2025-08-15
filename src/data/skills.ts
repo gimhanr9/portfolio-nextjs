@@ -3,7 +3,7 @@ import { SkillCategory } from "@/components/common/skill-carousel/skill-carousel
 export const skillCategories: SkillCategory[] = [
   {
     id: 1,
-    title: "Frontend Development",
+    titleKey: "skills.titles.frontendDevelopment",
     icon: "CodeIcon",
     skills: [
       "React",
@@ -17,7 +17,7 @@ export const skillCategories: SkillCategory[] = [
   },
   {
     id: 2,
-    title: "Backend Development",
+    titleKey: "skills.titles.backendDevelopment",
     icon: "ServerIcon",
     skills: [
       ".Net Core",
@@ -33,7 +33,7 @@ export const skillCategories: SkillCategory[] = [
   },
   {
     id: 3,
-    title: "Cloud, DevOps & Testing",
+    titleKey: "skills.titles.cloudDevOpsTesting",
     icon: "DevOpsIcon",
     skills: [
       "AWS",
@@ -47,13 +47,13 @@ export const skillCategories: SkillCategory[] = [
   },
   {
     id: 4,
-    title: "Mobile Development",
+    titleKey: "skills.titles.mobileDevelopment",
     icon: "CodeIcon",
     skills: ["Flutter", "Android"],
   },
   {
     id: 5,
-    title: "AI/ML",
+    titleKey: "skills.titles.aiMl",
     icon: "CodeIcon",
     skills: ["Tensorflow", "Keras", "Neural Networks"],
   },

@@ -9,8 +9,10 @@ import useEmblaCarousel from "embla-carousel-react";
 import { cn } from "@/lib/utils";
 import { SkillCarouselProps } from "./skill-carousel.types";
 import { useMediaQuery } from "@/hooks/use-media-query";
+import { useTranslations } from "next-intl";
 
 const SkillCarousel = (props: SkillCarouselProps) => {
+  const t = useTranslations();
   const isDesktop = useMediaQuery("(min-width: 1024px)");
   const isTablet = useMediaQuery("(min-width: 640px)");
 
@@ -99,7 +101,7 @@ const SkillCarousel = (props: SkillCarouselProps) => {
                     {getIconComponent(skill.icon)}
                   </div>
                   <h3 className="text-base md:text-lg font-bold line-clamp-1">
-                    {skill.title}
+                    {t(skill.titleKey)}
                   </h3>
                   <p className="text-center text-xs sm:text-sm text-muted-foreground">
                     {skill.skills.join(", ")}

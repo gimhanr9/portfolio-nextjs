@@ -1,42 +1,51 @@
 export interface Project {
   id: number;
-  title: string;
-  description: string;
-  tags: string[];
-  link: string;
+  key: string;
+  showGithub: boolean;
+  githubUrl: string;
 }
 
 export const projects: Project[] = [
   {
     id: 1,
-    title: "E-Commerce Platform",
-    description:
-      "A full-stack e-commerce platform with React, Node.js, and MongoDB. Features CI/CD pipeline with GitHub Actions and Jest testing.",
-    tags: ["React", "Node.js", "MongoDB", "Jest", "CI/CD"],
-    link: "/projects/ecommerce",
+    key: "portfolio",
+    showGithub: true,
+    githubUrl: "https://github.com/gimhanr9/portfolio-nextjs",
   },
   {
     id: 2,
-    title: "Task Management App",
-    description:
-      "A collaborative task management application with real-time updates. Includes comprehensive test coverage with Jest and React Testing Library.",
-    tags: ["Next.js", "TypeScript", "PostgreSQL", "Jest", "GitHub Actions"],
-    link: "/projects/task-manager",
+    key: "loyalty",
+    showGithub: true,
+    githubUrl: "https://github.com/gimhanr9/react-loyalty-frontend",
   },
   {
     id: 3,
-    title: "Analytics Dashboard",
-    description:
-      "A data visualization dashboard with real-time analytics. Built with React, D3.js, and a Node.js backend.",
-    tags: ["React", "D3.js", "Node.js", "Express", "Docker"],
-    link: "/projects/analytics",
+    key: "doorbell",
+    showGithub: true,
+    githubUrl: "https://github.com/gimhanr9/doorbell_app_flutter",
   },
   {
     id: 4,
-    title: "DevOps Toolkit",
-    description:
-      "A collection of tools for automating development workflows. Includes CI/CD templates, testing frameworks, and deployment scripts.",
-    tags: ["GitHub Actions", "Docker", "Jest", "Terraform", "AWS"],
-    link: "/projects/devops-toolkit",
+    key: "shopping-api",
+    showGithub: true,
+    githubUrl: "https://github.com/gimhanr9/shopping-api",
+  },
+  {
+    id: 5,
+    key: "flutter-shopping",
+    showGithub: true,
+    githubUrl: "https://github.com/gimhanr9/lookgood_flutter",
+  },
+  {
+    id: 6,
+    key: "android-shopping",
+    showGithub: true,
+    githubUrl: "https://github.com/gimhanr9/lookgood-android",
+  },
+  {
+    id: 7,
+    key: "student-enquiry",
+    showGithub: true,
+    githubUrl: "https://github.com/gimhanr9/student-enquiry-management",
   },
 ];

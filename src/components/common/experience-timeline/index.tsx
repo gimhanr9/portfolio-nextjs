@@ -1,7 +1,9 @@
 import { Badge } from "@/components/ui/badge";
 import { experience } from "@/data/experience";
+import { useTranslations } from "next-intl";
 
 const ExperienceTimeline = () => {
+  const t = useTranslations();
   return (
     <div className="space-y-6 sm:space-y-8 md:space-y-10 lg:space-y-12">
       {experience?.map((exp, index) => (
@@ -33,13 +35,13 @@ const ExperienceTimeline = () => {
             </div>
 
             <h4 className="text-sm md:text-base lg:text-lg font-medium mb-1 sm:mb-2 md:mb-3">
-              {exp.position}
+              {t(exp.positionKey)}
             </h4>
 
             <div className="space-y-1 sm:space-y-1.5 md:space-y-2">
-              {exp.descriptions?.map((desc, i) => (
+              {exp.descriptionKeys?.map((desc, i) => (
                 <p key={i} className="text-xs sm:text-sm text-muted-foreground">
-                  {desc}
+                  {t(desc)}
                 </p>
               ))}
             </div>

@@ -3,8 +3,6 @@ import { getMessages } from "next-intl/server";
 import type { ReactNode } from "react";
 import { routing } from "@/i18n/routing";
 
-import Navbar from "@/components/common/navbar";
-import Footer from "@/components/common/footer";
 import { inter } from "../fonts";
 import { notFound } from "next/navigation";
 import "../globals.css"; // Import the global CSS here as well
@@ -18,32 +16,51 @@ export const metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description:
-    "Portfolio of a Full Stack Developer specializing in modern web technologies, CI/CD, and testing.",
+    "Full-Stack Software Engineer with 3+ years of experience in React.js, .NET Core, and cloud platforms. Specializing in scalable web applications, clean code, and performance optimization.",
   keywords: [
-    "developer",
+    "software engineer",
+    "frontend developer",
+    "backend developer",
     "portfolio",
     "full stack",
     "web development",
+    "React",
+    "Next.js",
+    "TypeScript",
+    ".NET Core",
     "CI/CD",
     "testing",
+    "SQL Server",
+    "NoSQL",
+    "SQL",
   ],
-  authors: [{ name: siteConfig.name }],
+  authors: [{ name: siteConfig.name, url: siteConfig.url }], // Add URL
   creator: siteConfig.name,
+  robots: "index, follow",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: siteConfig.url,
     title: `${siteConfig.name} | Full Stack Developer`,
     description:
-      "Portfolio of a Full Stack Developer specializing in modern web technologies, CI/CD, and testing.",
+      "Full-Stack Software Engineer with 3+ years of experience in React.js, .NET Core, and cloud platforms. Specializing in scalable web applications, clean code, and performance optimization.",
     siteName: `${siteConfig.name} Portfolio`,
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: `${siteConfig.name} Portfolio Preview`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `${siteConfig.name} | Full Stack Developer`,
     description:
-      "Portfolio of a Full Stack Developer specializing in modern web technologies, CI/CD, and testing.",
-    creator: "@yourtwitterhandle",
+      "Full-Stack Software Engineer with 3+ years of experience in React.js, .NET Core, and cloud platforms. Building scalable, secure web applications.",
+    creator: `@${siteConfig.urls.twitter}`,
+    images: ["/og-image.png"],
   },
   icons: {
     icon: "/favicon.ico",
@@ -51,6 +68,7 @@ export const metadata = {
     apple: "/apple-touch-icon.png",
   },
   manifest: "/site.webmanifest",
+  metadataBase: new URL(siteConfig.url),
 };
 
 type Props = {
@@ -72,14 +90,12 @@ const LocaleLayout = async ({ children, params: { locale } }: Props) => {
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ThemeProvider
             attribute="class"
-            defaultTheme="system"
+            defaultTheme="dark"
             enableSystem
             disableTransitionOnChange
           >
             <div className="flex min-h-screen flex-col">
-              <Navbar />
               <div className="flex-1">{children}</div>
-              <Footer />
             </div>
           </ThemeProvider>
         </NextIntlClientProvider>

@@ -1,4 +1,10 @@
 {
+  "navigation": {
+    "home": "Home",
+    "about": "About", 
+    "projects": "Projects",
+    "contact": "Contact"
+  },
   "hero": {
     "badge": "Full Stack Developer",
     "greeting": "Hi there! I'm",
@@ -11,7 +17,7 @@
   },
   "about": {
     "title": "About Me",
-    "description": "I'm a results-driven full-stack developer with expertise in web, mobile, and machine learning. With a strong foundation in software engineering and a passion for problem-solving, I thrive on building innovative, efficient, and scalable applications."
+    "description": "🚀 Full-Stack Software Engineer with 3+ years of experience building scalable, secure, and user-friendly web applications using React.js, .NET Core, and SQL/NoSQL. Passionate about clean code, high performance, and turning ideas into impactful digital solutions."
   },
   "tabs": {
     "skills": "Skills",
@@ -21,17 +27,51 @@
   "projects": {
     "title": "Featured Projects",
     "description": "Check out some of my recent work.",
-    "viewAll": "View All Projects"
+    "showMore": "Show More",
+    "showLess": "Show Less",
+    "items": {
+      "portfolio": {
+        "title": "Portfolio Website",
+        "description": "A website showcasing my projects, skills, and experiences. Built with Next.js, TypeScript, and Tailwind CSS. Includes CI/CD pipeline with Github Actions for automated testing and deployment. Integrates with SonarQube for code quality analysis.",
+        "tags": ["Next.js", "Typescript", "Jest", "Tailwind CSS", "SonarQube", "GitHub Actions", "CI/CD", "Vercel"]
+      },
+      "loyalty": {
+        "title": "Loyalty App",
+        "description": "A full-stack loyalty application with React, Golang, and SQLite. Integrated with Square API for loyalty point and customer processing.",
+        "tags": ["React", "Golang", "SQLite", "Square API"]
+      },
+      "doorbell": {
+        "title": "Contactless Doorbell With Masked Face Recognition",
+        "description": "A system consisting of a mobile application, Flask REST API and a Raspberry Pi device acting as the doorbell specializing in masked face recognition.",
+        "tags": ["Flask", "Tensorflow", "Keras", "Flutter", "Firebase", "OneSignal", "SendGrid", "JWT", "GCP", "Masked face recognition", "Image processing"]
+      },
+      "shopping-api": {
+        "title": "Shopping API",
+        "description": "An API built with MongoDB, Express, and Node.js for managing shopping lists and product inventories. Features include user authentication and real-time updates.",
+        "tags": ["Node.js", "Express", "MongoDB", "SendGrid", "JWT"]
+      },
+      "flutter-shopping": {
+        "title": "Flutter Shopping Application",
+        "description": "A flutter ecommerce mobile application that includes various features including Firebase auth and forgot password, cart, purchase rating and review, view and ask product related questions from seller, read product ratings and reviews, product variants and stock management.",
+        "tags": ["Flutter", "Dart", "Firebase"]
+      },
+      "android-shopping": {
+        "title": "Android Shopping Application",
+        "description": "An Android ecommerce mobile application developed using the MVVM architecture equipped with an admin login where products can be added while also replying to customer queries. This is a complete ecommerce application equipped with Firebase authentication.",
+        "tags": ["Android", "Java", "Firebase", "MVVM", "Navigation component"]
+      },
+      "student-enquiry": {
+        "title": "Student Enquiry Management System",
+        "description": "A student enquiry management system built using C++ and data structures to enable an university to maintain and update each enquiry from the time it is entered until it is resolved.",
+        "tags": ["C++", "Data structures"]
+      }
+    }
   },
   "notFound": {
     "title": "Page Not Found",
-    "description": "The page you're looking for doesn't exist or has been moved.",
+    "description": "The page you're looking for doesn't exist or has been moved to a different location.",
     "goBack": "Go Back",
-    "backToHome": "Back to Home",
-    "suggestedLinks": "You might be looking for:",
-    "projects": "Projects",
-    "about": "About",
-    "contact": "Contact"
+    "backToHome": "Back to Home"
   },
   "status": {
     "cicd": {
@@ -59,7 +99,43 @@
     "backend": "Backend Development",
     "devops": "DevOps & Testing",
     "mobile": "Mobile Development",
-    "design": "UI/UX Design"
+    "design": "UI/UX Design",
+    "titles": {
+      "frontendDevelopment": "Frontend Development",
+      "backendDevelopment": "Backend Development",
+      "cloudDevOpsTesting": "Cloud, DevOps & Testing",
+      "mobileDevelopment": "Mobile Development",
+      "aiMl": "AI/ML"
+    }
+  },
+  "experience": {
+    "positions": {
+      "h2compute": "Full - Stack Software Engineer (React.js/.Net Core)",
+      "eatme": "Intern Full - Stack Software Engineer (React.js/Node.js)"
+    },
+    "descriptions": {
+      "h2compute": {
+        "desc1": "Developed scalable web applications using TypeScript, React.js, Redux Saga, and .NET Core.",
+        "desc2": "Integrated multi-role access control and secure JWT authentication protocols.",
+        "desc3": "Worked extensively with SQL Server and Neo4j databases for managing complex datasets",
+        "desc4": "Tuned application performance and optimized Neo4j Cypher queries for faster data retrieval.",
+        "desc5": "Utilized debugging tools and unit testing to maintain code quality.",
+        "desc6": "Implemented web workers to handle large report downloads without blocking the main thread, improving responsiveness."
+      },
+      "eatme": {
+        "desc1": "Built interactive UI components using React.js, Redux Thunk, and Material UI.",
+        "desc2": "Developed RESTful APIs with Node.js and Express; implemented secure JWT-based authentication.",
+        "desc3": "Managed data persistence using SQL databases.",
+        "desc4": "Applied unit testing using Mocha and Chai to ensure reliability.",
+        "desc5": "Actively contributed in Agile ceremonies and sprints."
+      }
+    }
+  },
+  "education": {
+    "degrees": {
+      "staffordshire": "Bachelor of Engineering (Hons) in Software Engineering (First Class)",
+      "stNicholas": "Cambridge GCE O-Level and A-Level"
+    }
   },
   "contact": {
     "title": "Get In Touch",
@@ -98,5 +174,9 @@
         "message": "Your message has been sent successfully"
       }
     }
+  },
+  "footer": {
+    "copyright": "All rights reserved.",
+    "description":"Full Stack Developer specializing in modern web technologies, Cloud, DevOps and testing."
   }
 }

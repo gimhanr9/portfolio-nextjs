@@ -1,6 +1,6 @@
 export interface SkillCategory {
   id: number;
-  title: string;
+  titleKey: string;
   icon: string;
   skills: string[];
 }
