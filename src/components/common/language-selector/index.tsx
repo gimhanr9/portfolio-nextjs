@@ -13,6 +13,7 @@ import { LanguageSelectorType } from "./language-selector.types";
 import { siteConfig } from "@/config/site";
 import { usePathname, useRouter } from "@/i18n/routing";
 import { useParams } from "next/navigation";
+import { useLocale } from "next-intl";
 
 const LanguageSelector = () => {
   const [currentLanguage, setCurrentLanguage] =
@@ -23,16 +24,20 @@ const LanguageSelector = () => {
   const [isPending, startTransition] = useTransition();
   const pathname = usePathname();
   const params = useParams();
+  const locale = useLocale();
 
   useEffect(() => {
     let locales = siteConfig.locales;
     if (locales?.length > 0) {
       setLanguages(siteConfig.locales);
+
       setCurrentLanguage(
-        locales.find((x) => x.code === siteConfig.defaultLocale) ?? locales[0]
+        locales.find((x) => x.code === locale) ??
+          locales.find((x) => x.code === siteConfig.defaultLocale) ??
+          locales[0]
       );
     }
-  }, []);
+  }, [locale]);
 
   const handleLanguageChange = (language: LanguageSelectorType) => {
     if (language.code === currentLanguage?.code) return;
