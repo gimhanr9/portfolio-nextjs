@@ -1,0 +1,182 @@
+{
+  "navigation": {
+    "home": "Accueil",
+    "about": "À propos", 
+    "projects": "Projets",
+    "contact": "Contact"
+  },
+  "hero": {
+    "badge": "Développeur Full Stack",
+    "greeting": "Salut ! Je suis",
+    "name": "Gimhan Rodrigo",
+    "description": "Créer des expériences numériques fluides avec du code propre et une technologie de pointe. Passionné par la création de solutions performantes et évolutives."
+  },
+  "buttons": {
+    "viewWork": "Voir Mon Travail",
+    "getInTouch": "Prendre Contact"
+  },
+  "about": {
+    "title": "À Propos de Moi",
+    "description": "🚀 Ingénieur Logiciel Full-Stack avec plus de 3 ans d'expérience dans la création d'applications web évolutives, sécurisées et conviviales utilisant React.js, .NET Core et SQL/NoSQL. Passionné par le code propre, les hautes performances et la transformation d'idées en solutions numériques impactantes."
+  },
+  "tabs": {
+    "skills": "Compétences",
+    "experience": "Expérience",
+    "education": "Éducation"
+  },
+  "projects": {
+    "title": "Projets Vedettes",
+    "description": "Découvrez quelques-uns de mes travaux récents.",
+    "showMore": "Afficher Plus",
+    "showLess": "Afficher Moins",
+    "items": {
+      "portfolio": {
+        "title": "Site Web Portfolio",
+        "description": "Un site web présentant mes projets, compétences et expériences. Construit avec Next.js, TypeScript et Tailwind CSS. Inclut un pipeline CI/CD avec GitHub Actions pour les tests automatisés et le déploiement. S'intègre avec SonarQube pour l'analyse de la qualité du code.",
+        "tags": ["Next.js", "Typescript", "Jest", "Tailwind CSS", "SonarQube", "GitHub Actions", "CI/CD", "Vercel"]
+      },
+      "loyalty": {
+        "title": "Application de Fidélité",
+        "description": "Une application de fidélité full-stack avec React, Golang et SQLite. Intégrée avec l'API Square pour le traitement des points de fidélité et des clients.",
+        "tags": ["React", "Golang", "SQLite", "Square API"]
+      },
+      "doorbell": {
+        "title": "Sonnette Sans Contact Avec Reconnaissance Faciale Masquée",
+        "description": "Un système composé d'une application mobile, d'une API REST Flask et d'un dispositif Raspberry Pi faisant office de sonnette spécialisée dans la reconnaissance faciale masquée.",
+        "tags": ["Flask", "Tensorflow", "Keras", "Flutter", "Firebase", "OneSignal", "SendGrid", "JWT", "GCP", "Masked face recognition", "Image processing"]
+      },
+      "shopping-api": {
+        "title": "API d'Achat",
+        "description": "Une API construite avec MongoDB, Express et Node.js pour gérer les listes d'achats et les inventaires de produits. Les fonctionnalités incluent l'authentification des utilisateurs et les mises à jour en temps réel.",
+        "tags": ["Node.js", "Express", "MongoDB", "SendGrid", "JWT"]
+      },
+      "flutter-shopping": {
+        "title": "Application d'Achat Flutter",
+        "description": "Une application mobile e-commerce Flutter qui inclut diverses fonctionnalités incluant l'authentification Firebase et mot de passe oublié, panier, évaluation et avis d'achat, visualiser et poser des questions liées aux produits au vendeur, lire les évaluations et avis de produits, variantes de produits et gestion des stocks.",
+        "tags": ["Flutter", "Dart", "Firebase"]
+      },
+      "android-shopping": {
+        "title": "Application d'Achat Android",
+        "description": "Une application mobile e-commerce Android développée en utilisant l'architecture MVVM équipée d'une connexion administrateur où les produits peuvent être ajoutés tout en répondant également aux requêtes des clients. Il s'agit d'une application e-commerce complète équipée de l'authentification Firebase.",
+        "tags": ["Android", "Java", "Firebase", "MVVM", "Navigation component"]
+      },
+      "student-enquiry": {
+        "title": "Système de Gestion des Demandes Étudiantes",
+        "description": "Un système de gestion des demandes étudiantes construit en utilisant C++ et les structures de données pour permettre à une université de maintenir et mettre à jour chaque demande depuis son entrée jusqu'à sa résolution.",
+        "tags": ["C++", "Data structures"]
+      }
+    }
+  },
+  "notFound": {
+    "title": "Page Non Trouvée",
+    "description": "La page que vous recherchez n'existe pas ou a été déplacée vers un autre emplacement.",
+    "goBack": "Retour",
+    "backToHome": "Retour à l'Accueil"
+  },
+  "status": {
+    "cicd": {
+      "label": "CI/CD",
+      "passing": "Réussi",
+      "failing": "Échec",
+      "pending": "En Attente",
+      "notAvailable": "Non Disponible"
+    },
+    "qualityGate": {
+      "label": "Porte de Qualité",
+      "passed": "Réussi",
+      "failed": "Échoué",
+      "pending": "En Attente",
+      "notAvailable": "Non Disponible"
+    },
+    "testCoverage": {
+      "label": "Tests",
+      "notAvailable": "Non Disponible"
+    }
+  },
+  "skills": {
+    "techStack": "Technologies Actuelles",
+    "frontend": "Développement Frontend",
+    "backend": "Développement Backend",
+    "devops": "DevOps et Tests",
+    "mobile": "Développement Mobile",
+    "design": "Design UI/UX",
+    "titles": {
+      "frontendDevelopment": "Développement Frontend",
+      "backendDevelopment": "Développement Backend",
+      "cloudDevOpsTesting": "Cloud, DevOps et Tests",
+      "mobileDevelopment": "Développement Mobile",
+      "aiMl": "IA/ML"
+    }
+  },
+  "experience": {
+    "positions": {
+      "h2compute": "Ingénieur Logiciel Full-Stack (React.js/.Net Core)",
+      "eatme": "Stagiaire Ingénieur Logiciel Full-Stack (React.js/Node.js)"
+    },
+    "descriptions": {
+      "h2compute": {
+        "desc1": "Développé des applications web évolutives utilisant TypeScript, React.js, Redux Saga et .NET Core.",
+        "desc2": "Intégré le contrôle d'accès multi-rôles et les protocoles d'authentification JWT sécurisés.",
+        "desc3": "Travaillé extensivement avec les bases de données SQL Server et Neo4j pour gérer des ensembles de données complexes.",
+        "desc4": "Optimisé les performances de l'application et les requêtes Cypher Neo4j pour une récupération de données plus rapide.",
+        "desc5": "Utilisé des outils de débogage et des tests unitaires pour maintenir la qualité du code.",
+        "desc6": "Implémenté des web workers pour gérer les téléchargements de rapports volumineux sans bloquer le thread principal, améliorant la réactivité."
+      },
+      "eatme": {
+        "desc1": "Construit des composants UI interactifs utilisant React.js, Redux Thunk et Material UI.",
+        "desc2": "Développé des APIs RESTful avec Node.js et Express ; implémenté une authentification sécurisée basée sur JWT.",
+        "desc3": "Géré la persistance des données en utilisant des bases de données SQL.",
+        "desc4": "Appliqué des tests unitaires utilisant Mocha et Chai pour assurer la fiabilité.",
+        "desc5": "Contribué activement aux cérémonies et sprints Agiles."
+      }
+    }
+  },
+  "education": {
+    "degrees": {
+      "staffordshire": "Licence d'Ingénierie (Hons) en Génie Logiciel (Première Classe)",
+      "stNicholas": "Cambridge GCE O-Level et A-Level"
+    }
+  },
+  "contact": {
+    "title": "Prendre Contact",
+    "description": "Intéressé à travailler ensemble ? N'hésitez pas à me contacter.",
+    "form": {
+      "labels": {
+        "name": "Nom",
+        "email": "Email",
+        "message": "Message"
+      },
+      "placeholders": {
+        "name": "Votre nom",
+        "email": "votre.email@exemple.com",
+        "message": "Votre message"
+      },
+      "buttons": {
+        "send": "Envoyer le Message",
+        "sending": "Envoi en cours...",
+        "sent": "Envoyé !"
+      },
+      "errors": {
+        "title": "Quelque chose s'est mal passé",
+        "nameRequired": "Le nom est requis",
+        "emailRequired": "L'email est requis",
+        "emailInvalid": "Veuillez entrer une adresse email valide",
+        "messageRequired": "Le message est requis",
+        "messageTooShort": "Le message doit contenir au moins 10 caractères",
+        "sendFailed": "Votre message n'a pas pu être envoyé. Veuillez réessayer.",
+        "missingFields": "Le nom, l'email et le message sont requis",
+        "emailServiceNotConfigured": "Le service email n'est pas configuré. Veuillez contacter l'administrateur.",
+        "emailServiceError": "Erreur du service email. Veuillez réessayer plus tard."
+      },
+      "success": {
+        "title": "Message envoyé !",
+        "description": "Merci de m'avoir contacté. Je vous répondrai bientôt.",
+        "message": "Votre message a été envoyé avec succès"
+      }
+    }
+  },
+  "footer": {
+    "copyright": "Tous droits réservés.",
+    "description": "Développeur Full Stack spécialisé dans les technologies web modernes, Cloud, DevOps et tests."
+  }
+}
