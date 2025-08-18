@@ -145,7 +145,7 @@ const StatusBadges = () => {
           status.cicd.status
         )}`}
       >
-        <CICDIcon className="h-3 w-3" />
+        <CICDIcon className="h-3 w-3" data-testid="cicd-icon" />
         <span>
           <span className="font-semibold">{t("cicd.label")}:</span>{" "}
           <span className="font-normal text-[12px]">
@@ -162,7 +162,7 @@ const StatusBadges = () => {
           status.qualityGate.status
         )}`}
       >
-        <SonarQubeIcon className="h-3 w-3" />
+        <SonarQubeIcon className="h-3 w-3" data-testid="qualityGate-icon" />
         <span>
           <span className="font-semibold">{t("qualityGate.label")}:</span>{" "}
           <span className="font-normal text-[12px]">
@@ -179,7 +179,7 @@ const StatusBadges = () => {
           status.testCoverage.percentage
         )}`}
       >
-        <JestIcon className="h-3 w-3" />
+        <JestIcon className="h-3 w-3" data-testid="testCoverage-icon" />
         <span>
           <span className="font-semibold">{t("testCoverage.label")}:</span>{" "}
           <span className="font-normal text-[12px]">
